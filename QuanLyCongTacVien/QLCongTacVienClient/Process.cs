@@ -7,23 +7,14 @@ namespace QLCongTacVienClient
 {
     public class Process
     {
-        private static Process Instance = null;
-        public static QLCongTacVienEntities context;
+       
+        public  QLCongTacVienEntities context;
         public  Process()
         {
-           
-        }
-
-        public static Process getInstance()
-        {
             context = new QLCongTacVienEntities();
-            if (Instance == null)
-            {
-                return Instance = new Process();
-            }
-            return Instance;
         }
 
+     
         public tblUser checkDangNhap(string UserName,string Password)
         {
             try

@@ -12,14 +12,12 @@ namespace QLCongTacVienClient
     using System;
     using System.Collections.Generic;
     
-    public partial class tblOrder_Account
+    public partial class tblInfoSite
     {
-        public long AccountID { get; set; }
-        public int OrderID { get; set; }
-        public Nullable<double> HueHong { get; set; }
-        public Nullable<int> TrangThai { get; set; }
+        public int InfoID { get; set; }
+        public string Note { get; set; }
+        public Nullable<int> SiteID { get; set; }
     
-        public virtual tblAccount tblAccount { get; set; }
-        public virtual tblOrder tblOrder { get; set; }
+        public virtual tblSite tblSite { get; set; }
     }
 }
