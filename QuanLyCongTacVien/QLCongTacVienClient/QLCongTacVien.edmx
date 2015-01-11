@@ -1,0 +1,1216 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="QLCongTacVienModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Category">
+          <Key>
+            <PropertyRef Name="CategoryID" />
+          </Key>
+          <Property Name="CategoryID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CategoryName" Type="nvarchar" MaxLength="50" />
+          <Property Name="AccountID" Type="int" />
+          <Property Name="NgayTao" Type="datetime" />
+          <Property Name="NgayUpdate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="tblAccount">
+          <Key>
+            <PropertyRef Name="MaAccount" />
+          </Key>
+          <Property Name="MaAccount" Type="bigint" Nullable="false" />
+          <Property Name="TenAccount" Type="nvarchar" MaxLength="100" />
+          <Property Name="LoaiAccount" Type="nvarchar" MaxLength="50" />
+          <Property Name="GhiChu" Type="nvarchar(max)" />
+          <Property Name="AccountManager" Type="bigint" />
+          <Property Name="NgayTao" Type="datetime" />
+          <Property Name="NgayUpdate" Type="datetime" />
+          <Property Name="UserTao" Type="nvarchar" MaxLength="50" />
+          <Property Name="UserUpdate" Type="nvarchar" MaxLength="50" />
+          <Property Name="TrangThai" Type="int" />
+        </EntityType>
+        <EntityType Name="tblAccount_Nhom">
+          <Key>
+            <PropertyRef Name="MaAccount" />
+            <PropertyRef Name="MaNhom" />
+          </Key>
+          <Property Name="MaAccount" Type="bigint" Nullable="false" />
+          <Property Name="MaNhom" Type="bigint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tblAccount_User">
+          <Key>
+            <PropertyRef Name="MaAccount" />
+            <PropertyRef Name="MaUser" />
+          </Key>
+          <Property Name="MaAccount" Type="bigint" Nullable="false" />
+          <Property Name="MaUser" Type="bigint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tblKhachHang">
+          <Key>
+            <PropertyRef Name="MaKhachHang" />
+          </Key>
+          <Property Name="MaKhachHang" Type="bigint" Nullable="false" />
+          <Property Name="TenKhachHang" Type="nvarchar" MaxLength="100" />
+          <Property Name="SoDT" Type="nvarchar" MaxLength="50" />
+          <Property Name="DiaChi" Type="nvarchar" MaxLength="250" />
+          <Property Name="GhiChu1" Type="nvarchar(max)" />
+          <Property Name="GhiChu2" Type="nvarchar(max)" />
+          <Property Name="GhiChu3" Type="nvarchar(max)" />
+          <Property Name="GhiChu4" Type="nvarchar(max)" />
+          <Property Name="GiaTri" Type="float" />
+          <Property Name="TrangThai1" Type="int" />
+          <Property Name="TrangThai2" Type="int" />
+          <Property Name="TrangThai3" Type="int" />
+          <Property Name="TrangThai4" Type="int" />
+          <Property Name="NgayTao" Type="datetime" />
+          <Property Name="NgayUpdate" Type="datetime" />
+          <Property Name="UserTao" Type="nvarchar" MaxLength="50" />
+          <Property Name="UserUpdate" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="tblKhachHang_LichSu">
+          <Key>
+            <PropertyRef Name="MaKhachHang" />
+            <PropertyRef Name="MaLichSu" />
+          </Key>
+          <Property Name="MaKhachHang" Type="bigint" Nullable="false" />
+          <Property Name="MaLichSu" Type="bigint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tblLichSu">
+          <Key>
+            <PropertyRef Name="MaLichSu" />
+          </Key>
+          <Property Name="MaLichSu" Type="bigint" Nullable="false" />
+          <Property Name="NoiDung" Type="nvarchar(max)" />
+          <Property Name="GiaTri" Type="float" />
+          <Property Name="GhiChu1" Type="nvarchar(max)" />
+          <Property Name="GhiChu2" Type="nvarchar(max)" />
+          <Property Name="GhiChu3" Type="nvarchar(max)" />
+          <Property Name="GhiChu4" Type="nvarchar(max)" />
+          <Property Name="NgayTao" Type="datetime" />
+          <Property Name="NgayUpdate" Type="datetime" />
+          <Property Name="UserTao" Type="datetime" />
+          <Property Name="UserUpdate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="tblNhom">
+          <Key>
+            <PropertyRef Name="MaNhom" />
+          </Key>
+          <Property Name="MaNhom" Type="bigint" Nullable="false" />
+          <Property Name="TenNhom" Type="nvarchar" MaxLength="100" />
+          <Property Name="MoTaoNhom" Type="nvarchar(max)" />
+          <Property Name="GhiChu" Type="nvarchar(max)" />
+          <Property Name="NgayTao" Type="datetime" />
+          <Property Name="NgayUpdate" Type="datetime" />
+          <Property Name="UserTao" Type="nvarchar" MaxLength="50" />
+          <Property Name="UserUpdate" Type="nvarchar" MaxLength="50" />
+          <Property Name="TrangThai" Type="int" />
+        </EntityType>
+        <EntityType Name="tblNhom_KhachHang">
+          <Key>
+            <PropertyRef Name="MaNhom" />
+            <PropertyRef Name="MaKhachHang" />
+          </Key>
+          <Property Name="MaNhom" Type="bigint" Nullable="false" />
+          <Property Name="MaKhachHang" Type="bigint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tblOrder">
+          <Key>
+            <PropertyRef Name="OrderID" />
+          </Key>
+          <Property Name="OrderID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ProductID" Type="int" />
+          <Property Name="SoLuong" Type="int" />
+          <Property Name="MaKhachHang" Type="bigint" />
+          <Property Name="TongTien" Type="float" />
+          <Property Name="AccountID" Type="bigint" />
+          <Property Name="NgayHen" Type="datetime" />
+          <Property Name="NgayTao" Type="datetime" />
+          <Property Name="NgayUpdate" Type="datetime" />
+          <Property Name="TrangThai" Type="int" />
+        </EntityType>
+        <EntityType Name="tblOrder_Account">
+          <Key>
+            <PropertyRef Name="AccountID" />
+            <PropertyRef Name="OrderID" />
+          </Key>
+          <Property Name="AccountID" Type="bigint" Nullable="false" />
+          <Property Name="OrderID" Type="int" Nullable="false" />
+          <Property Name="HueHong" Type="float" />
+          <Property Name="TrangThai" Type="int" />
+        </EntityType>
+        <EntityType Name="tblPhongBan">
+          <Key>
+            <PropertyRef Name="MaPhongBan" />
+          </Key>
+          <Property Name="MaPhongBan" Type="bigint" Nullable="false" />
+          <Property Name="TenPhongBan" Type="nvarchar" MaxLength="100" />
+          <Property Name="MoTaPhongBan" Type="nvarchar(max)" />
+          <Property Name="GhiChuPhongBan" Type="nvarchar(max)" />
+          <Property Name="NgayTao" Type="datetime" />
+          <Property Name="NgayUpdate" Type="datetime" />
+          <Property Name="UserTao" Type="nvarchar" MaxLength="50" />
+          <Property Name="UserUpdate" Type="nvarchar" MaxLength="50" />
+          <Property Name="TrangThai" Type="int" />
+        </EntityType>
+        <EntityType Name="tblPhongBan_Account">
+          <Key>
+            <PropertyRef Name="MaPhongBan" />
+            <PropertyRef Name="MaAccount" />
+          </Key>
+          <Property Name="MaPhongBan" Type="bigint" Nullable="false" />
+          <Property Name="MaAccount" Type="bigint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tblProduct">
+          <Key>
+            <PropertyRef Name="ProductID" />
+          </Key>
+          <Property Name="ProductID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ProductName" Type="nvarchar" MaxLength="50" />
+          <Property Name="CategoryID" Type="int" />
+          <Property Name="GiaBan" Type="float" />
+          <Property Name="TrangThai" Type="int" />
+          <Property Name="NgayTao" Type="datetime" />
+          <Property Name="NgayUpdate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="tblSite">
+          <Key>
+            <PropertyRef Name="SiteID" />
+          </Key>
+          <Property Name="SiteID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SiteName" Type="nvarchar" MaxLength="50" />
+          <Property Name="Title" Type="nvarchar" MaxLength="50" />
+          <Property Name="TrangThai" Type="int" />
+          <Property Name="NgayTao" Type="datetime" />
+          <Property Name="NgayUpdate" Type="datetime" />
+          <Property Name="AccountID" Type="bigint" />
+        </EntityType>
+        <EntityType Name="tblSite_Product">
+          <Key>
+            <PropertyRef Name="SiteID" />
+            <PropertyRef Name="ProductID" />
+          </Key>
+          <Property Name="SiteID" Type="int" Nullable="false" />
+          <Property Name="ProductID" Type="int" Nullable="false" />
+          <Property Name="TrangThai" Type="int" />
+        </EntityType>
+        <EntityType Name="tblUser">
+          <Key>
+            <PropertyRef Name="MaUser" />
+          </Key>
+          <Property Name="MaUser" Type="bigint" Nullable="false" />
+          <Property Name="UserName" Type="nvarchar" MaxLength="50" />
+          <Property Name="Password" Type="nvarchar" MaxLength="100" />
+          <Property Name="FullName" Type="nvarchar" MaxLength="50" />
+          <Property Name="DienThoai" Type="nvarchar" MaxLength="50" />
+          <Property Name="DiaChi" Type="nvarchar" MaxLength="250" />
+          <Property Name="Email" Type="nvarchar" MaxLength="100" />
+          <Property Name="GhiChu" Type="nvarchar(max)" />
+          <Property Name="NgayTao" Type="datetime" />
+          <Property Name="NgayUpdate" Type="datetime" />
+          <Property Name="UserTao" Type="nvarchar" MaxLength="50" />
+          <Property Name="UserUpdate" Type="nvarchar" MaxLength="50" />
+          <Property Name="TrangThai" Type="int" />
+        </EntityType>
+        <Association Name="FK_tblAccount_Nhom_tblAccount">
+          <End Role="tblAccount" Type="Self.tblAccount" Multiplicity="1" />
+          <End Role="tblAccount_Nhom" Type="Self.tblAccount_Nhom" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblAccount">
+              <PropertyRef Name="MaAccount" />
+            </Principal>
+            <Dependent Role="tblAccount_Nhom">
+              <PropertyRef Name="MaAccount" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblAccount_Nhom_tblNhom">
+          <End Role="tblNhom" Type="Self.tblNhom" Multiplicity="1" />
+          <End Role="tblAccount_Nhom" Type="Self.tblAccount_Nhom" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblNhom">
+              <PropertyRef Name="MaNhom" />
+            </Principal>
+            <Dependent Role="tblAccount_Nhom">
+              <PropertyRef Name="MaNhom" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblAccount_tblAccount">
+          <End Role="tblAccount" Type="Self.tblAccount" Multiplicity="0..1" />
+          <End Role="tblAccount1" Type="Self.tblAccount" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblAccount">
+              <PropertyRef Name="MaAccount" />
+            </Principal>
+            <Dependent Role="tblAccount1">
+              <PropertyRef Name="AccountManager" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblAccount_User_tblAccount">
+          <End Role="tblAccount" Type="Self.tblAccount" Multiplicity="1" />
+          <End Role="tblAccount_User" Type="Self.tblAccount_User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblAccount">
+              <PropertyRef Name="MaAccount" />
+            </Principal>
+            <Dependent Role="tblAccount_User">
+              <PropertyRef Name="MaAccount" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblAccount_User_tblUser">
+          <End Role="tblUser" Type="Self.tblUser" Multiplicity="1" />
+          <End Role="tblAccount_User" Type="Self.tblAccount_User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblUser">
+              <PropertyRef Name="MaUser" />
+            </Principal>
+            <Dependent Role="tblAccount_User">
+              <PropertyRef Name="MaUser" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblKhachHang_LichSu_tblKhachHang">
+          <End Role="tblKhachHang" Type="Self.tblKhachHang" Multiplicity="1" />
+          <End Role="tblKhachHang_LichSu" Type="Self.tblKhachHang_LichSu" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblKhachHang">
+              <PropertyRef Name="MaKhachHang" />
+            </Principal>
+            <Dependent Role="tblKhachHang_LichSu">
+              <PropertyRef Name="MaKhachHang" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblKhachHang_LichSu_tblLichSu">
+          <End Role="tblLichSu" Type="Self.tblLichSu" Multiplicity="1" />
+          <End Role="tblKhachHang_LichSu" Type="Self.tblKhachHang_LichSu" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblLichSu">
+              <PropertyRef Name="MaLichSu" />
+            </Principal>
+            <Dependent Role="tblKhachHang_LichSu">
+              <PropertyRef Name="MaLichSu" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblNhom_KhachHang_tblKhachHang">
+          <End Role="tblKhachHang" Type="Self.tblKhachHang" Multiplicity="1" />
+          <End Role="tblNhom_KhachHang" Type="Self.tblNhom_KhachHang" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblKhachHang">
+              <PropertyRef Name="MaKhachHang" />
+            </Principal>
+            <Dependent Role="tblNhom_KhachHang">
+              <PropertyRef Name="MaKhachHang" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblNhom_KhachHang_tblNhom">
+          <End Role="tblNhom" Type="Self.tblNhom" Multiplicity="1" />
+          <End Role="tblNhom_KhachHang" Type="Self.tblNhom_KhachHang" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblNhom">
+              <PropertyRef Name="MaNhom" />
+            </Principal>
+            <Dependent Role="tblNhom_KhachHang">
+              <PropertyRef Name="MaNhom" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblOrder_Account_tblAccount">
+          <End Role="tblAccount" Type="Self.tblAccount" Multiplicity="1" />
+          <End Role="tblOrder_Account" Type="Self.tblOrder_Account" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblAccount">
+              <PropertyRef Name="MaAccount" />
+            </Principal>
+            <Dependent Role="tblOrder_Account">
+              <PropertyRef Name="AccountID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblOrder_Account_tblOrder">
+          <End Role="tblOrder" Type="Self.tblOrder" Multiplicity="1" />
+          <End Role="tblOrder_Account" Type="Self.tblOrder_Account" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblOrder">
+              <PropertyRef Name="OrderID" />
+            </Principal>
+            <Dependent Role="tblOrder_Account">
+              <PropertyRef Name="OrderID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblOrder_tblAccount">
+          <End Role="tblAccount" Type="Self.tblAccount" Multiplicity="0..1" />
+          <End Role="tblOrder" Type="Self.tblOrder" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblAccount">
+              <PropertyRef Name="MaAccount" />
+            </Principal>
+            <Dependent Role="tblOrder">
+              <PropertyRef Name="AccountID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblOrder_tblKhachHang">
+          <End Role="tblKhachHang" Type="Self.tblKhachHang" Multiplicity="0..1" />
+          <End Role="tblOrder" Type="Self.tblOrder" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblKhachHang">
+              <PropertyRef Name="MaKhachHang" />
+            </Principal>
+            <Dependent Role="tblOrder">
+              <PropertyRef Name="MaKhachHang" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblOrder_tblProduct">
+          <End Role="tblProduct" Type="Self.tblProduct" Multiplicity="0..1" />
+          <End Role="tblOrder" Type="Self.tblOrder" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblProduct">
+              <PropertyRef Name="ProductID" />
+            </Principal>
+            <Dependent Role="tblOrder">
+              <PropertyRef Name="ProductID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblPhongBan_Account_tblAccount">
+          <End Role="tblAccount" Type="Self.tblAccount" Multiplicity="1" />
+          <End Role="tblPhongBan_Account" Type="Self.tblPhongBan_Account" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblAccount">
+              <PropertyRef Name="MaAccount" />
+            </Principal>
+            <Dependent Role="tblPhongBan_Account">
+              <PropertyRef Name="MaAccount" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblPhongBan_Account_tblPhongBan">
+          <End Role="tblPhongBan" Type="Self.tblPhongBan" Multiplicity="1" />
+          <End Role="tblPhongBan_Account" Type="Self.tblPhongBan_Account" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblPhongBan">
+              <PropertyRef Name="MaPhongBan" />
+            </Principal>
+            <Dependent Role="tblPhongBan_Account">
+              <PropertyRef Name="MaPhongBan" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblProduct_Category">
+          <End Role="Category" Type="Self.Category" Multiplicity="0..1" />
+          <End Role="tblProduct" Type="Self.tblProduct" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Category">
+              <PropertyRef Name="CategoryID" />
+            </Principal>
+            <Dependent Role="tblProduct">
+              <PropertyRef Name="CategoryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblSite_Product_tblProduct">
+          <End Role="tblProduct" Type="Self.tblProduct" Multiplicity="1" />
+          <End Role="tblSite_Product" Type="Self.tblSite_Product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblProduct">
+              <PropertyRef Name="ProductID" />
+            </Principal>
+            <Dependent Role="tblSite_Product">
+              <PropertyRef Name="ProductID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblSite_Product_tblSite">
+          <End Role="tblSite" Type="Self.tblSite" Multiplicity="1" />
+          <End Role="tblSite_Product" Type="Self.tblSite_Product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblSite">
+              <PropertyRef Name="SiteID" />
+            </Principal>
+            <Dependent Role="tblSite_Product">
+              <PropertyRef Name="SiteID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblSite_tblAccount">
+          <End Role="tblAccount" Type="Self.tblAccount" Multiplicity="0..1" />
+          <End Role="tblSite" Type="Self.tblSite" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblAccount">
+              <PropertyRef Name="MaAccount" />
+            </Principal>
+            <Dependent Role="tblSite">
+              <PropertyRef Name="AccountID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="QLCongTacVienModelStoreContainer">
+          <EntitySet Name="Category" EntityType="Self.Category" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblAccount" EntityType="Self.tblAccount" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblAccount_Nhom" EntityType="Self.tblAccount_Nhom" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblAccount_User" EntityType="Self.tblAccount_User" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblKhachHang" EntityType="Self.tblKhachHang" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblKhachHang_LichSu" EntityType="Self.tblKhachHang_LichSu" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblLichSu" EntityType="Self.tblLichSu" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblNhom" EntityType="Self.tblNhom" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblNhom_KhachHang" EntityType="Self.tblNhom_KhachHang" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblOrder" EntityType="Self.tblOrder" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblOrder_Account" EntityType="Self.tblOrder_Account" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblPhongBan" EntityType="Self.tblPhongBan" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblPhongBan_Account" EntityType="Self.tblPhongBan_Account" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblProduct" EntityType="Self.tblProduct" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblSite" EntityType="Self.tblSite" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblSite_Product" EntityType="Self.tblSite_Product" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblUser" EntityType="Self.tblUser" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_tblAccount_Nhom_tblAccount" Association="Self.FK_tblAccount_Nhom_tblAccount">
+            <End Role="tblAccount" EntitySet="tblAccount" />
+            <End Role="tblAccount_Nhom" EntitySet="tblAccount_Nhom" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblAccount_Nhom_tblNhom" Association="Self.FK_tblAccount_Nhom_tblNhom">
+            <End Role="tblNhom" EntitySet="tblNhom" />
+            <End Role="tblAccount_Nhom" EntitySet="tblAccount_Nhom" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblAccount_tblAccount" Association="Self.FK_tblAccount_tblAccount">
+            <End Role="tblAccount" EntitySet="tblAccount" />
+            <End Role="tblAccount1" EntitySet="tblAccount" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblAccount_User_tblAccount" Association="Self.FK_tblAccount_User_tblAccount">
+            <End Role="tblAccount" EntitySet="tblAccount" />
+            <End Role="tblAccount_User" EntitySet="tblAccount_User" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblAccount_User_tblUser" Association="Self.FK_tblAccount_User_tblUser">
+            <End Role="tblUser" EntitySet="tblUser" />
+            <End Role="tblAccount_User" EntitySet="tblAccount_User" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblKhachHang_LichSu_tblKhachHang" Association="Self.FK_tblKhachHang_LichSu_tblKhachHang">
+            <End Role="tblKhachHang" EntitySet="tblKhachHang" />
+            <End Role="tblKhachHang_LichSu" EntitySet="tblKhachHang_LichSu" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblKhachHang_LichSu_tblLichSu" Association="Self.FK_tblKhachHang_LichSu_tblLichSu">
+            <End Role="tblLichSu" EntitySet="tblLichSu" />
+            <End Role="tblKhachHang_LichSu" EntitySet="tblKhachHang_LichSu" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblNhom_KhachHang_tblKhachHang" Association="Self.FK_tblNhom_KhachHang_tblKhachHang">
+            <End Role="tblKhachHang" EntitySet="tblKhachHang" />
+            <End Role="tblNhom_KhachHang" EntitySet="tblNhom_KhachHang" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblNhom_KhachHang_tblNhom" Association="Self.FK_tblNhom_KhachHang_tblNhom">
+            <End Role="tblNhom" EntitySet="tblNhom" />
+            <End Role="tblNhom_KhachHang" EntitySet="tblNhom_KhachHang" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblOrder_Account_tblAccount" Association="Self.FK_tblOrder_Account_tblAccount">
+            <End Role="tblAccount" EntitySet="tblAccount" />
+            <End Role="tblOrder_Account" EntitySet="tblOrder_Account" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblOrder_Account_tblOrder" Association="Self.FK_tblOrder_Account_tblOrder">
+            <End Role="tblOrder" EntitySet="tblOrder" />
+            <End Role="tblOrder_Account" EntitySet="tblOrder_Account" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblOrder_tblAccount" Association="Self.FK_tblOrder_tblAccount">
+            <End Role="tblAccount" EntitySet="tblAccount" />
+            <End Role="tblOrder" EntitySet="tblOrder" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblOrder_tblKhachHang" Association="Self.FK_tblOrder_tblKhachHang">
+            <End Role="tblKhachHang" EntitySet="tblKhachHang" />
+            <End Role="tblOrder" EntitySet="tblOrder" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblOrder_tblProduct" Association="Self.FK_tblOrder_tblProduct">
+            <End Role="tblProduct" EntitySet="tblProduct" />
+            <End Role="tblOrder" EntitySet="tblOrder" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblPhongBan_Account_tblAccount" Association="Self.FK_tblPhongBan_Account_tblAccount">
+            <End Role="tblAccount" EntitySet="tblAccount" />
+            <End Role="tblPhongBan_Account" EntitySet="tblPhongBan_Account" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblPhongBan_Account_tblPhongBan" Association="Self.FK_tblPhongBan_Account_tblPhongBan">
+            <End Role="tblPhongBan" EntitySet="tblPhongBan" />
+            <End Role="tblPhongBan_Account" EntitySet="tblPhongBan_Account" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblProduct_Category" Association="Self.FK_tblProduct_Category">
+            <End Role="Category" EntitySet="Category" />
+            <End Role="tblProduct" EntitySet="tblProduct" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblSite_Product_tblProduct" Association="Self.FK_tblSite_Product_tblProduct">
+            <End Role="tblProduct" EntitySet="tblProduct" />
+            <End Role="tblSite_Product" EntitySet="tblSite_Product" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblSite_Product_tblSite" Association="Self.FK_tblSite_Product_tblSite">
+            <End Role="tblSite" EntitySet="tblSite" />
+            <End Role="tblSite_Product" EntitySet="tblSite_Product" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblSite_tblAccount" Association="Self.FK_tblSite_tblAccount">
+            <End Role="tblAccount" EntitySet="tblAccount" />
+            <End Role="tblSite" EntitySet="tblSite" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="QLCongTacVienModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Category">
+          <Key>
+            <PropertyRef Name="CategoryID" />
+          </Key>
+          <Property Name="CategoryID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CategoryName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="AccountID" Type="Int32" />
+          <Property Name="NgayTao" Type="DateTime" Precision="3" />
+          <Property Name="NgayUpdate" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="tblProducts" Relationship="Self.FK_tblProduct_Category" FromRole="Category" ToRole="tblProduct" />
+        </EntityType>
+        <EntityType Name="tblAccount">
+          <Key>
+            <PropertyRef Name="MaAccount" />
+          </Key>
+          <Property Name="MaAccount" Type="Int64" Nullable="false" />
+          <Property Name="TenAccount" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="LoaiAccount" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="GhiChu" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="AccountManager" Type="Int64" />
+          <Property Name="NgayTao" Type="DateTime" Precision="3" />
+          <Property Name="NgayUpdate" Type="DateTime" Precision="3" />
+          <Property Name="UserTao" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="UserUpdate" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="TrangThai" Type="Int32" />
+          <NavigationProperty Name="tblAccount1" Relationship="Self.FK_tblAccount_tblAccount" FromRole="tblAccount" ToRole="tblAccount1" />
+          <NavigationProperty Name="tblAccount2" Relationship="Self.FK_tblAccount_tblAccount" FromRole="tblAccount1" ToRole="tblAccount" />
+          <NavigationProperty Name="tblOrder_Account" Relationship="Self.FK_tblOrder_Account_tblAccount" FromRole="tblAccount" ToRole="tblOrder_Account" />
+          <NavigationProperty Name="tblOrders" Relationship="Self.FK_tblOrder_tblAccount" FromRole="tblAccount" ToRole="tblOrder" />
+          <NavigationProperty Name="tblSites" Relationship="Self.FK_tblSite_tblAccount" FromRole="tblAccount" ToRole="tblSite" />
+          <NavigationProperty Name="tblNhoms" Relationship="Self.tblAccount_Nhom" FromRole="tblAccount" ToRole="tblNhom" />
+          <NavigationProperty Name="tblUsers" Relationship="Self.tblAccount_User" FromRole="tblAccount" ToRole="tblUser" />
+          <NavigationProperty Name="tblPhongBans" Relationship="Self.tblPhongBan_Account" FromRole="tblAccount" ToRole="tblPhongBan" />
+        </EntityType>
+        <EntityType Name="tblKhachHang">
+          <Key>
+            <PropertyRef Name="MaKhachHang" />
+          </Key>
+          <Property Name="MaKhachHang" Type="Int64" Nullable="false" />
+          <Property Name="TenKhachHang" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="SoDT" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DiaChi" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="GhiChu1" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="GhiChu2" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="GhiChu3" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="GhiChu4" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="GiaTri" Type="Double" />
+          <Property Name="TrangThai1" Type="Int32" />
+          <Property Name="TrangThai2" Type="Int32" />
+          <Property Name="TrangThai3" Type="Int32" />
+          <Property Name="TrangThai4" Type="Int32" />
+          <Property Name="NgayTao" Type="DateTime" Precision="3" />
+          <Property Name="NgayUpdate" Type="DateTime" Precision="3" />
+          <Property Name="UserTao" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="UserUpdate" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="tblOrders" Relationship="Self.FK_tblOrder_tblKhachHang" FromRole="tblKhachHang" ToRole="tblOrder" />
+          <NavigationProperty Name="tblLichSus" Relationship="Self.tblKhachHang_LichSu" FromRole="tblKhachHang" ToRole="tblLichSu" />
+          <NavigationProperty Name="tblNhoms" Relationship="Self.tblNhom_KhachHang" FromRole="tblKhachHang" ToRole="tblNhom" />
+        </EntityType>
+        <EntityType Name="tblLichSu">
+          <Key>
+            <PropertyRef Name="MaLichSu" />
+          </Key>
+          <Property Name="MaLichSu" Type="Int64" Nullable="false" />
+          <Property Name="NoiDung" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="GiaTri" Type="Double" />
+          <Property Name="GhiChu1" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="GhiChu2" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="GhiChu3" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="GhiChu4" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="NgayTao" Type="DateTime" Precision="3" />
+          <Property Name="NgayUpdate" Type="DateTime" Precision="3" />
+          <Property Name="UserTao" Type="DateTime" Precision="3" />
+          <Property Name="UserUpdate" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="tblKhachHangs" Relationship="Self.tblKhachHang_LichSu" FromRole="tblLichSu" ToRole="tblKhachHang" />
+        </EntityType>
+        <EntityType Name="tblNhom">
+          <Key>
+            <PropertyRef Name="MaNhom" />
+          </Key>
+          <Property Name="MaNhom" Type="Int64" Nullable="false" />
+          <Property Name="TenNhom" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="MoTaoNhom" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="GhiChu" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="NgayTao" Type="DateTime" Precision="3" />
+          <Property Name="NgayUpdate" Type="DateTime" Precision="3" />
+          <Property Name="UserTao" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="UserUpdate" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="TrangThai" Type="Int32" />
+          <NavigationProperty Name="tblAccounts" Relationship="Self.tblAccount_Nhom" FromRole="tblNhom" ToRole="tblAccount" />
+          <NavigationProperty Name="tblKhachHangs" Relationship="Self.tblNhom_KhachHang" FromRole="tblNhom" ToRole="tblKhachHang" />
+        </EntityType>
+        <EntityType Name="tblOrder">
+          <Key>
+            <PropertyRef Name="OrderID" />
+          </Key>
+          <Property Name="OrderID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ProductID" Type="Int32" />
+          <Property Name="SoLuong" Type="Int32" />
+          <Property Name="MaKhachHang" Type="Int64" />
+          <Property Name="TongTien" Type="Double" />
+          <Property Name="AccountID" Type="Int64" />
+          <Property Name="NgayHen" Type="DateTime" Precision="3" />
+          <Property Name="NgayTao" Type="DateTime" Precision="3" />
+          <Property Name="NgayUpdate" Type="DateTime" Precision="3" />
+          <Property Name="TrangThai" Type="Int32" />
+          <NavigationProperty Name="tblAccount" Relationship="Self.FK_tblOrder_tblAccount" FromRole="tblOrder" ToRole="tblAccount" />
+          <NavigationProperty Name="tblKhachHang" Relationship="Self.FK_tblOrder_tblKhachHang" FromRole="tblOrder" ToRole="tblKhachHang" />
+          <NavigationProperty Name="tblOrder_Account" Relationship="Self.FK_tblOrder_Account_tblOrder" FromRole="tblOrder" ToRole="tblOrder_Account" />
+          <NavigationProperty Name="tblProduct" Relationship="Self.FK_tblOrder_tblProduct" FromRole="tblOrder" ToRole="tblProduct" />
+        </EntityType>
+        <EntityType Name="tblOrder_Account">
+          <Key>
+            <PropertyRef Name="AccountID" />
+            <PropertyRef Name="OrderID" />
+          </Key>
+          <Property Name="AccountID" Type="Int64" Nullable="false" />
+          <Property Name="OrderID" Type="Int32" Nullable="false" />
+          <Property Name="HueHong" Type="Double" />
+          <Property Name="TrangThai" Type="Int32" />
+          <NavigationProperty Name="tblAccount" Relationship="Self.FK_tblOrder_Account_tblAccount" FromRole="tblOrder_Account" ToRole="tblAccount" />
+          <NavigationProperty Name="tblOrder" Relationship="Self.FK_tblOrder_Account_tblOrder" FromRole="tblOrder_Account" ToRole="tblOrder" />
+        </EntityType>
+        <EntityType Name="tblPhongBan">
+          <Key>
+            <PropertyRef Name="MaPhongBan" />
+          </Key>
+          <Property Name="MaPhongBan" Type="Int64" Nullable="false" />
+          <Property Name="TenPhongBan" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="MoTaPhongBan" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="GhiChuPhongBan" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="NgayTao" Type="DateTime" Precision="3" />
+          <Property Name="NgayUpdate" Type="DateTime" Precision="3" />
+          <Property Name="UserTao" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="UserUpdate" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="TrangThai" Type="Int32" />
+          <NavigationProperty Name="tblAccounts" Relationship="Self.tblPhongBan_Account" FromRole="tblPhongBan" ToRole="tblAccount" />
+        </EntityType>
+        <EntityType Name="tblProduct">
+          <Key>
+            <PropertyRef Name="ProductID" />
+          </Key>
+          <Property Name="ProductID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ProductName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CategoryID" Type="Int32" />
+          <Property Name="GiaBan" Type="Double" />
+          <Property Name="TrangThai" Type="Int32" />
+          <Property Name="NgayTao" Type="DateTime" Precision="3" />
+          <Property Name="NgayUpdate" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Category" Relationship="Self.FK_tblProduct_Category" FromRole="tblProduct" ToRole="Category" />
+          <NavigationProperty Name="tblOrders" Relationship="Self.FK_tblOrder_tblProduct" FromRole="tblProduct" ToRole="tblOrder" />
+          <NavigationProperty Name="tblSite_Product" Relationship="Self.FK_tblSite_Product_tblProduct" FromRole="tblProduct" ToRole="tblSite_Product" />
+        </EntityType>
+        <EntityType Name="tblSite">
+          <Key>
+            <PropertyRef Name="SiteID" />
+          </Key>
+          <Property Name="SiteID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SiteName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Title" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="TrangThai" Type="Int32" />
+          <Property Name="NgayTao" Type="DateTime" Precision="3" />
+          <Property Name="NgayUpdate" Type="DateTime" Precision="3" />
+          <Property Name="AccountID" Type="Int64" />
+          <NavigationProperty Name="tblAccount" Relationship="Self.FK_tblSite_tblAccount" FromRole="tblSite" ToRole="tblAccount" />
+          <NavigationProperty Name="tblSite_Product" Relationship="Self.FK_tblSite_Product_tblSite" FromRole="tblSite" ToRole="tblSite_Product" />
+        </EntityType>
+        <EntityType Name="tblSite_Product">
+          <Key>
+            <PropertyRef Name="SiteID" />
+            <PropertyRef Name="ProductID" />
+          </Key>
+          <Property Name="SiteID" Type="Int32" Nullable="false" />
+          <Property Name="ProductID" Type="Int32" Nullable="false" />
+          <Property Name="TrangThai" Type="Int32" />
+          <NavigationProperty Name="tblProduct" Relationship="Self.FK_tblSite_Product_tblProduct" FromRole="tblSite_Product" ToRole="tblProduct" />
+          <NavigationProperty Name="tblSite" Relationship="Self.FK_tblSite_Product_tblSite" FromRole="tblSite_Product" ToRole="tblSite" />
+        </EntityType>
+        <EntityType Name="tblUser">
+          <Key>
+            <PropertyRef Name="MaUser" />
+          </Key>
+          <Property Name="MaUser" Type="Int64" Nullable="false" />
+          <Property Name="UserName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Password" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="FullName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DienThoai" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DiaChi" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="GhiChu" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="NgayTao" Type="DateTime" Precision="3" />
+          <Property Name="NgayUpdate" Type="DateTime" Precision="3" />
+          <Property Name="UserTao" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="UserUpdate" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="TrangThai" Type="Int32" />
+          <NavigationProperty Name="tblAccounts" Relationship="Self.tblAccount_User" FromRole="tblUser" ToRole="tblAccount" />
+        </EntityType>
+        <Association Name="FK_tblProduct_Category">
+          <End Role="Category" Type="Self.Category" Multiplicity="0..1" />
+          <End Role="tblProduct" Type="Self.tblProduct" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Category">
+              <PropertyRef Name="CategoryID" />
+            </Principal>
+            <Dependent Role="tblProduct">
+              <PropertyRef Name="CategoryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblAccount_tblAccount">
+          <End Role="tblAccount" Type="Self.tblAccount" Multiplicity="0..1" />
+          <End Role="tblAccount1" Type="Self.tblAccount" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblAccount">
+              <PropertyRef Name="MaAccount" />
+            </Principal>
+            <Dependent Role="tblAccount1">
+              <PropertyRef Name="AccountManager" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblOrder_Account_tblAccount">
+          <End Role="tblAccount" Type="Self.tblAccount" Multiplicity="1" />
+          <End Role="tblOrder_Account" Type="Self.tblOrder_Account" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblAccount">
+              <PropertyRef Name="MaAccount" />
+            </Principal>
+            <Dependent Role="tblOrder_Account">
+              <PropertyRef Name="AccountID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblOrder_tblAccount">
+          <End Role="tblAccount" Type="Self.tblAccount" Multiplicity="0..1" />
+          <End Role="tblOrder" Type="Self.tblOrder" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblAccount">
+              <PropertyRef Name="MaAccount" />
+            </Principal>
+            <Dependent Role="tblOrder">
+              <PropertyRef Name="AccountID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblSite_tblAccount">
+          <End Role="tblAccount" Type="Self.tblAccount" Multiplicity="0..1" />
+          <End Role="tblSite" Type="Self.tblSite" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblAccount">
+              <PropertyRef Name="MaAccount" />
+            </Principal>
+            <Dependent Role="tblSite">
+              <PropertyRef Name="AccountID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblOrder_tblKhachHang">
+          <End Role="tblKhachHang" Type="Self.tblKhachHang" Multiplicity="0..1" />
+          <End Role="tblOrder" Type="Self.tblOrder" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblKhachHang">
+              <PropertyRef Name="MaKhachHang" />
+            </Principal>
+            <Dependent Role="tblOrder">
+              <PropertyRef Name="MaKhachHang" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblOrder_Account_tblOrder">
+          <End Role="tblOrder" Type="Self.tblOrder" Multiplicity="1" />
+          <End Role="tblOrder_Account" Type="Self.tblOrder_Account" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblOrder">
+              <PropertyRef Name="OrderID" />
+            </Principal>
+            <Dependent Role="tblOrder_Account">
+              <PropertyRef Name="OrderID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblOrder_tblProduct">
+          <End Role="tblProduct" Type="Self.tblProduct" Multiplicity="0..1" />
+          <End Role="tblOrder" Type="Self.tblOrder" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblProduct">
+              <PropertyRef Name="ProductID" />
+            </Principal>
+            <Dependent Role="tblOrder">
+              <PropertyRef Name="ProductID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblSite_Product_tblProduct">
+          <End Role="tblProduct" Type="Self.tblProduct" Multiplicity="1" />
+          <End Role="tblSite_Product" Type="Self.tblSite_Product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblProduct">
+              <PropertyRef Name="ProductID" />
+            </Principal>
+            <Dependent Role="tblSite_Product">
+              <PropertyRef Name="ProductID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblSite_Product_tblSite">
+          <End Role="tblSite" Type="Self.tblSite" Multiplicity="1" />
+          <End Role="tblSite_Product" Type="Self.tblSite_Product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblSite">
+              <PropertyRef Name="SiteID" />
+            </Principal>
+            <Dependent Role="tblSite_Product">
+              <PropertyRef Name="SiteID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="tblAccount_Nhom">
+          <End Role="tblAccount" Type="Self.tblAccount" Multiplicity="*" />
+          <End Role="tblNhom" Type="Self.tblNhom" Multiplicity="*" />
+        </Association>
+        <Association Name="tblAccount_User">
+          <End Role="tblAccount" Type="Self.tblAccount" Multiplicity="*" />
+          <End Role="tblUser" Type="Self.tblUser" Multiplicity="*" />
+        </Association>
+        <Association Name="tblKhachHang_LichSu">
+          <End Role="tblKhachHang" Type="Self.tblKhachHang" Multiplicity="*" />
+          <End Role="tblLichSu" Type="Self.tblLichSu" Multiplicity="*" />
+        </Association>
+        <Association Name="tblNhom_KhachHang">
+          <End Role="tblKhachHang" Type="Self.tblKhachHang" Multiplicity="*" />
+          <End Role="tblNhom" Type="Self.tblNhom" Multiplicity="*" />
+        </Association>
+        <Association Name="tblPhongBan_Account">
+          <End Role="tblAccount" Type="Self.tblAccount" Multiplicity="*" />
+          <End Role="tblPhongBan" Type="Self.tblPhongBan" Multiplicity="*" />
+        </Association>
+        <EntityContainer Name="QLCongTacVienEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Categories" EntityType="Self.Category" />
+          <EntitySet Name="tblAccounts" EntityType="Self.tblAccount" />
+          <EntitySet Name="tblKhachHangs" EntityType="Self.tblKhachHang" />
+          <EntitySet Name="tblLichSus" EntityType="Self.tblLichSu" />
+          <EntitySet Name="tblNhoms" EntityType="Self.tblNhom" />
+          <EntitySet Name="tblOrders" EntityType="Self.tblOrder" />
+          <EntitySet Name="tblOrder_Account" EntityType="Self.tblOrder_Account" />
+          <EntitySet Name="tblPhongBans" EntityType="Self.tblPhongBan" />
+          <EntitySet Name="tblProducts" EntityType="Self.tblProduct" />
+          <EntitySet Name="tblSites" EntityType="Self.tblSite" />
+          <EntitySet Name="tblSite_Product" EntityType="Self.tblSite_Product" />
+          <EntitySet Name="tblUsers" EntityType="Self.tblUser" />
+          <AssociationSet Name="FK_tblProduct_Category" Association="Self.FK_tblProduct_Category">
+            <End Role="Category" EntitySet="Categories" />
+            <End Role="tblProduct" EntitySet="tblProducts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblAccount_tblAccount" Association="Self.FK_tblAccount_tblAccount">
+            <End Role="tblAccount" EntitySet="tblAccounts" />
+            <End Role="tblAccount1" EntitySet="tblAccounts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblOrder_Account_tblAccount" Association="Self.FK_tblOrder_Account_tblAccount">
+            <End Role="tblAccount" EntitySet="tblAccounts" />
+            <End Role="tblOrder_Account" EntitySet="tblOrder_Account" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblOrder_tblAccount" Association="Self.FK_tblOrder_tblAccount">
+            <End Role="tblAccount" EntitySet="tblAccounts" />
+            <End Role="tblOrder" EntitySet="tblOrders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblSite_tblAccount" Association="Self.FK_tblSite_tblAccount">
+            <End Role="tblAccount" EntitySet="tblAccounts" />
+            <End Role="tblSite" EntitySet="tblSites" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblOrder_tblKhachHang" Association="Self.FK_tblOrder_tblKhachHang">
+            <End Role="tblKhachHang" EntitySet="tblKhachHangs" />
+            <End Role="tblOrder" EntitySet="tblOrders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblOrder_Account_tblOrder" Association="Self.FK_tblOrder_Account_tblOrder">
+            <End Role="tblOrder" EntitySet="tblOrders" />
+            <End Role="tblOrder_Account" EntitySet="tblOrder_Account" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblOrder_tblProduct" Association="Self.FK_tblOrder_tblProduct">
+            <End Role="tblProduct" EntitySet="tblProducts" />
+            <End Role="tblOrder" EntitySet="tblOrders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblSite_Product_tblProduct" Association="Self.FK_tblSite_Product_tblProduct">
+            <End Role="tblProduct" EntitySet="tblProducts" />
+            <End Role="tblSite_Product" EntitySet="tblSite_Product" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblSite_Product_tblSite" Association="Self.FK_tblSite_Product_tblSite">
+            <End Role="tblSite" EntitySet="tblSites" />
+            <End Role="tblSite_Product" EntitySet="tblSite_Product" />
+          </AssociationSet>
+          <AssociationSet Name="tblAccount_Nhom" Association="Self.tblAccount_Nhom">
+            <End Role="tblAccount" EntitySet="tblAccounts" />
+            <End Role="tblNhom" EntitySet="tblNhoms" />
+          </AssociationSet>
+          <AssociationSet Name="tblAccount_User" Association="Self.tblAccount_User">
+            <End Role="tblAccount" EntitySet="tblAccounts" />
+            <End Role="tblUser" EntitySet="tblUsers" />
+          </AssociationSet>
+          <AssociationSet Name="tblKhachHang_LichSu" Association="Self.tblKhachHang_LichSu">
+            <End Role="tblKhachHang" EntitySet="tblKhachHangs" />
+            <End Role="tblLichSu" EntitySet="tblLichSus" />
+          </AssociationSet>
+          <AssociationSet Name="tblNhom_KhachHang" Association="Self.tblNhom_KhachHang">
+            <End Role="tblKhachHang" EntitySet="tblKhachHangs" />
+            <End Role="tblNhom" EntitySet="tblNhoms" />
+          </AssociationSet>
+          <AssociationSet Name="tblPhongBan_Account" Association="Self.tblPhongBan_Account">
+            <End Role="tblAccount" EntitySet="tblAccounts" />
+            <End Role="tblPhongBan" EntitySet="tblPhongBans" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="QLCongTacVienModelStoreContainer" CdmEntityContainer="QLCongTacVienEntities">
+          <EntitySetMapping Name="Categories">
+            <EntityTypeMapping TypeName="QLCongTacVienModel.Category">
+              <MappingFragment StoreEntitySet="Category">
+                <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
+                <ScalarProperty Name="CategoryName" ColumnName="CategoryName" />
+                <ScalarProperty Name="AccountID" ColumnName="AccountID" />
+                <ScalarProperty Name="NgayTao" ColumnName="NgayTao" />
+                <ScalarProperty Name="NgayUpdate" ColumnName="NgayUpdate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblAccounts">
+            <EntityTypeMapping TypeName="QLCongTacVienModel.tblAccount">
+              <MappingFragment StoreEntitySet="tblAccount">
+                <ScalarProperty Name="MaAccount" ColumnName="MaAccount" />
+                <ScalarProperty Name="TenAccount" ColumnName="TenAccount" />
+                <ScalarProperty Name="LoaiAccount" ColumnName="LoaiAccount" />
+                <ScalarProperty Name="GhiChu" ColumnName="GhiChu" />
+                <ScalarProperty Name="AccountManager" ColumnName="AccountManager" />
+                <ScalarProperty Name="NgayTao" ColumnName="NgayTao" />
+                <ScalarProperty Name="NgayUpdate" ColumnName="NgayUpdate" />
+                <ScalarProperty Name="UserTao" ColumnName="UserTao" />
+                <ScalarProperty Name="UserUpdate" ColumnName="UserUpdate" />
+                <ScalarProperty Name="TrangThai" ColumnName="TrangThai" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblKhachHangs">
+            <EntityTypeMapping TypeName="QLCongTacVienModel.tblKhachHang">
+              <MappingFragment StoreEntitySet="tblKhachHang">
+                <ScalarProperty Name="MaKhachHang" ColumnName="MaKhachHang" />
+                <ScalarProperty Name="TenKhachHang" ColumnName="TenKhachHang" />
+                <ScalarProperty Name="SoDT" ColumnName="SoDT" />
+                <ScalarProperty Name="DiaChi" ColumnName="DiaChi" />
+                <ScalarProperty Name="GhiChu1" ColumnName="GhiChu1" />
+                <ScalarProperty Name="GhiChu2" ColumnName="GhiChu2" />
+                <ScalarProperty Name="GhiChu3" ColumnName="GhiChu3" />
+                <ScalarProperty Name="GhiChu4" ColumnName="GhiChu4" />
+                <ScalarProperty Name="GiaTri" ColumnName="GiaTri" />
+                <ScalarProperty Name="TrangThai1" ColumnName="TrangThai1" />
+                <ScalarProperty Name="TrangThai2" ColumnName="TrangThai2" />
+                <ScalarProperty Name="TrangThai3" ColumnName="TrangThai3" />
+                <ScalarProperty Name="TrangThai4" ColumnName="TrangThai4" />
+                <ScalarProperty Name="NgayTao" ColumnName="NgayTao" />
+                <ScalarProperty Name="NgayUpdate" ColumnName="NgayUpdate" />
+                <ScalarProperty Name="UserTao" ColumnName="UserTao" />
+                <ScalarProperty Name="UserUpdate" ColumnName="UserUpdate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblLichSus">
+            <EntityTypeMapping TypeName="QLCongTacVienModel.tblLichSu">
+              <MappingFragment StoreEntitySet="tblLichSu">
+                <ScalarProperty Name="MaLichSu" ColumnName="MaLichSu" />
+                <ScalarProperty Name="NoiDung" ColumnName="NoiDung" />
+                <ScalarProperty Name="GiaTri" ColumnName="GiaTri" />
+                <ScalarProperty Name="GhiChu1" ColumnName="GhiChu1" />
+                <ScalarProperty Name="GhiChu2" ColumnName="GhiChu2" />
+                <ScalarProperty Name="GhiChu3" ColumnName="GhiChu3" />
+                <ScalarProperty Name="GhiChu4" ColumnName="GhiChu4" />
+                <ScalarProperty Name="NgayTao" ColumnName="NgayTao" />
+                <ScalarProperty Name="NgayUpdate" ColumnName="NgayUpdate" />
+                <ScalarProperty Name="UserTao" ColumnName="UserTao" />
+                <ScalarProperty Name="UserUpdate" ColumnName="UserUpdate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblNhoms">
+            <EntityTypeMapping TypeName="QLCongTacVienModel.tblNhom">
+              <MappingFragment StoreEntitySet="tblNhom">
+                <ScalarProperty Name="MaNhom" ColumnName="MaNhom" />
+                <ScalarProperty Name="TenNhom" ColumnName="TenNhom" />
+                <ScalarProperty Name="MoTaoNhom" ColumnName="MoTaoNhom" />
+                <ScalarProperty Name="GhiChu" ColumnName="GhiChu" />
+                <ScalarProperty Name="NgayTao" ColumnName="NgayTao" />
+                <ScalarProperty Name="NgayUpdate" ColumnName="NgayUpdate" />
+                <ScalarProperty Name="UserTao" ColumnName="UserTao" />
+                <ScalarProperty Name="UserUpdate" ColumnName="UserUpdate" />
+                <ScalarProperty Name="TrangThai" ColumnName="TrangThai" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblOrders">
+            <EntityTypeMapping TypeName="QLCongTacVienModel.tblOrder">
+              <MappingFragment StoreEntitySet="tblOrder">
+                <ScalarProperty Name="OrderID" ColumnName="OrderID" />
+                <ScalarProperty Name="ProductID" ColumnName="ProductID" />
+                <ScalarProperty Name="SoLuong" ColumnName="SoLuong" />
+                <ScalarProperty Name="MaKhachHang" ColumnName="MaKhachHang" />
+                <ScalarProperty Name="TongTien" ColumnName="TongTien" />
+                <ScalarProperty Name="AccountID" ColumnName="AccountID" />
+                <ScalarProperty Name="NgayHen" ColumnName="NgayHen" />
+                <ScalarProperty Name="NgayTao" ColumnName="NgayTao" />
+                <ScalarProperty Name="NgayUpdate" ColumnName="NgayUpdate" />
+                <ScalarProperty Name="TrangThai" ColumnName="TrangThai" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblOrder_Account">
+            <EntityTypeMapping TypeName="QLCongTacVienModel.tblOrder_Account">
+              <MappingFragment StoreEntitySet="tblOrder_Account">
+                <ScalarProperty Name="AccountID" ColumnName="AccountID" />
+                <ScalarProperty Name="OrderID" ColumnName="OrderID" />
+                <ScalarProperty Name="HueHong" ColumnName="HueHong" />
+                <ScalarProperty Name="TrangThai" ColumnName="TrangThai" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblPhongBans">
+            <EntityTypeMapping TypeName="QLCongTacVienModel.tblPhongBan">
+              <MappingFragment StoreEntitySet="tblPhongBan">
+                <ScalarProperty Name="MaPhongBan" ColumnName="MaPhongBan" />
+                <ScalarProperty Name="TenPhongBan" ColumnName="TenPhongBan" />
+                <ScalarProperty Name="MoTaPhongBan" ColumnName="MoTaPhongBan" />
+                <ScalarProperty Name="GhiChuPhongBan" ColumnName="GhiChuPhongBan" />
+                <ScalarProperty Name="NgayTao" ColumnName="NgayTao" />
+                <ScalarProperty Name="NgayUpdate" ColumnName="NgayUpdate" />
+                <ScalarProperty Name="UserTao" ColumnName="UserTao" />
+                <ScalarProperty Name="UserUpdate" ColumnName="UserUpdate" />
+                <ScalarProperty Name="TrangThai" ColumnName="TrangThai" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblProducts">
+            <EntityTypeMapping TypeName="QLCongTacVienModel.tblProduct">
+              <MappingFragment StoreEntitySet="tblProduct">
+                <ScalarProperty Name="ProductID" ColumnName="ProductID" />
+                <ScalarProperty Name="ProductName" ColumnName="ProductName" />
+                <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
+                <ScalarProperty Name="GiaBan" ColumnName="GiaBan" />
+                <ScalarProperty Name="TrangThai" ColumnName="TrangThai" />
+                <ScalarProperty Name="NgayTao" ColumnName="NgayTao" />
+                <ScalarProperty Name="NgayUpdate" ColumnName="NgayUpdate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblSites">
+            <EntityTypeMapping TypeName="QLCongTacVienModel.tblSite">
+              <MappingFragment StoreEntitySet="tblSite">
+                <ScalarProperty Name="SiteID" ColumnName="SiteID" />
+                <ScalarProperty Name="SiteName" ColumnName="SiteName" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="TrangThai" ColumnName="TrangThai" />
+                <ScalarProperty Name="NgayTao" ColumnName="NgayTao" />
+                <ScalarProperty Name="NgayUpdate" ColumnName="NgayUpdate" />
+                <ScalarProperty Name="AccountID" ColumnName="AccountID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblSite_Product">
+            <EntityTypeMapping TypeName="QLCongTacVienModel.tblSite_Product">
+              <MappingFragment StoreEntitySet="tblSite_Product">
+                <ScalarProperty Name="SiteID" ColumnName="SiteID" />
+                <ScalarProperty Name="ProductID" ColumnName="ProductID" />
+                <ScalarProperty Name="TrangThai" ColumnName="TrangThai" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblUsers">
+            <EntityTypeMapping TypeName="QLCongTacVienModel.tblUser">
+              <MappingFragment StoreEntitySet="tblUser">
+                <ScalarProperty Name="MaUser" ColumnName="MaUser" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="FullName" ColumnName="FullName" />
+                <ScalarProperty Name="DienThoai" ColumnName="DienThoai" />
+                <ScalarProperty Name="DiaChi" ColumnName="DiaChi" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="GhiChu" ColumnName="GhiChu" />
+                <ScalarProperty Name="NgayTao" ColumnName="NgayTao" />
+                <ScalarProperty Name="NgayUpdate" ColumnName="NgayUpdate" />
+                <ScalarProperty Name="UserTao" ColumnName="UserTao" />
+                <ScalarProperty Name="UserUpdate" ColumnName="UserUpdate" />
+                <ScalarProperty Name="TrangThai" ColumnName="TrangThai" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="tblAccount_Nhom" TypeName="QLCongTacVienModel.tblAccount_Nhom" StoreEntitySet="tblAccount_Nhom">
+            <EndProperty Name="tblAccount">
+              <ScalarProperty Name="MaAccount" ColumnName="MaAccount" />
+            </EndProperty>
+            <EndProperty Name="tblNhom">
+              <ScalarProperty Name="MaNhom" ColumnName="MaNhom" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="tblAccount_User" TypeName="QLCongTacVienModel.tblAccount_User" StoreEntitySet="tblAccount_User">
+            <EndProperty Name="tblAccount">
+              <ScalarProperty Name="MaAccount" ColumnName="MaAccount" />
+            </EndProperty>
+            <EndProperty Name="tblUser">
+              <ScalarProperty Name="MaUser" ColumnName="MaUser" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="tblKhachHang_LichSu" TypeName="QLCongTacVienModel.tblKhachHang_LichSu" StoreEntitySet="tblKhachHang_LichSu">
+            <EndProperty Name="tblKhachHang">
+              <ScalarProperty Name="MaKhachHang" ColumnName="MaKhachHang" />
+            </EndProperty>
+            <EndProperty Name="tblLichSu">
+              <ScalarProperty Name="MaLichSu" ColumnName="MaLichSu" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="tblNhom_KhachHang" TypeName="QLCongTacVienModel.tblNhom_KhachHang" StoreEntitySet="tblNhom_KhachHang">
+            <EndProperty Name="tblKhachHang">
+              <ScalarProperty Name="MaKhachHang" ColumnName="MaKhachHang" />
+            </EndProperty>
+            <EndProperty Name="tblNhom">
+              <ScalarProperty Name="MaNhom" ColumnName="MaNhom" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="tblPhongBan_Account" TypeName="QLCongTacVienModel.tblPhongBan_Account" StoreEntitySet="tblPhongBan_Account">
+            <EndProperty Name="tblAccount">
+              <ScalarProperty Name="MaAccount" ColumnName="MaAccount" />
+            </EndProperty>
+            <EndProperty Name="tblPhongBan">
+              <ScalarProperty Name="MaPhongBan" ColumnName="MaPhongBan" />
+            </EndProperty>
+          </AssociationSetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

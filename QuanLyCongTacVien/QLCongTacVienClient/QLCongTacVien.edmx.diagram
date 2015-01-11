@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="15bf67deba6c4ab5816652237e2904a2" Name="Diagram1">
+        <EntityTypeShape EntityType="QLCongTacVienModel.Category" Width="1.5" PointX="1.5" PointY="1.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="QLCongTacVienModel.tblAccount" Width="1.5" PointX="0.75" PointY="10.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="QLCongTacVienModel.tblKhachHang" Width="1.5" PointX="3.75" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="QLCongTacVienModel.tblLichSu" Width="1.5" PointX="6" PointY="6.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="QLCongTacVienModel.tblNhom" Width="1.5" PointX="3" PointY="11.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="QLCongTacVienModel.tblOrder" Width="1.5" PointX="6" PointY="11.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="QLCongTacVienModel.tblOrder_Account" Width="1.5" PointX="8.25" PointY="11.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="QLCongTacVienModel.tblPhongBan" Width="1.5" PointX="3" PointY="18.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="QLCongTacVienModel.tblProduct" Width="1.5" PointX="3.75" PointY="1.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="QLCongTacVienModel.tblSite" Width="1.5" PointX="3" PointY="22.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="QLCongTacVienModel.tblSite_Product" Width="1.5" PointX="5.25" PointY="22.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="QLCongTacVienModel.tblUser" Width="1.5" PointX="3" PointY="26" IsExpanded="true" />
+        <AssociationConnector Association="QLCongTacVienModel.FK_tblProduct_Category" ManuallyRouted="false" />
+        <AssociationConnector Association="QLCongTacVienModel.FK_tblAccount_tblAccount" ManuallyRouted="false" />
+        <AssociationConnector Association="QLCongTacVienModel.FK_tblOrder_Account_tblAccount" ManuallyRouted="false" />
+        <AssociationConnector Association="QLCongTacVienModel.FK_tblOrder_tblAccount" ManuallyRouted="false" />
+        <AssociationConnector Association="QLCongTacVienModel.FK_tblSite_tblAccount" ManuallyRouted="false" />
+        <AssociationConnector Association="QLCongTacVienModel.FK_tblOrder_tblKhachHang" ManuallyRouted="false" />
+        <AssociationConnector Association="QLCongTacVienModel.FK_tblOrder_Account_tblOrder" ManuallyRouted="false" />
+        <AssociationConnector Association="QLCongTacVienModel.FK_tblOrder_tblProduct" ManuallyRouted="false" />
+        <AssociationConnector Association="QLCongTacVienModel.FK_tblSite_Product_tblProduct" ManuallyRouted="false" />
+        <AssociationConnector Association="QLCongTacVienModel.FK_tblSite_Product_tblSite" ManuallyRouted="false" />
+        <AssociationConnector Association="QLCongTacVienModel.tblAccount_Nhom" ManuallyRouted="false" />
+        <AssociationConnector Association="QLCongTacVienModel.tblAccount_User" ManuallyRouted="false" />
+        <AssociationConnector Association="QLCongTacVienModel.tblKhachHang_LichSu" ManuallyRouted="false" />
+        <AssociationConnector Association="QLCongTacVienModel.tblNhom_KhachHang" ManuallyRouted="false" />
+        <AssociationConnector Association="QLCongTacVienModel.tblPhongBan_Account" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
