@@ -41,6 +41,7 @@
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Data.Entity" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
     <Reference Include="System.Xml.Linq" />
@@ -68,6 +69,7 @@
     <Compile Include="FormMain.Designer.cs">
       <DependentUpon>FormMain.cs</DependentUpon>
     </Compile>
+    <Compile Include="PhongBan.cs" />
     <Compile Include="Process.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -86,7 +88,19 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>QLCongTacVien.edmx</DependentUpon>
     </Compile>
+    <Compile Include="sysdiagram.cs">
+      <DependentUpon>QLCongTacVien.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tblAboutSite.cs">
+      <DependentUpon>QLCongTacVien.tt</DependentUpon>
+    </Compile>
     <Compile Include="tblAccount.cs">
+      <DependentUpon>QLCongTacVien.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tblContactSite.cs">
+      <DependentUpon>QLCongTacVien.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tblInfoSite.cs">
       <DependentUpon>QLCongTacVien.tt</DependentUpon>
     </Compile>
     <Compile Include="tblKhachHang.cs">

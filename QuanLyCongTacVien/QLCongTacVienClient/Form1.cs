@@ -11,25 +11,29 @@ namespace QLCongTacVienClient
 {
     public partial class FormDangNhap : Form
     {
+        Process objPro;
+        public static tblUser objUser=null;
         public FormDangNhap()
         {
             InitializeComponent();
+            objPro = new Process();
         }
 
         private void btnDangNhap_Click(object sender, EventArgs e)
         {
             try
-            {
-                var result = Process.getInstance().checkDangNhap(txtusername.Text, txtpassword.Text);
+            {                
+                var result = objPro.checkDangNhap(txtusername.Text, txtpassword.Text);
                 if (result == null)
                 {
                     MessageBox.Show("Username hoặc mật khẩu không đúng. Vui long thử lại!");
                     return;
                 }
-
+                objUser = result;
                 MessageBox.Show("Bạn đã đăng nhập thành công!");
                 FormMain frm = new FormMain();
-                frm.ShowDialog();
+                frm.Show();
+                this.Hide();
                 return;
             }
             catch (Exception objEx)
