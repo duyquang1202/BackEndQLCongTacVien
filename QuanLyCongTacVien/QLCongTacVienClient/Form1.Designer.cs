@@ -91,6 +91,7 @@
             this.Controls.Add(this.txtusername);
             this.Name = "FormDangNhap";
             this.Text = "Đăng Nhập";
+            this.Load += new System.EventHandler(this.FormDangNhap_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

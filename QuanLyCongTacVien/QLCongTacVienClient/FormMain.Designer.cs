@@ -32,6 +32,12 @@
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.txtMoTaPhongBan = new System.Windows.Forms.TextBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.cbTrangThaiPhongBan = new System.Windows.Forms.ComboBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.txtLuuYPhongBan = new System.Windows.Forms.TextBox();
+            this.label2 = new System.Windows.Forms.Label();
             this.btnDongPhongBan = new System.Windows.Forms.Button();
             this.btnLuuPhongBan = new System.Windows.Forms.Button();
             this.btnXoaPhongBan = new System.Windows.Forms.Button();
@@ -41,17 +47,32 @@
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.dgvPhongBan = new System.Windows.Forms.DataGridView();
             this.tabPage3 = new System.Windows.Forms.TabPage();
-            this.label2 = new System.Windows.Forms.Label();
-            this.txtLuuYPhongBan = new System.Windows.Forms.TextBox();
-            this.label3 = new System.Windows.Forms.Label();
-            this.cbTrangThaiPhongBan = new System.Windows.Forms.ComboBox();
-            this.txtMoTaPhongBan = new System.Windows.Forms.TextBox();
-            this.label4 = new System.Windows.Forms.Label();
+            this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.label5 = new System.Windows.Forms.Label();
+            this.btnDongAcount = new System.Windows.Forms.Button();
+            this.btnLuuAcount = new System.Windows.Forms.Button();
+            this.btnXoaAcount = new System.Windows.Forms.Button();
+            this.btnThemAcount = new System.Windows.Forms.Button();
+            this.txtLoaiAcount = new System.Windows.Forms.TextBox();
+            this.label9 = new System.Windows.Forms.Label();
+            this.cboTrangthaiAcount = new System.Windows.Forms.ComboBox();
+            this.label6 = new System.Windows.Forms.Label();
+            this.txtLuuyAcount = new System.Windows.Forms.TextBox();
+            this.label7 = new System.Windows.Forms.Label();
+            this.txtTenAcount = new System.Windows.Forms.TextBox();
+            this.label8 = new System.Windows.Forms.Label();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.dgvAccount = new System.Windows.Forms.DataGridView();
+            this.txtAccountManager = new System.Windows.Forms.TextBox();
             this.tabMainControl.SuspendLayout();
             this.tabPage2.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvPhongBan)).BeginInit();
+            this.tabPage3.SuspendLayout();
+            this.groupBox4.SuspendLayout();
+            this.groupBox3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvAccount)).BeginInit();
             this.SuspendLayout();
             // 
             // tabMainControl
@@ -72,7 +93,7 @@
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(795, 467);
+            this.tabPage1.Size = new System.Drawing.Size(795, 596);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Quản Lý Đơn Hàng";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -110,6 +131,59 @@
             this.groupBox2.TabIndex = 7;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Thông Tin";
+            // 
+            // txtMoTaPhongBan
+            // 
+            this.txtMoTaPhongBan.Enabled = false;
+            this.txtMoTaPhongBan.Location = new System.Drawing.Point(114, 109);
+            this.txtMoTaPhongBan.Multiline = true;
+            this.txtMoTaPhongBan.Name = "txtMoTaPhongBan";
+            this.txtMoTaPhongBan.Size = new System.Drawing.Size(223, 88);
+            this.txtMoTaPhongBan.TabIndex = 12;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(20, 122);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(41, 13);
+            this.label4.TabIndex = 11;
+            this.label4.Text = "Mô Tả:";
+            // 
+            // cbTrangThaiPhongBan
+            // 
+            this.cbTrangThaiPhongBan.FormattingEnabled = true;
+            this.cbTrangThaiPhongBan.Location = new System.Drawing.Point(114, 58);
+            this.cbTrangThaiPhongBan.Name = "cbTrangThaiPhongBan";
+            this.cbTrangThaiPhongBan.Size = new System.Drawing.Size(121, 21);
+            this.cbTrangThaiPhongBan.TabIndex = 10;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(9, 58);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(62, 13);
+            this.label3.TabIndex = 9;
+            this.label3.Text = "Trạng Thái:";
+            // 
+            // txtLuuYPhongBan
+            // 
+            this.txtLuuYPhongBan.Enabled = false;
+            this.txtLuuYPhongBan.Location = new System.Drawing.Point(469, 109);
+            this.txtLuuYPhongBan.Multiline = true;
+            this.txtLuuYPhongBan.Name = "txtLuuYPhongBan";
+            this.txtLuuYPhongBan.Size = new System.Drawing.Size(281, 88);
+            this.txtLuuYPhongBan.TabIndex = 8;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(402, 122);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(36, 13);
+            this.label2.TabIndex = 7;
+            this.label2.Text = "Lưu ý:";
             // 
             // btnDongPhongBan
             // 
@@ -194,66 +268,194 @@
             // 
             // tabPage3
             // 
+            this.tabPage3.Controls.Add(this.groupBox4);
+            this.tabPage3.Controls.Add(this.groupBox3);
             this.tabPage3.Location = new System.Drawing.Point(4, 22);
             this.tabPage3.Name = "tabPage3";
             this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage3.Size = new System.Drawing.Size(795, 467);
+            this.tabPage3.Size = new System.Drawing.Size(795, 596);
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "Quản Lý Account";
             this.tabPage3.UseVisualStyleBackColor = true;
             // 
-            // label2
+            // groupBox4
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(402, 122);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(36, 13);
-            this.label2.TabIndex = 7;
-            this.label2.Text = "Lưu ý:";
+            this.groupBox4.Controls.Add(this.txtAccountManager);
+            this.groupBox4.Controls.Add(this.label5);
+            this.groupBox4.Controls.Add(this.btnDongAcount);
+            this.groupBox4.Controls.Add(this.btnLuuAcount);
+            this.groupBox4.Controls.Add(this.btnXoaAcount);
+            this.groupBox4.Controls.Add(this.btnThemAcount);
+            this.groupBox4.Controls.Add(this.txtLoaiAcount);
+            this.groupBox4.Controls.Add(this.label9);
+            this.groupBox4.Controls.Add(this.cboTrangthaiAcount);
+            this.groupBox4.Controls.Add(this.label6);
+            this.groupBox4.Controls.Add(this.txtLuuyAcount);
+            this.groupBox4.Controls.Add(this.label7);
+            this.groupBox4.Controls.Add(this.txtTenAcount);
+            this.groupBox4.Controls.Add(this.label8);
+            this.groupBox4.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.groupBox4.Location = new System.Drawing.Point(3, 3);
+            this.groupBox4.Name = "groupBox4";
+            this.groupBox4.Size = new System.Drawing.Size(789, 377);
+            this.groupBox4.TabIndex = 1;
+            this.groupBox4.TabStop = false;
+            this.groupBox4.Text = "Thông Tin";
+            this.groupBox4.Enter += new System.EventHandler(this.groupBox4_Enter);
             // 
-            // txtLuuYPhongBan
+            // label5
             // 
-            this.txtLuuYPhongBan.Enabled = false;
-            this.txtLuuYPhongBan.Location = new System.Drawing.Point(469, 109);
-            this.txtLuuYPhongBan.Multiline = true;
-            this.txtLuuYPhongBan.Name = "txtLuuYPhongBan";
-            this.txtLuuYPhongBan.Size = new System.Drawing.Size(281, 88);
-            this.txtLuuYPhongBan.TabIndex = 8;
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(17, 169);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(92, 13);
+            this.label5.TabIndex = 27;
+            this.label5.Text = "Acount Mannager";
             // 
-            // label3
+            // btnDongAcount
             // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(9, 58);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(62, 13);
-            this.label3.TabIndex = 9;
-            this.label3.Text = "Trạng Thái:";
+            this.btnDongAcount.Location = new System.Drawing.Point(609, 289);
+            this.btnDongAcount.Name = "btnDongAcount";
+            this.btnDongAcount.Size = new System.Drawing.Size(75, 36);
+            this.btnDongAcount.TabIndex = 26;
+            this.btnDongAcount.Text = "Đóng";
+            this.btnDongAcount.UseVisualStyleBackColor = true;
+            this.btnDongAcount.Click += new System.EventHandler(this.button1_Click);
             // 
-            // cbTrangThaiPhongBan
+            // btnLuuAcount
             // 
-            this.cbTrangThaiPhongBan.FormattingEnabled = true;
-            this.cbTrangThaiPhongBan.Location = new System.Drawing.Point(114, 58);
-            this.cbTrangThaiPhongBan.Name = "cbTrangThaiPhongBan";
-            this.cbTrangThaiPhongBan.Size = new System.Drawing.Size(121, 21);
-            this.cbTrangThaiPhongBan.TabIndex = 10;
+            this.btnLuuAcount.Enabled = false;
+            this.btnLuuAcount.Location = new System.Drawing.Point(270, 289);
+            this.btnLuuAcount.Name = "btnLuuAcount";
+            this.btnLuuAcount.Size = new System.Drawing.Size(75, 36);
+            this.btnLuuAcount.TabIndex = 24;
+            this.btnLuuAcount.Text = "Lưu";
+            this.btnLuuAcount.UseVisualStyleBackColor = true;
+            this.btnLuuAcount.Click += new System.EventHandler(this.button2_Click);
             // 
-            // txtMoTaPhongBan
+            // btnXoaAcount
             // 
-            this.txtMoTaPhongBan.Enabled = false;
-            this.txtMoTaPhongBan.Location = new System.Drawing.Point(114, 109);
-            this.txtMoTaPhongBan.Multiline = true;
-            this.txtMoTaPhongBan.Name = "txtMoTaPhongBan";
-            this.txtMoTaPhongBan.Size = new System.Drawing.Size(223, 88);
-            this.txtMoTaPhongBan.TabIndex = 12;
+            this.btnXoaAcount.Enabled = false;
+            this.btnXoaAcount.Location = new System.Drawing.Point(458, 289);
+            this.btnXoaAcount.Name = "btnXoaAcount";
+            this.btnXoaAcount.Size = new System.Drawing.Size(75, 36);
+            this.btnXoaAcount.TabIndex = 25;
+            this.btnXoaAcount.Text = "Xóa";
+            this.btnXoaAcount.UseVisualStyleBackColor = true;
+            this.btnXoaAcount.Click += new System.EventHandler(this.button3_Click);
             // 
-            // label4
+            // btnThemAcount
             // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(20, 122);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(41, 13);
-            this.label4.TabIndex = 11;
-            this.label4.Text = "Mô Tả:";
+            this.btnThemAcount.Location = new System.Drawing.Point(79, 289);
+            this.btnThemAcount.Name = "btnThemAcount";
+            this.btnThemAcount.Size = new System.Drawing.Size(75, 36);
+            this.btnThemAcount.TabIndex = 23;
+            this.btnThemAcount.Text = "Thêm";
+            this.btnThemAcount.UseVisualStyleBackColor = true;
+            this.btnThemAcount.Click += new System.EventHandler(this.button4_Click);
+            // 
+            // txtLoaiAcount
+            // 
+            this.txtLoaiAcount.Enabled = false;
+            this.txtLoaiAcount.Location = new System.Drawing.Point(115, 61);
+            this.txtLoaiAcount.Name = "txtLoaiAcount";
+            this.txtLoaiAcount.Size = new System.Drawing.Size(223, 20);
+            this.txtLoaiAcount.TabIndex = 22;
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(10, 68);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(64, 13);
+            this.label9.TabIndex = 21;
+            this.label9.Text = "Loại Acount";
+            // 
+            // cboTrangthaiAcount
+            // 
+            this.cboTrangthaiAcount.FormattingEnabled = true;
+            this.cboTrangthaiAcount.Location = new System.Drawing.Point(122, 115);
+            this.cboTrangthaiAcount.Name = "cboTrangthaiAcount";
+            this.cboTrangthaiAcount.Size = new System.Drawing.Size(121, 21);
+            this.cboTrangthaiAcount.TabIndex = 18;
+            this.cboTrangthaiAcount.SelectedIndexChanged += new System.EventHandler(this.cboTrangthaiAcount_SelectedIndexChanged);
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(17, 115);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(62, 13);
+            this.label6.TabIndex = 17;
+            this.label6.Text = "Trạng Thái:";
+            this.label6.Click += new System.EventHandler(this.label6_Click);
+            // 
+            // txtLuuyAcount
+            // 
+            this.txtLuuyAcount.Enabled = false;
+            this.txtLuuyAcount.Location = new System.Drawing.Point(477, 166);
+            this.txtLuuyAcount.Multiline = true;
+            this.txtLuuyAcount.Name = "txtLuuyAcount";
+            this.txtLuuyAcount.Size = new System.Drawing.Size(281, 88);
+            this.txtLuuyAcount.TabIndex = 16;
+            this.txtLuuyAcount.TextChanged += new System.EventHandler(this.txtLuuyAcount_TextChanged);
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(410, 179);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(36, 13);
+            this.label7.TabIndex = 15;
+            this.label7.Text = "Lưu ý:";
+            this.label7.Click += new System.EventHandler(this.label7_Click);
+            // 
+            // txtTenAcount
+            // 
+            this.txtTenAcount.Enabled = false;
+            this.txtTenAcount.Location = new System.Drawing.Point(115, 20);
+            this.txtTenAcount.Name = "txtTenAcount";
+            this.txtTenAcount.Size = new System.Drawing.Size(223, 20);
+            this.txtTenAcount.TabIndex = 13;
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(10, 23);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(69, 13);
+            this.label8.TabIndex = 14;
+            this.label8.Text = "Tên Account";
+            // 
+            // groupBox3
+            // 
+            this.groupBox3.Controls.Add(this.dgvAccount);
+            this.groupBox3.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.groupBox3.Location = new System.Drawing.Point(3, 380);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Size = new System.Drawing.Size(789, 213);
+            this.groupBox3.TabIndex = 0;
+            this.groupBox3.TabStop = false;
+            this.groupBox3.Text = "Danh Sách Account";
+            // 
+            // dgvAccount
+            // 
+            this.dgvAccount.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvAccount.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgvAccount.Location = new System.Drawing.Point(3, 16);
+            this.dgvAccount.Name = "dgvAccount";
+            this.dgvAccount.Size = new System.Drawing.Size(783, 194);
+            this.dgvAccount.TabIndex = 0;
+            this.dgvAccount.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvAccount_CellDoubleClick);
+            // 
+            // txtAccountManager
+            // 
+            this.txtAccountManager.Enabled = false;
+            this.txtAccountManager.Location = new System.Drawing.Point(115, 162);
+            this.txtAccountManager.Name = "txtAccountManager";
+            this.txtAccountManager.Size = new System.Drawing.Size(223, 20);
+            this.txtAccountManager.TabIndex = 28;
+            this.txtAccountManager.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             // 
             // FormMain
             // 
@@ -271,6 +473,11 @@
             this.groupBox2.PerformLayout();
             this.groupBox1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvPhongBan)).EndInit();
+            this.tabPage3.ResumeLayout(false);
+            this.groupBox4.ResumeLayout(false);
+            this.groupBox4.PerformLayout();
+            this.groupBox3.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dgvAccount)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -296,5 +503,22 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox txtMoTaPhongBan;
         private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.GroupBox groupBox3;
+        private System.Windows.Forms.DataGridView dgvAccount;
+        private System.Windows.Forms.GroupBox groupBox4;
+        private System.Windows.Forms.ComboBox cboTrangthaiAcount;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.TextBox txtLuuyAcount;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.TextBox txtTenAcount;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.TextBox txtLoaiAcount;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.Button btnDongAcount;
+        private System.Windows.Forms.Button btnLuuAcount;
+        private System.Windows.Forms.Button btnXoaAcount;
+        private System.Windows.Forms.Button btnThemAcount;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.TextBox txtAccountManager;
     }
 }
