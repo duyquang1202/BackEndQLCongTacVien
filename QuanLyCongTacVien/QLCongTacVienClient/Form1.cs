@@ -42,5 +42,10 @@ namespace QLCongTacVienClient
                 return;
             }
         }
+
+        private void FormDangNhap_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }
