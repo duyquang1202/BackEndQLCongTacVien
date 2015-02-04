@@ -30,12 +30,14 @@ namespace QLCongTacVienClient
         public DbSet<tblAboutSite> tblAboutSites { get; set; }
         public DbSet<tblAccount> tblAccounts { get; set; }
         public DbSet<tblContactSite> tblContactSites { get; set; }
+        public DbSet<tblGroupPermission> tblGroupPermissions { get; set; }
         public DbSet<tblInfoSite> tblInfoSites { get; set; }
         public DbSet<tblKhachHang> tblKhachHangs { get; set; }
         public DbSet<tblLichSu> tblLichSus { get; set; }
         public DbSet<tblNhom> tblNhoms { get; set; }
         public DbSet<tblOrder> tblOrders { get; set; }
         public DbSet<tblOrder_Account> tblOrder_Account { get; set; }
+        public DbSet<tblPermission> tblPermissions { get; set; }
         public DbSet<tblPhongBan> tblPhongBans { get; set; }
         public DbSet<tblProduct> tblProducts { get; set; }
         public DbSet<tblSite> tblSites { get; set; }

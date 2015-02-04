@@ -19,10 +19,12 @@ namespace QLCongTacVienClient
                 return new List<tblAccount>();
             }
         }
-        public bool ThemAccount(tblAccount obj)
+        public bool ThemAccount(tblAccount obj,int MaPhongBan)
         {
             try
             {
+                var phongban = context.tblPhongBans.Where(x => x.MaPhongBan == MaPhongBan).FirstOrDefault();
+                obj.tblPhongBans.Add(phongban);
                 context.tblAccounts.Add(obj);
                 context.SaveChanges();
                 return true;
@@ -44,6 +46,7 @@ namespace QLCongTacVienClient
                 }
 
                 result.TenAccount = obj.TenAccount;
+                
                 result.LoaiAccount = obj.LoaiAccount;
                 result.TrangThai = obj.TrangThai;
                 result.AccountManager = obj.AccountManager;
@@ -73,6 +76,19 @@ namespace QLCongTacVienClient
             catch(Exception ex)
             {
                 return false;
+            }
+        }
+
+        public List<tblAccount> getAccountFromLoaiAccount(int MaPhongBan, string LoaiAccount)
+        {
+            try
+            {
+                var result = context.tblAccounts.Where(x => x.tblPhongBans.Where(m => m.MaPhongBan == MaPhongBan).Count() > 0 && x.LoaiAccount==LoaiAccount).ToList();
+                return result;
+            }
+            catch (Exception)
+            {
+                return new List<tblAccount>();
             }
         }
 

@@ -54,10 +54,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AboutSite.cs" />
     <Compile Include="Account.cs" />
     <Compile Include="Category.cs">
       <DependentUpon>QLCongTacVien.tt</DependentUpon>
     </Compile>
+    <Compile Include="ConttactSite.cs" />
+    <Compile Include="DonHang.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -70,6 +73,39 @@
     <Compile Include="FormMain.Designer.cs">
       <DependentUpon>FormMain.cs</DependentUpon>
     </Compile>
+    <Compile Include="FrmAboutSite.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmAboutSite.Designer.cs">
+      <DependentUpon>FrmAboutSite.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmContactSite.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmContactSite.Designer.cs">
+      <DependentUpon>FrmContactSite.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmHoaHong.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmHoaHong.Designer.cs">
+      <DependentUpon>FrmHoaHong.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmInfoSite.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmInfoSite.Designer.cs">
+      <DependentUpon>FrmInfoSite.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmPermission.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmPermission.Designer.cs">
+      <DependentUpon>FrmPermission.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GroupPermission.cs" />
+    <Compile Include="Group_Permission.cs" />
+    <Compile Include="HoaHong.cs" />
     <Compile Include="PhongBan.cs" />
     <Compile Include="Process.cs" />
     <Compile Include="Program.cs" />
@@ -89,6 +125,13 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>QLCongTacVien.edmx</DependentUpon>
     </Compile>
+    <Compile Include="QLUser.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="QLUser.Designer.cs">
+      <DependentUpon>QLUser.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Site.cs" />
     <Compile Include="sysdiagram.cs">
       <DependentUpon>QLCongTacVien.tt</DependentUpon>
     </Compile>
@@ -99,6 +142,9 @@
       <DependentUpon>QLCongTacVien.tt</DependentUpon>
     </Compile>
     <Compile Include="tblContactSite.cs">
+      <DependentUpon>QLCongTacVien.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tblGroupPermission.cs">
       <DependentUpon>QLCongTacVien.tt</DependentUpon>
     </Compile>
     <Compile Include="tblInfoSite.cs">
@@ -119,6 +165,9 @@
     <Compile Include="tblOrder_Account.cs">
       <DependentUpon>QLCongTacVien.tt</DependentUpon>
     </Compile>
+    <Compile Include="tblPermission.cs">
+      <DependentUpon>QLCongTacVien.tt</DependentUpon>
+    </Compile>
     <Compile Include="tblPhongBan.cs">
       <DependentUpon>QLCongTacVien.tt</DependentUpon>
     </Compile>
@@ -134,11 +183,29 @@
     <Compile Include="tblUser.cs">
       <DependentUpon>QLCongTacVien.tt</DependentUpon>
     </Compile>
+    <Compile Include="Types.cs" />
+    <Compile Include="USer.cs" />
+    <Compile Include="ÌnoSite.cs" />
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormMain.resx">
       <DependentUpon>FormMain.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmAboutSite.resx">
+      <DependentUpon>FrmAboutSite.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmContactSite.resx">
+      <DependentUpon>FrmContactSite.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmHoaHong.resx">
+      <DependentUpon>FrmHoaHong.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmInfoSite.resx">
+      <DependentUpon>FrmInfoSite.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmPermission.resx">
+      <DependentUpon>FrmPermission.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -149,6 +216,9 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="QLUser.resx">
+      <DependentUpon>QLUser.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="App.Config" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">

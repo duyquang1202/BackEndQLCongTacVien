@@ -16,6 +16,7 @@ namespace QLCongTacVienClient
     {
         public tblSite()
         {
+            this.tblAboutSites = new HashSet<tblAboutSite>();
             this.tblContactSites = new HashSet<tblContactSite>();
             this.tblInfoSites = new HashSet<tblInfoSite>();
             this.tblSite_Product = new HashSet<tblSite_Product>();
@@ -28,8 +29,9 @@ namespace QLCongTacVienClient
         public Nullable<System.DateTime> NgayTao { get; set; }
         public Nullable<System.DateTime> NgayUpdate { get; set; }
         public Nullable<long> AccountID { get; set; }
+        public string Domain { get; set; }
     
-        public virtual tblAboutSite tblAboutSite { get; set; }
+        public virtual ICollection<tblAboutSite> tblAboutSites { get; set; }
         public virtual tblAccount tblAccount { get; set; }
         public virtual ICollection<tblContactSite> tblContactSites { get; set; }
         public virtual ICollection<tblInfoSite> tblInfoSites { get; set; }

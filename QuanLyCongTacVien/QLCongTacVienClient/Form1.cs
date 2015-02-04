@@ -31,7 +31,7 @@ namespace QLCongTacVienClient
                 }
                 objUser = result;
                 MessageBox.Show("Bạn đã đăng nhập thành công!");
-                FormMain frm = new FormMain();
+                FormMain frm = new FormMain(objUser);
                 frm.Show();
                 this.Hide();
                 return;
