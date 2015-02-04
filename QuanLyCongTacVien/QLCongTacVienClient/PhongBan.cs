@@ -79,5 +79,18 @@ namespace QLCongTacVienClient
                 return false;
             }
         }
+
+        public tblPhongBan getPhongBan(int MaPhongBan)
+        {
+            try
+            {
+                var result = context.tblPhongBans.Single(x => x.MaPhongBan == MaPhongBan);
+                return result;
+            }
+            catch (Exception objEX)
+            {
+                return null;
+            }
+        }
     }
 }

@@ -32,7 +32,9 @@ namespace QLCongTacVienClient
         public string UserTao { get; set; }
         public string UserUpdate { get; set; }
         public Nullable<int> TrangThai { get; set; }
+        public Nullable<int> GroupID { get; set; }
     
+        public virtual tblGroupPermission tblGroupPermission { get; set; }
         public virtual ICollection<tblAccount> tblAccounts { get; set; }
     }
 }
