@@ -16,7 +16,7 @@ namespace QLCongTacVienClient
     {
         public tblPermission()
         {
-            this.tblGroupPermissions = new HashSet<tblGroupPermission>();
+            this.tblGroup_Perrmision = new HashSet<tblGroup_Perrmision>();
         }
     
         public int PermisionID { get; set; }
@@ -24,7 +24,8 @@ namespace QLCongTacVienClient
         public Nullable<int> Status { get; set; }
         public Nullable<System.DateTime> NgayTao { get; set; }
         public Nullable<System.DateTime> NgayUpdate { get; set; }
+        public string PermissionKey { get; set; }
     
-        public virtual ICollection<tblGroupPermission> tblGroupPermissions { get; set; }
+        public virtual ICollection<tblGroup_Perrmision> tblGroup_Perrmision { get; set; }
     }
 }

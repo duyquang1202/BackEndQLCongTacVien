@@ -5,40 +5,40 @@ using System.Text;
 
 namespace QLCongTacVienClient
 {
-    class Group_Permission:Process
+    class Nhom_KH:Process
     {
-        public List<tblGroup_Perrmision> LoadDSGroup_Permission(int GroupID)
+        public List<tblNhom_KhachHang> LoadDSNhom_KH(int MaNhom)
         {
             try
             {
-                var objGroup = context.tblGroupPermissions.Find(GroupID);
-                if (objGroup == null)
+                var objNhom = context.tblNhoms.Find(MaNhom);
+                if (objNhom == null)
                 {
-                    return new List<tblGroup_Perrmision>();
+                    return new List<tblNhom_KhachHang>();
                 }
-                return objGroup.tblGroup_Perrmision.ToList();
+                return objNhom.tblNhom_KhachHang.ToList();
             }
             catch (Exception objEX)
             {
-                return new List<tblGroup_Perrmision>();
+                return new List<tblNhom_KhachHang>();
             }
         }
-        public List<tblPermission> LoadDSPermission()
+        public List<tblKhachHang> LoadDSKhachHang()
         {
             try
             {
-                return context.tblPermissions.ToList();
+                return context.tblKhachHangs.ToList();
             }
             catch (Exception objEX)
             {
-                return new List<tblPermission>();
+                return new List<tblKhachHang>();
             }
         }
-        public bool ThemGroup_Permission(tblGroup_Perrmision obj)
+        public bool ThemNhom_KH(tblNhom_KhachHang obj)
         {
             try
             {
-                context.tblGroup_Perrmision.Add(obj);
+                context.tblNhom_KhachHang.Add(obj);
                 context.SaveChanges();
                 return true;
             }
@@ -48,19 +48,19 @@ namespace QLCongTacVienClient
             }
         }
 
-        
 
-        public bool XoaGroup_Permission(tblGroup_Perrmision obj)
+
+        public bool XoaNhom_KH(tblNhom_KhachHang obj)
         {
             try
             {
-                var result = context.tblGroup_Perrmision.Where(x => x.PermissionID.Equals(obj.PermissionID)).FirstOrDefault();
+                var result = context.tblNhom_KhachHang.Where(x => x.MaKhachHang.Equals(obj.MaKhachHang)).FirstOrDefault();
                 if (result == null)
                 {
                     return false;
                 }
 
-                context.tblGroup_Perrmision.Remove(result);
+                context.tblNhom_KhachHang.Remove(result);
 
                 context.SaveChanges();
                 return true;
@@ -71,6 +71,5 @@ namespace QLCongTacVienClient
             }
         }
        
-     
     }
 }

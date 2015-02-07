@@ -86,7 +86,7 @@ namespace QLCongTacVienClient
         {
             try
             {
-                var result = context.tblPermissions.Where(x =>x.tblGroupPermissions.Where(m=>m.GroupID==GroupID).Count()>0).ToList();
+                var result = context.tblPermissions.Where(x =>x.tblGroup_Perrmision.Where(m=>m.GroupID==GroupID).Count()>0).ToList();
                 return result;
             }
             catch (Exception)

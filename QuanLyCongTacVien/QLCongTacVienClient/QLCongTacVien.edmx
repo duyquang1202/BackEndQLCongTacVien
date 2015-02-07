@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="QLCongTacVienModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+      <Schema Namespace="QLCongTacVienModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
         <EntityContainer Name="QLCongTacVienModelStoreContainer">
           <EntitySet Name="Category" EntityType="QLCongTacVienModel.Store.Category" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="sysdiagrams" EntityType="QLCongTacVienModel.Store.sysdiagrams" store:Type="Tables" Schema="dbo" />
@@ -209,6 +209,7 @@
           </Key>
           <Property Name="GroupID" Type="int" Nullable="false" />
           <Property Name="PermissionID" Type="int" Nullable="false" />
+          <Property Name="TrangThai" Type="int" />
         </EntityType>
         <EntityType Name="tblGroupPermission">
           <Key>
@@ -278,7 +279,7 @@
           <Key>
             <PropertyRef Name="MaNhom" />
           </Key>
-          <Property Name="MaNhom" Type="bigint" Nullable="false" />
+          <Property Name="MaNhom" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="TenNhom" Type="nvarchar" MaxLength="100" />
           <Property Name="MoTaoNhom" Type="nvarchar(max)" />
           <Property Name="GhiChu" Type="nvarchar(max)" />
@@ -295,6 +296,7 @@
           </Key>
           <Property Name="MaNhom" Type="bigint" Nullable="false" />
           <Property Name="MaKhachHang" Type="bigint" Nullable="false" />
+          <Property Name="TrangThai" Type="int" />
         </EntityType>
         <EntityType Name="tblOrder">
           <Key>
@@ -330,6 +332,7 @@
           <Property Name="Status" Type="int" />
           <Property Name="NgayTao" Type="datetime" />
           <Property Name="NgayUpdate" Type="datetime" />
+          <Property Name="PermissionKey" Type="varchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="tblPhongBan">
           <Key>
@@ -718,7 +721,8 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="QLCongTacVienModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
@@ -728,11 +732,13 @@
           <EntitySet Name="tblAboutSites" EntityType="QLCongTacVienModel.tblAboutSite" />
           <EntitySet Name="tblAccounts" EntityType="QLCongTacVienModel.tblAccount" />
           <EntitySet Name="tblContactSites" EntityType="QLCongTacVienModel.tblContactSite" />
+          <EntitySet Name="tblGroup_Perrmision" EntityType="QLCongTacVienModel.tblGroup_Perrmision" />
           <EntitySet Name="tblGroupPermissions" EntityType="QLCongTacVienModel.tblGroupPermission" />
           <EntitySet Name="tblInfoSites" EntityType="QLCongTacVienModel.tblInfoSite" />
           <EntitySet Name="tblKhachHangs" EntityType="QLCongTacVienModel.tblKhachHang" />
           <EntitySet Name="tblLichSus" EntityType="QLCongTacVienModel.tblLichSu" />
           <EntitySet Name="tblNhoms" EntityType="QLCongTacVienModel.tblNhom" />
+          <EntitySet Name="tblNhom_KhachHang" EntityType="QLCongTacVienModel.tblNhom_KhachHang" />
           <EntitySet Name="tblOrders" EntityType="QLCongTacVienModel.tblOrder" />
           <EntitySet Name="tblOrder_Account" EntityType="QLCongTacVienModel.tblOrder_Account" />
           <EntitySet Name="tblPermissions" EntityType="QLCongTacVienModel.tblPermission" />
@@ -769,6 +775,14 @@
             <End Role="tblSite" EntitySet="tblSites" />
             <End Role="tblContactSite" EntitySet="tblContactSites" />
           </AssociationSet>
+          <AssociationSet Name="FK_tblGroup_Perrmision_tblGroupPermission" Association="QLCongTacVienModel.FK_tblGroup_Perrmision_tblGroupPermission">
+            <End Role="tblGroupPermission" EntitySet="tblGroupPermissions" />
+            <End Role="tblGroup_Perrmision" EntitySet="tblGroup_Perrmision" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblGroup_Perrmision_tblPermission" Association="QLCongTacVienModel.FK_tblGroup_Perrmision_tblPermission">
+            <End Role="tblPermission" EntitySet="tblPermissions" />
+            <End Role="tblGroup_Perrmision" EntitySet="tblGroup_Perrmision" />
+          </AssociationSet>
           <AssociationSet Name="FK_tblUser_tblGroupPermission" Association="QLCongTacVienModel.FK_tblUser_tblGroupPermission">
             <End Role="tblGroupPermission" EntitySet="tblGroupPermissions" />
             <End Role="tblUser" EntitySet="tblUsers" />
@@ -777,9 +791,17 @@
             <End Role="tblSite" EntitySet="tblSites" />
             <End Role="tblInfoSite" EntitySet="tblInfoSites" />
           </AssociationSet>
+          <AssociationSet Name="FK_tblNhom_KhachHang_tblKhachHang" Association="QLCongTacVienModel.FK_tblNhom_KhachHang_tblKhachHang">
+            <End Role="tblKhachHang" EntitySet="tblKhachHangs" />
+            <End Role="tblNhom_KhachHang" EntitySet="tblNhom_KhachHang" />
+          </AssociationSet>
           <AssociationSet Name="FK_tblOrder_tblKhachHang" Association="QLCongTacVienModel.FK_tblOrder_tblKhachHang">
             <End Role="tblKhachHang" EntitySet="tblKhachHangs" />
             <End Role="tblOrder" EntitySet="tblOrders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblNhom_KhachHang_tblNhom" Association="QLCongTacVienModel.FK_tblNhom_KhachHang_tblNhom">
+            <End Role="tblNhom" EntitySet="tblNhoms" />
+            <End Role="tblNhom_KhachHang" EntitySet="tblNhom_KhachHang" />
           </AssociationSet>
           <AssociationSet Name="FK_tblOrder_Account_tblOrder" Association="QLCongTacVienModel.FK_tblOrder_Account_tblOrder">
             <End Role="tblOrder" EntitySet="tblOrders" />
@@ -805,17 +827,9 @@
             <End Role="tblAccount" EntitySet="tblAccounts" />
             <End Role="tblUser" EntitySet="tblUsers" />
           </AssociationSet>
-          <AssociationSet Name="tblGroup_Perrmision" Association="QLCongTacVienModel.tblGroup_Perrmision">
-            <End Role="tblGroupPermission" EntitySet="tblGroupPermissions" />
-            <End Role="tblPermission" EntitySet="tblPermissions" />
-          </AssociationSet>
           <AssociationSet Name="tblKhachHang_LichSu" Association="QLCongTacVienModel.tblKhachHang_LichSu">
             <End Role="tblKhachHang" EntitySet="tblKhachHangs" />
             <End Role="tblLichSu" EntitySet="tblLichSus" />
-          </AssociationSet>
-          <AssociationSet Name="tblNhom_KhachHang" Association="QLCongTacVienModel.tblNhom_KhachHang">
-            <End Role="tblKhachHang" EntitySet="tblKhachHangs" />
-            <End Role="tblNhom" EntitySet="tblNhoms" />
           </AssociationSet>
           <AssociationSet Name="tblPhongBan_Account" Association="QLCongTacVienModel.tblPhongBan_Account">
             <End Role="tblAccount" EntitySet="tblAccounts" />
@@ -826,46 +840,46 @@
           <Key>
             <PropertyRef Name="CategoryID" />
           </Key>
-          <Property Type="Int32" Name="CategoryID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Type="String" Name="CategoryName" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Type="Int32" Name="AccountID" />
-          <Property Type="DateTime" Name="NgayTao" Precision="3" />
-          <Property Type="DateTime" Name="NgayUpdate" Precision="3" />
+          <Property Name="CategoryID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CategoryName" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="AccountID" Type="Int32" />
+          <Property Name="NgayTao" Type="DateTime" Precision="3" />
+          <Property Name="NgayUpdate" Type="DateTime" Precision="3" />
           <NavigationProperty Name="tblProducts" Relationship="QLCongTacVienModel.FK_tblProduct_Category" FromRole="Category" ToRole="tblProduct" />
         </EntityType>
         <EntityType Name="sysdiagram">
           <Key>
             <PropertyRef Name="diagram_id" />
           </Key>
-          <Property Type="String" Name="name" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
-          <Property Type="Int32" Name="principal_id" Nullable="false" />
-          <Property Type="Int32" Name="diagram_id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Type="Int32" Name="version" />
-          <Property Type="Binary" Name="definition" MaxLength="Max" FixedLength="false" />
+          <Property Name="name" Type="String" Nullable="false" MaxLength="128" Unicode="true" FixedLength="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
         </EntityType>
         <EntityType Name="tblAboutSite">
           <Key>
             <PropertyRef Name="AboutID" />
           </Key>
-          <Property Type="Int32" Name="AboutID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Type="String" Name="Note" MaxLength="1000" FixedLength="false" Unicode="true" />
-          <Property Type="Int32" Name="SiteID" />
+          <Property Name="AboutID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Note" Type="String" MaxLength="1000" Unicode="true" FixedLength="false" />
+          <Property Name="SiteID" Type="Int32" />
           <NavigationProperty Name="tblSite" Relationship="QLCongTacVienModel.FK_tblAboutSite_tblSite" FromRole="tblAboutSite" ToRole="tblSite" />
         </EntityType>
         <EntityType Name="tblAccount">
           <Key>
             <PropertyRef Name="MaAccount" />
           </Key>
-          <Property Type="Int64" Name="MaAccount" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Type="String" Name="TenAccount" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Type="String" Name="LoaiAccount" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Type="String" Name="GhiChu" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Type="Int64" Name="AccountManager" />
-          <Property Type="DateTime" Name="NgayTao" Precision="3" />
-          <Property Type="DateTime" Name="NgayUpdate" Precision="3" />
-          <Property Type="String" Name="UserTao" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Type="String" Name="UserUpdate" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Type="Int32" Name="TrangThai" />
+          <Property Name="MaAccount" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TenAccount" Type="String" MaxLength="100" Unicode="true" FixedLength="false" />
+          <Property Name="LoaiAccount" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="GhiChu" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="AccountManager" Type="Int64" />
+          <Property Name="NgayTao" Type="DateTime" Precision="3" />
+          <Property Name="NgayUpdate" Type="DateTime" Precision="3" />
+          <Property Name="UserTao" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="UserUpdate" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="TrangThai" Type="Int32" />
           <NavigationProperty Name="tblAccount1" Relationship="QLCongTacVienModel.FK_tblAccount_tblAccount" FromRole="tblAccount" ToRole="tblAccount1" />
           <NavigationProperty Name="tblAccount2" Relationship="QLCongTacVienModel.FK_tblAccount_tblAccount" FromRole="tblAccount1" ToRole="tblAccount" />
           <NavigationProperty Name="tblOrder_Account" Relationship="QLCongTacVienModel.FK_tblOrder_Account_tblAccount" FromRole="tblAccount" ToRole="tblOrder_Account" />
@@ -879,104 +893,126 @@
           <Key>
             <PropertyRef Name="ContacID" />
           </Key>
-          <Property Type="Int32" Name="ContacID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Type="String" Name="Note" MaxLength="1000" FixedLength="false" Unicode="true" />
-          <Property Type="Int32" Name="SiteID" />
+          <Property Name="ContacID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Note" Type="String" MaxLength="1000" Unicode="true" FixedLength="false" />
+          <Property Name="SiteID" Type="Int32" />
           <NavigationProperty Name="tblSite" Relationship="QLCongTacVienModel.FK_tblContactSite_tblSite" FromRole="tblContactSite" ToRole="tblSite" />
+        </EntityType>
+        <EntityType Name="tblGroup_Perrmision">
+          <Key>
+            <PropertyRef Name="GroupID" />
+            <PropertyRef Name="PermissionID" />
+          </Key>
+          <Property Name="GroupID" Type="Int32" Nullable="false" />
+          <Property Name="PermissionID" Type="Int32" Nullable="false" />
+          <Property Name="TrangThai" Type="Int32" />
+          <NavigationProperty Name="tblGroupPermission" Relationship="QLCongTacVienModel.FK_tblGroup_Perrmision_tblGroupPermission" FromRole="tblGroup_Perrmision" ToRole="tblGroupPermission" />
+          <NavigationProperty Name="tblPermission" Relationship="QLCongTacVienModel.FK_tblGroup_Perrmision_tblPermission" FromRole="tblGroup_Perrmision" ToRole="tblPermission" />
         </EntityType>
         <EntityType Name="tblGroupPermission">
           <Key>
             <PropertyRef Name="GroupID" />
           </Key>
-          <Property Type="Int32" Name="GroupID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Type="String" Name="Name" MaxLength="150" FixedLength="false" Unicode="true" />
-          <Property Type="Int32" Name="Status" />
-          <Property Type="DateTime" Name="NgayTao" Precision="3" />
-          <Property Type="DateTime" Name="NgayUpdate" Precision="3" />
+          <Property Name="GroupID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="150" Unicode="true" FixedLength="false" />
+          <Property Name="Status" Type="Int32" />
+          <Property Name="NgayTao" Type="DateTime" Precision="3" />
+          <Property Name="NgayUpdate" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="tblGroup_Perrmision" Relationship="QLCongTacVienModel.FK_tblGroup_Perrmision_tblGroupPermission" FromRole="tblGroupPermission" ToRole="tblGroup_Perrmision" />
           <NavigationProperty Name="tblUsers" Relationship="QLCongTacVienModel.FK_tblUser_tblGroupPermission" FromRole="tblGroupPermission" ToRole="tblUser" />
-          <NavigationProperty Name="tblPermissions" Relationship="QLCongTacVienModel.tblGroup_Perrmision" FromRole="tblGroupPermission" ToRole="tblPermission" />
         </EntityType>
         <EntityType Name="tblInfoSite">
           <Key>
             <PropertyRef Name="InfoID" />
           </Key>
-          <Property Type="Int32" Name="InfoID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Type="String" Name="Note" MaxLength="1000" FixedLength="false" Unicode="true" />
-          <Property Type="Int32" Name="SiteID" />
+          <Property Name="InfoID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Note" Type="String" MaxLength="1000" Unicode="true" FixedLength="false" />
+          <Property Name="SiteID" Type="Int32" />
           <NavigationProperty Name="tblSite" Relationship="QLCongTacVienModel.FK_tblInfoSite_tblSite" FromRole="tblInfoSite" ToRole="tblSite" />
         </EntityType>
         <EntityType Name="tblKhachHang">
           <Key>
             <PropertyRef Name="MaKhachHang" />
           </Key>
-          <Property Type="Int64" Name="MaKhachHang" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Type="String" Name="TenKhachHang" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Type="String" Name="SoDT" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Type="String" Name="DiaChi" MaxLength="250" FixedLength="false" Unicode="true" />
-          <Property Type="String" Name="GhiChu1" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Type="String" Name="GhiChu2" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Type="String" Name="GhiChu3" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Type="String" Name="GhiChu4" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Type="Double" Name="GiaTri" />
-          <Property Type="Int32" Name="TrangThai1" />
-          <Property Type="Int32" Name="TrangThai2" />
-          <Property Type="Int32" Name="TrangThai3" />
-          <Property Type="Int32" Name="TrangThai4" />
-          <Property Type="DateTime" Name="NgayTao" Precision="3" />
-          <Property Type="DateTime" Name="NgayUpdate" Precision="3" />
-          <Property Type="String" Name="UserTao" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Type="String" Name="UserUpdate" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="MaKhachHang" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TenKhachHang" Type="String" MaxLength="100" Unicode="true" FixedLength="false" />
+          <Property Name="SoDT" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="DiaChi" Type="String" MaxLength="250" Unicode="true" FixedLength="false" />
+          <Property Name="GhiChu1" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="GhiChu2" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="GhiChu3" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="GhiChu4" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="GiaTri" Type="Double" />
+          <Property Name="TrangThai1" Type="Int32" />
+          <Property Name="TrangThai2" Type="Int32" />
+          <Property Name="TrangThai3" Type="Int32" />
+          <Property Name="TrangThai4" Type="Int32" />
+          <Property Name="NgayTao" Type="DateTime" Precision="3" />
+          <Property Name="NgayUpdate" Type="DateTime" Precision="3" />
+          <Property Name="UserTao" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="UserUpdate" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="tblNhom_KhachHang" Relationship="QLCongTacVienModel.FK_tblNhom_KhachHang_tblKhachHang" FromRole="tblKhachHang" ToRole="tblNhom_KhachHang" />
           <NavigationProperty Name="tblOrders" Relationship="QLCongTacVienModel.FK_tblOrder_tblKhachHang" FromRole="tblKhachHang" ToRole="tblOrder" />
           <NavigationProperty Name="tblLichSus" Relationship="QLCongTacVienModel.tblKhachHang_LichSu" FromRole="tblKhachHang" ToRole="tblLichSu" />
-          <NavigationProperty Name="tblNhoms" Relationship="QLCongTacVienModel.tblNhom_KhachHang" FromRole="tblKhachHang" ToRole="tblNhom" />
         </EntityType>
         <EntityType Name="tblLichSu">
           <Key>
             <PropertyRef Name="MaLichSu" />
           </Key>
-          <Property Type="Int64" Name="MaLichSu" Nullable="false" />
-          <Property Type="String" Name="NoiDung" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Type="Double" Name="GiaTri" />
-          <Property Type="String" Name="GhiChu1" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Type="String" Name="GhiChu2" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Type="String" Name="GhiChu3" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Type="String" Name="GhiChu4" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Type="DateTime" Name="NgayTao" Precision="3" />
-          <Property Type="DateTime" Name="NgayUpdate" Precision="3" />
-          <Property Type="DateTime" Name="UserTao" Precision="3" />
-          <Property Type="DateTime" Name="UserUpdate" Precision="3" />
+          <Property Name="MaLichSu" Type="Int64" Nullable="false" />
+          <Property Name="NoiDung" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="GiaTri" Type="Double" />
+          <Property Name="GhiChu1" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="GhiChu2" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="GhiChu3" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="GhiChu4" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="NgayTao" Type="DateTime" Precision="3" />
+          <Property Name="NgayUpdate" Type="DateTime" Precision="3" />
+          <Property Name="UserTao" Type="DateTime" Precision="3" />
+          <Property Name="UserUpdate" Type="DateTime" Precision="3" />
           <NavigationProperty Name="tblKhachHangs" Relationship="QLCongTacVienModel.tblKhachHang_LichSu" FromRole="tblLichSu" ToRole="tblKhachHang" />
         </EntityType>
         <EntityType Name="tblNhom">
           <Key>
             <PropertyRef Name="MaNhom" />
           </Key>
-          <Property Type="Int64" Name="MaNhom" Nullable="false" />
-          <Property Type="String" Name="TenNhom" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Type="String" Name="MoTaoNhom" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Type="String" Name="GhiChu" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Type="DateTime" Name="NgayTao" Precision="3" />
-          <Property Type="DateTime" Name="NgayUpdate" Precision="3" />
-          <Property Type="String" Name="UserTao" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Type="String" Name="UserUpdate" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Type="Int32" Name="TrangThai" />
+          <Property Name="MaNhom" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TenNhom" Type="String" MaxLength="100" Unicode="true" FixedLength="false" />
+          <Property Name="MoTaoNhom" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="GhiChu" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="NgayTao" Type="DateTime" Precision="3" />
+          <Property Name="NgayUpdate" Type="DateTime" Precision="3" />
+          <Property Name="UserTao" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="UserUpdate" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="TrangThai" Type="Int32" />
+          <NavigationProperty Name="tblNhom_KhachHang" Relationship="QLCongTacVienModel.FK_tblNhom_KhachHang_tblNhom" FromRole="tblNhom" ToRole="tblNhom_KhachHang" />
           <NavigationProperty Name="tblAccounts" Relationship="QLCongTacVienModel.tblAccount_Nhom" FromRole="tblNhom" ToRole="tblAccount" />
-          <NavigationProperty Name="tblKhachHangs" Relationship="QLCongTacVienModel.tblNhom_KhachHang" FromRole="tblNhom" ToRole="tblKhachHang" />
+        </EntityType>
+        <EntityType Name="tblNhom_KhachHang">
+          <Key>
+            <PropertyRef Name="MaNhom" />
+            <PropertyRef Name="MaKhachHang" />
+          </Key>
+          <Property Name="MaNhom" Type="Int64" Nullable="false" />
+          <Property Name="MaKhachHang" Type="Int64" Nullable="false" />
+          <Property Name="TrangThai" Type="Int32" />
+          <NavigationProperty Name="tblKhachHang" Relationship="QLCongTacVienModel.FK_tblNhom_KhachHang_tblKhachHang" FromRole="tblNhom_KhachHang" ToRole="tblKhachHang" />
+          <NavigationProperty Name="tblNhom" Relationship="QLCongTacVienModel.FK_tblNhom_KhachHang_tblNhom" FromRole="tblNhom_KhachHang" ToRole="tblNhom" />
         </EntityType>
         <EntityType Name="tblOrder">
           <Key>
             <PropertyRef Name="OrderID" />
           </Key>
-          <Property Type="Int32" Name="OrderID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Type="Int32" Name="ProductID" />
-          <Property Type="Int32" Name="SoLuong" />
-          <Property Type="Int64" Name="MaKhachHang" />
-          <Property Type="Double" Name="TongTien" />
-          <Property Type="Int64" Name="AccountID" />
-          <Property Type="DateTime" Name="NgayHen" Precision="3" />
-          <Property Type="DateTime" Name="NgayTao" Precision="3" />
-          <Property Type="DateTime" Name="NgayUpdate" Precision="3" />
-          <Property Type="Int32" Name="TrangThai" />
+          <Property Name="OrderID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ProductID" Type="Int32" />
+          <Property Name="SoLuong" Type="Int32" />
+          <Property Name="MaKhachHang" Type="Int64" />
+          <Property Name="TongTien" Type="Double" />
+          <Property Name="AccountID" Type="Int64" />
+          <Property Name="NgayHen" Type="DateTime" Precision="3" />
+          <Property Name="NgayTao" Type="DateTime" Precision="3" />
+          <Property Name="NgayUpdate" Type="DateTime" Precision="3" />
+          <Property Name="TrangThai" Type="Int32" />
           <NavigationProperty Name="tblAccount" Relationship="QLCongTacVienModel.FK_tblOrder_tblAccount" FromRole="tblOrder" ToRole="tblAccount" />
           <NavigationProperty Name="tblKhachHang" Relationship="QLCongTacVienModel.FK_tblOrder_tblKhachHang" FromRole="tblOrder" ToRole="tblKhachHang" />
           <NavigationProperty Name="tblOrder_Account" Relationship="QLCongTacVienModel.FK_tblOrder_Account_tblOrder" FromRole="tblOrder" ToRole="tblOrder_Account" />
@@ -987,10 +1023,10 @@
             <PropertyRef Name="AccountID" />
             <PropertyRef Name="OrderID" />
           </Key>
-          <Property Type="Int64" Name="AccountID" Nullable="false" />
-          <Property Type="Int32" Name="OrderID" Nullable="false" />
-          <Property Type="Double" Name="HueHong" />
-          <Property Type="Int32" Name="TrangThai" />
+          <Property Name="AccountID" Type="Int64" Nullable="false" />
+          <Property Name="OrderID" Type="Int32" Nullable="false" />
+          <Property Name="HueHong" Type="Double" />
+          <Property Name="TrangThai" Type="Int32" />
           <NavigationProperty Name="tblAccount" Relationship="QLCongTacVienModel.FK_tblOrder_Account_tblAccount" FromRole="tblOrder_Account" ToRole="tblAccount" />
           <NavigationProperty Name="tblOrder" Relationship="QLCongTacVienModel.FK_tblOrder_Account_tblOrder" FromRole="tblOrder_Account" ToRole="tblOrder" />
         </EntityType>
@@ -998,39 +1034,40 @@
           <Key>
             <PropertyRef Name="PermisionID" />
           </Key>
-          <Property Type="Int32" Name="PermisionID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Type="String" Name="Name" MaxLength="150" FixedLength="false" Unicode="false" />
-          <Property Type="Int32" Name="Status" />
-          <Property Type="DateTime" Name="NgayTao" Precision="3" />
-          <Property Type="DateTime" Name="NgayUpdate" Precision="3" />
-          <NavigationProperty Name="tblGroupPermissions" Relationship="QLCongTacVienModel.tblGroup_Perrmision" FromRole="tblPermission" ToRole="tblGroupPermission" />
+          <Property Name="PermisionID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="150" Unicode="false" FixedLength="false" />
+          <Property Name="Status" Type="Int32" />
+          <Property Name="NgayTao" Type="DateTime" Precision="3" />
+          <Property Name="NgayUpdate" Type="DateTime" Precision="3" />
+          <Property Name="PermissionKey" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+          <NavigationProperty Name="tblGroup_Perrmision" Relationship="QLCongTacVienModel.FK_tblGroup_Perrmision_tblPermission" FromRole="tblPermission" ToRole="tblGroup_Perrmision" />
         </EntityType>
         <EntityType Name="tblPhongBan">
           <Key>
             <PropertyRef Name="MaPhongBan" />
           </Key>
-          <Property Type="Int64" Name="MaPhongBan" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Type="String" Name="TenPhongBan" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Type="String" Name="MoTaPhongBan" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Type="String" Name="GhiChuPhongBan" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Type="DateTime" Name="NgayTao" Precision="3" />
-          <Property Type="DateTime" Name="NgayUpdate" Precision="3" />
-          <Property Type="String" Name="UserTao" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Type="String" Name="UserUpdate" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Type="Int32" Name="TrangThai" />
+          <Property Name="MaPhongBan" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TenPhongBan" Type="String" MaxLength="100" Unicode="true" FixedLength="false" />
+          <Property Name="MoTaPhongBan" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="GhiChuPhongBan" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="NgayTao" Type="DateTime" Precision="3" />
+          <Property Name="NgayUpdate" Type="DateTime" Precision="3" />
+          <Property Name="UserTao" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="UserUpdate" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="TrangThai" Type="Int32" />
           <NavigationProperty Name="tblAccounts" Relationship="QLCongTacVienModel.tblPhongBan_Account" FromRole="tblPhongBan" ToRole="tblAccount" />
         </EntityType>
         <EntityType Name="tblProduct">
           <Key>
             <PropertyRef Name="ProductID" />
           </Key>
-          <Property Type="Int32" Name="ProductID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Type="String" Name="ProductName" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Type="Int32" Name="CategoryID" />
-          <Property Type="Double" Name="GiaBan" />
-          <Property Type="Int32" Name="TrangThai" />
-          <Property Type="DateTime" Name="NgayTao" Precision="3" />
-          <Property Type="DateTime" Name="NgayUpdate" Precision="3" />
+          <Property Name="ProductID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ProductName" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="CategoryID" Type="Int32" />
+          <Property Name="GiaBan" Type="Double" />
+          <Property Name="TrangThai" Type="Int32" />
+          <Property Name="NgayTao" Type="DateTime" Precision="3" />
+          <Property Name="NgayUpdate" Type="DateTime" Precision="3" />
           <NavigationProperty Name="Category" Relationship="QLCongTacVienModel.FK_tblProduct_Category" FromRole="tblProduct" ToRole="Category" />
           <NavigationProperty Name="tblOrders" Relationship="QLCongTacVienModel.FK_tblOrder_tblProduct" FromRole="tblProduct" ToRole="tblOrder" />
           <NavigationProperty Name="tblSite_Product" Relationship="QLCongTacVienModel.FK_tblSite_Product_tblProduct" FromRole="tblProduct" ToRole="tblSite_Product" />
@@ -1039,14 +1076,14 @@
           <Key>
             <PropertyRef Name="SiteID" />
           </Key>
-          <Property Type="Int32" Name="SiteID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Type="String" Name="SiteName" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Type="String" Name="Title" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Type="Int32" Name="TrangThai" />
-          <Property Type="DateTime" Name="NgayTao" Precision="3" />
-          <Property Type="DateTime" Name="NgayUpdate" Precision="3" />
-          <Property Type="Int64" Name="AccountID" />
-          <Property Type="String" Name="Domain" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="SiteID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SiteName" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="Title" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="TrangThai" Type="Int32" />
+          <Property Name="NgayTao" Type="DateTime" Precision="3" />
+          <Property Name="NgayUpdate" Type="DateTime" Precision="3" />
+          <Property Name="AccountID" Type="Int64" />
+          <Property Name="Domain" Type="String" MaxLength="200" Unicode="true" FixedLength="false" />
           <NavigationProperty Name="tblAboutSites" Relationship="QLCongTacVienModel.FK_tblAboutSite_tblSite" FromRole="tblSite" ToRole="tblAboutSite" />
           <NavigationProperty Name="tblAccount" Relationship="QLCongTacVienModel.FK_tblSite_tblAccount" FromRole="tblSite" ToRole="tblAccount" />
           <NavigationProperty Name="tblContactSites" Relationship="QLCongTacVienModel.FK_tblContactSite_tblSite" FromRole="tblSite" ToRole="tblContactSite" />
@@ -1058,9 +1095,9 @@
             <PropertyRef Name="SiteID" />
             <PropertyRef Name="ProductID" />
           </Key>
-          <Property Type="Int32" Name="SiteID" Nullable="false" />
-          <Property Type="Int32" Name="ProductID" Nullable="false" />
-          <Property Type="Int32" Name="TrangThai" />
+          <Property Name="SiteID" Type="Int32" Nullable="false" />
+          <Property Name="ProductID" Type="Int32" Nullable="false" />
+          <Property Name="TrangThai" Type="Int32" />
           <NavigationProperty Name="tblProduct" Relationship="QLCongTacVienModel.FK_tblSite_Product_tblProduct" FromRole="tblSite_Product" ToRole="tblProduct" />
           <NavigationProperty Name="tblSite" Relationship="QLCongTacVienModel.FK_tblSite_Product_tblSite" FromRole="tblSite_Product" ToRole="tblSite" />
         </EntityType>
@@ -1068,26 +1105,26 @@
           <Key>
             <PropertyRef Name="MaUser" />
           </Key>
-          <Property Type="Int64" Name="MaUser" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Type="String" Name="UserName" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Type="String" Name="Password" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Type="String" Name="FullName" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Type="String" Name="DienThoai" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Type="String" Name="DiaChi" MaxLength="250" FixedLength="false" Unicode="true" />
-          <Property Type="String" Name="Email" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Type="String" Name="GhiChu" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Type="DateTime" Name="NgayTao" Precision="3" />
-          <Property Type="DateTime" Name="NgayUpdate" Precision="3" />
-          <Property Type="String" Name="UserTao" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Type="String" Name="UserUpdate" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Type="Int32" Name="TrangThai" />
-          <Property Type="Int32" Name="GroupID" />
+          <Property Name="MaUser" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserName" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="Password" Type="String" MaxLength="100" Unicode="true" FixedLength="false" />
+          <Property Name="FullName" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="DienThoai" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="DiaChi" Type="String" MaxLength="250" Unicode="true" FixedLength="false" />
+          <Property Name="Email" Type="String" MaxLength="100" Unicode="true" FixedLength="false" />
+          <Property Name="GhiChu" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="NgayTao" Type="DateTime" Precision="3" />
+          <Property Name="NgayUpdate" Type="DateTime" Precision="3" />
+          <Property Name="UserTao" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="UserUpdate" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="TrangThai" Type="Int32" />
+          <Property Name="GroupID" Type="Int32" />
           <NavigationProperty Name="tblGroupPermission" Relationship="QLCongTacVienModel.FK_tblUser_tblGroupPermission" FromRole="tblUser" ToRole="tblGroupPermission" />
           <NavigationProperty Name="tblAccounts" Relationship="QLCongTacVienModel.tblAccount_User" FromRole="tblUser" ToRole="tblAccount" />
         </EntityType>
         <Association Name="FK_tblProduct_Category">
-          <End Type="QLCongTacVienModel.Category" Role="Category" Multiplicity="0..1" />
-          <End Type="QLCongTacVienModel.tblProduct" Role="tblProduct" Multiplicity="*" />
+          <End Role="Category" Type="QLCongTacVienModel.Category" Multiplicity="0..1" />
+          <End Role="tblProduct" Type="QLCongTacVienModel.tblProduct" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Category">
               <PropertyRef Name="CategoryID" />
@@ -1098,8 +1135,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_tblAboutSite_tblSite">
-          <End Type="QLCongTacVienModel.tblSite" Role="tblSite" Multiplicity="0..1" />
-          <End Type="QLCongTacVienModel.tblAboutSite" Role="tblAboutSite" Multiplicity="*" />
+          <End Role="tblSite" Type="QLCongTacVienModel.tblSite" Multiplicity="0..1" />
+          <End Role="tblAboutSite" Type="QLCongTacVienModel.tblAboutSite" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="tblSite">
               <PropertyRef Name="SiteID" />
@@ -1110,8 +1147,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_tblAccount_tblAccount">
-          <End Type="QLCongTacVienModel.tblAccount" Role="tblAccount" Multiplicity="0..1" />
-          <End Type="QLCongTacVienModel.tblAccount" Role="tblAccount1" Multiplicity="*" />
+          <End Role="tblAccount" Type="QLCongTacVienModel.tblAccount" Multiplicity="0..1" />
+          <End Role="tblAccount1" Type="QLCongTacVienModel.tblAccount" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="tblAccount">
               <PropertyRef Name="MaAccount" />
@@ -1122,8 +1159,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_tblOrder_Account_tblAccount">
-          <End Type="QLCongTacVienModel.tblAccount" Role="tblAccount" Multiplicity="1" />
-          <End Type="QLCongTacVienModel.tblOrder_Account" Role="tblOrder_Account" Multiplicity="*" />
+          <End Role="tblAccount" Type="QLCongTacVienModel.tblAccount" Multiplicity="1" />
+          <End Role="tblOrder_Account" Type="QLCongTacVienModel.tblOrder_Account" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="tblAccount">
               <PropertyRef Name="MaAccount" />
@@ -1134,8 +1171,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_tblOrder_tblAccount">
-          <End Type="QLCongTacVienModel.tblAccount" Role="tblAccount" Multiplicity="0..1" />
-          <End Type="QLCongTacVienModel.tblOrder" Role="tblOrder" Multiplicity="*" />
+          <End Role="tblAccount" Type="QLCongTacVienModel.tblAccount" Multiplicity="0..1" />
+          <End Role="tblOrder" Type="QLCongTacVienModel.tblOrder" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="tblAccount">
               <PropertyRef Name="MaAccount" />
@@ -1146,8 +1183,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_tblSite_tblAccount">
-          <End Type="QLCongTacVienModel.tblAccount" Role="tblAccount" Multiplicity="0..1" />
-          <End Type="QLCongTacVienModel.tblSite" Role="tblSite" Multiplicity="*" />
+          <End Role="tblAccount" Type="QLCongTacVienModel.tblAccount" Multiplicity="0..1" />
+          <End Role="tblSite" Type="QLCongTacVienModel.tblSite" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="tblAccount">
               <PropertyRef Name="MaAccount" />
@@ -1158,8 +1195,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_tblContactSite_tblSite">
-          <End Type="QLCongTacVienModel.tblSite" Role="tblSite" Multiplicity="0..1" />
-          <End Type="QLCongTacVienModel.tblContactSite" Role="tblContactSite" Multiplicity="*" />
+          <End Role="tblSite" Type="QLCongTacVienModel.tblSite" Multiplicity="0..1" />
+          <End Role="tblContactSite" Type="QLCongTacVienModel.tblContactSite" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="tblSite">
               <PropertyRef Name="SiteID" />
@@ -1169,9 +1206,33 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_tblGroup_Perrmision_tblGroupPermission">
+          <End Role="tblGroupPermission" Type="QLCongTacVienModel.tblGroupPermission" Multiplicity="1" />
+          <End Role="tblGroup_Perrmision" Type="QLCongTacVienModel.tblGroup_Perrmision" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblGroupPermission">
+              <PropertyRef Name="GroupID" />
+            </Principal>
+            <Dependent Role="tblGroup_Perrmision">
+              <PropertyRef Name="GroupID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblGroup_Perrmision_tblPermission">
+          <End Role="tblPermission" Type="QLCongTacVienModel.tblPermission" Multiplicity="1" />
+          <End Role="tblGroup_Perrmision" Type="QLCongTacVienModel.tblGroup_Perrmision" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblPermission">
+              <PropertyRef Name="PermisionID" />
+            </Principal>
+            <Dependent Role="tblGroup_Perrmision">
+              <PropertyRef Name="PermissionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_tblUser_tblGroupPermission">
-          <End Type="QLCongTacVienModel.tblGroupPermission" Role="tblGroupPermission" Multiplicity="0..1" />
-          <End Type="QLCongTacVienModel.tblUser" Role="tblUser" Multiplicity="*" />
+          <End Role="tblGroupPermission" Type="QLCongTacVienModel.tblGroupPermission" Multiplicity="0..1" />
+          <End Role="tblUser" Type="QLCongTacVienModel.tblUser" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="tblGroupPermission">
               <PropertyRef Name="GroupID" />
@@ -1182,8 +1243,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_tblInfoSite_tblSite">
-          <End Type="QLCongTacVienModel.tblSite" Role="tblSite" Multiplicity="0..1" />
-          <End Type="QLCongTacVienModel.tblInfoSite" Role="tblInfoSite" Multiplicity="*" />
+          <End Role="tblSite" Type="QLCongTacVienModel.tblSite" Multiplicity="0..1" />
+          <End Role="tblInfoSite" Type="QLCongTacVienModel.tblInfoSite" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="tblSite">
               <PropertyRef Name="SiteID" />
@@ -1193,9 +1254,21 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_tblNhom_KhachHang_tblKhachHang">
+          <End Role="tblKhachHang" Type="QLCongTacVienModel.tblKhachHang" Multiplicity="1" />
+          <End Role="tblNhom_KhachHang" Type="QLCongTacVienModel.tblNhom_KhachHang" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblKhachHang">
+              <PropertyRef Name="MaKhachHang" />
+            </Principal>
+            <Dependent Role="tblNhom_KhachHang">
+              <PropertyRef Name="MaKhachHang" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_tblOrder_tblKhachHang">
-          <End Type="QLCongTacVienModel.tblKhachHang" Role="tblKhachHang" Multiplicity="0..1" />
-          <End Type="QLCongTacVienModel.tblOrder" Role="tblOrder" Multiplicity="*" />
+          <End Role="tblKhachHang" Type="QLCongTacVienModel.tblKhachHang" Multiplicity="0..1" />
+          <End Role="tblOrder" Type="QLCongTacVienModel.tblOrder" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="tblKhachHang">
               <PropertyRef Name="MaKhachHang" />
@@ -1205,9 +1278,21 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_tblNhom_KhachHang_tblNhom">
+          <End Role="tblNhom" Type="QLCongTacVienModel.tblNhom" Multiplicity="1" />
+          <End Role="tblNhom_KhachHang" Type="QLCongTacVienModel.tblNhom_KhachHang" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblNhom">
+              <PropertyRef Name="MaNhom" />
+            </Principal>
+            <Dependent Role="tblNhom_KhachHang">
+              <PropertyRef Name="MaNhom" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_tblOrder_Account_tblOrder">
-          <End Type="QLCongTacVienModel.tblOrder" Role="tblOrder" Multiplicity="1" />
-          <End Type="QLCongTacVienModel.tblOrder_Account" Role="tblOrder_Account" Multiplicity="*" />
+          <End Role="tblOrder" Type="QLCongTacVienModel.tblOrder" Multiplicity="1" />
+          <End Role="tblOrder_Account" Type="QLCongTacVienModel.tblOrder_Account" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="tblOrder">
               <PropertyRef Name="OrderID" />
@@ -1218,8 +1303,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_tblOrder_tblProduct">
-          <End Type="QLCongTacVienModel.tblProduct" Role="tblProduct" Multiplicity="0..1" />
-          <End Type="QLCongTacVienModel.tblOrder" Role="tblOrder" Multiplicity="*" />
+          <End Role="tblProduct" Type="QLCongTacVienModel.tblProduct" Multiplicity="0..1" />
+          <End Role="tblOrder" Type="QLCongTacVienModel.tblOrder" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="tblProduct">
               <PropertyRef Name="ProductID" />
@@ -1230,8 +1315,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_tblSite_Product_tblProduct">
-          <End Type="QLCongTacVienModel.tblProduct" Role="tblProduct" Multiplicity="1" />
-          <End Type="QLCongTacVienModel.tblSite_Product" Role="tblSite_Product" Multiplicity="*" />
+          <End Role="tblProduct" Type="QLCongTacVienModel.tblProduct" Multiplicity="1" />
+          <End Role="tblSite_Product" Type="QLCongTacVienModel.tblSite_Product" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="tblProduct">
               <PropertyRef Name="ProductID" />
@@ -1242,8 +1327,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_tblSite_Product_tblSite">
-          <End Type="QLCongTacVienModel.tblSite" Role="tblSite" Multiplicity="1" />
-          <End Type="QLCongTacVienModel.tblSite_Product" Role="tblSite_Product" Multiplicity="*" />
+          <End Role="tblSite" Type="QLCongTacVienModel.tblSite" Multiplicity="1" />
+          <End Role="tblSite_Product" Type="QLCongTacVienModel.tblSite_Product" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="tblSite">
               <PropertyRef Name="SiteID" />
@@ -1254,30 +1339,22 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="tblAccount_Nhom">
-          <End Type="QLCongTacVienModel.tblAccount" Role="tblAccount" Multiplicity="*" />
-          <End Type="QLCongTacVienModel.tblNhom" Role="tblNhom" Multiplicity="*" />
+          <End Role="tblAccount" Type="QLCongTacVienModel.tblAccount" Multiplicity="*" />
+          <End Role="tblNhom" Type="QLCongTacVienModel.tblNhom" Multiplicity="*" />
         </Association>
         <Association Name="tblAccount_User">
-          <End Type="QLCongTacVienModel.tblAccount" Role="tblAccount" Multiplicity="*" />
-          <End Type="QLCongTacVienModel.tblUser" Role="tblUser" Multiplicity="*" />
-        </Association>
-        <Association Name="tblGroup_Perrmision">
-          <End Type="QLCongTacVienModel.tblGroupPermission" Role="tblGroupPermission" Multiplicity="*" />
-          <End Type="QLCongTacVienModel.tblPermission" Role="tblPermission" Multiplicity="*" />
+          <End Role="tblAccount" Type="QLCongTacVienModel.tblAccount" Multiplicity="*" />
+          <End Role="tblUser" Type="QLCongTacVienModel.tblUser" Multiplicity="*" />
         </Association>
         <Association Name="tblKhachHang_LichSu">
-          <End Type="QLCongTacVienModel.tblKhachHang" Role="tblKhachHang" Multiplicity="*" />
-          <End Type="QLCongTacVienModel.tblLichSu" Role="tblLichSu" Multiplicity="*" />
-        </Association>
-        <Association Name="tblNhom_KhachHang">
-          <End Type="QLCongTacVienModel.tblKhachHang" Role="tblKhachHang" Multiplicity="*" />
-          <End Type="QLCongTacVienModel.tblNhom" Role="tblNhom" Multiplicity="*" />
+          <End Role="tblKhachHang" Type="QLCongTacVienModel.tblKhachHang" Multiplicity="*" />
+          <End Role="tblLichSu" Type="QLCongTacVienModel.tblLichSu" Multiplicity="*" />
         </Association>
         <Association Name="tblPhongBan_Account">
-          <End Type="QLCongTacVienModel.tblAccount" Role="tblAccount" Multiplicity="*" />
-          <End Type="QLCongTacVienModel.tblPhongBan" Role="tblPhongBan" Multiplicity="*" />
+          <End Role="tblAccount" Type="QLCongTacVienModel.tblAccount" Multiplicity="*" />
+          <End Role="tblPhongBan" Type="QLCongTacVienModel.tblPhongBan" Multiplicity="*" />
         </Association>
-        </Schema>
+      </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
@@ -1286,288 +1363,291 @@
           <EntitySetMapping Name="Categories">
             <EntityTypeMapping TypeName="QLCongTacVienModel.Category">
               <MappingFragment StoreEntitySet="Category">
-                <ScalarProperty Name="NgayUpdate" ColumnName="NgayUpdate" />
-                <ScalarProperty Name="NgayTao" ColumnName="NgayTao" />
-                <ScalarProperty Name="AccountID" ColumnName="AccountID" />
-                <ScalarProperty Name="CategoryName" ColumnName="CategoryName" />
                 <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
+                <ScalarProperty Name="CategoryName" ColumnName="CategoryName" />
+                <ScalarProperty Name="AccountID" ColumnName="AccountID" />
+                <ScalarProperty Name="NgayTao" ColumnName="NgayTao" />
+                <ScalarProperty Name="NgayUpdate" ColumnName="NgayUpdate" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="sysdiagrams">
             <EntityTypeMapping TypeName="QLCongTacVienModel.sysdiagram">
               <MappingFragment StoreEntitySet="sysdiagrams">
-                <ScalarProperty Name="definition" ColumnName="definition" />
-                <ScalarProperty Name="version" ColumnName="version" />
-                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
-                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
                 <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="tblAboutSites">
             <EntityTypeMapping TypeName="QLCongTacVienModel.tblAboutSite">
               <MappingFragment StoreEntitySet="tblAboutSite">
-                <ScalarProperty Name="SiteID" ColumnName="SiteID" />
-                <ScalarProperty Name="Note" ColumnName="Note" />
                 <ScalarProperty Name="AboutID" ColumnName="AboutID" />
+                <ScalarProperty Name="Note" ColumnName="Note" />
+                <ScalarProperty Name="SiteID" ColumnName="SiteID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="tblAccounts">
             <EntityTypeMapping TypeName="QLCongTacVienModel.tblAccount">
               <MappingFragment StoreEntitySet="tblAccount">
-                <ScalarProperty Name="TrangThai" ColumnName="TrangThai" />
-                <ScalarProperty Name="UserUpdate" ColumnName="UserUpdate" />
-                <ScalarProperty Name="UserTao" ColumnName="UserTao" />
-                <ScalarProperty Name="NgayUpdate" ColumnName="NgayUpdate" />
-                <ScalarProperty Name="NgayTao" ColumnName="NgayTao" />
-                <ScalarProperty Name="AccountManager" ColumnName="AccountManager" />
-                <ScalarProperty Name="GhiChu" ColumnName="GhiChu" />
-                <ScalarProperty Name="LoaiAccount" ColumnName="LoaiAccount" />
-                <ScalarProperty Name="TenAccount" ColumnName="TenAccount" />
                 <ScalarProperty Name="MaAccount" ColumnName="MaAccount" />
+                <ScalarProperty Name="TenAccount" ColumnName="TenAccount" />
+                <ScalarProperty Name="LoaiAccount" ColumnName="LoaiAccount" />
+                <ScalarProperty Name="GhiChu" ColumnName="GhiChu" />
+                <ScalarProperty Name="AccountManager" ColumnName="AccountManager" />
+                <ScalarProperty Name="NgayTao" ColumnName="NgayTao" />
+                <ScalarProperty Name="NgayUpdate" ColumnName="NgayUpdate" />
+                <ScalarProperty Name="UserTao" ColumnName="UserTao" />
+                <ScalarProperty Name="UserUpdate" ColumnName="UserUpdate" />
+                <ScalarProperty Name="TrangThai" ColumnName="TrangThai" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="tblContactSites">
             <EntityTypeMapping TypeName="QLCongTacVienModel.tblContactSite">
               <MappingFragment StoreEntitySet="tblContactSite">
-                <ScalarProperty Name="SiteID" ColumnName="SiteID" />
-                <ScalarProperty Name="Note" ColumnName="Note" />
                 <ScalarProperty Name="ContacID" ColumnName="ContacID" />
+                <ScalarProperty Name="Note" ColumnName="Note" />
+                <ScalarProperty Name="SiteID" ColumnName="SiteID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblGroup_Perrmision">
+            <EntityTypeMapping TypeName="QLCongTacVienModel.tblGroup_Perrmision">
+              <MappingFragment StoreEntitySet="tblGroup_Perrmision">
+                <ScalarProperty Name="GroupID" ColumnName="GroupID" />
+                <ScalarProperty Name="PermissionID" ColumnName="PermissionID" />
+                <ScalarProperty Name="TrangThai" ColumnName="TrangThai" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="tblGroupPermissions">
             <EntityTypeMapping TypeName="QLCongTacVienModel.tblGroupPermission">
               <MappingFragment StoreEntitySet="tblGroupPermission">
-                <ScalarProperty Name="NgayUpdate" ColumnName="NgayUpdate" />
-                <ScalarProperty Name="NgayTao" ColumnName="NgayTao" />
-                <ScalarProperty Name="Status" ColumnName="Status" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="GroupID" ColumnName="GroupID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="NgayTao" ColumnName="NgayTao" />
+                <ScalarProperty Name="NgayUpdate" ColumnName="NgayUpdate" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="tblInfoSites">
             <EntityTypeMapping TypeName="QLCongTacVienModel.tblInfoSite">
               <MappingFragment StoreEntitySet="tblInfoSite">
-                <ScalarProperty Name="SiteID" ColumnName="SiteID" />
-                <ScalarProperty Name="Note" ColumnName="Note" />
                 <ScalarProperty Name="InfoID" ColumnName="InfoID" />
+                <ScalarProperty Name="Note" ColumnName="Note" />
+                <ScalarProperty Name="SiteID" ColumnName="SiteID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="tblKhachHangs">
             <EntityTypeMapping TypeName="QLCongTacVienModel.tblKhachHang">
               <MappingFragment StoreEntitySet="tblKhachHang">
-                <ScalarProperty Name="UserUpdate" ColumnName="UserUpdate" />
-                <ScalarProperty Name="UserTao" ColumnName="UserTao" />
-                <ScalarProperty Name="NgayUpdate" ColumnName="NgayUpdate" />
-                <ScalarProperty Name="NgayTao" ColumnName="NgayTao" />
-                <ScalarProperty Name="TrangThai4" ColumnName="TrangThai4" />
-                <ScalarProperty Name="TrangThai3" ColumnName="TrangThai3" />
-                <ScalarProperty Name="TrangThai2" ColumnName="TrangThai2" />
-                <ScalarProperty Name="TrangThai1" ColumnName="TrangThai1" />
-                <ScalarProperty Name="GiaTri" ColumnName="GiaTri" />
-                <ScalarProperty Name="GhiChu4" ColumnName="GhiChu4" />
-                <ScalarProperty Name="GhiChu3" ColumnName="GhiChu3" />
-                <ScalarProperty Name="GhiChu2" ColumnName="GhiChu2" />
-                <ScalarProperty Name="GhiChu1" ColumnName="GhiChu1" />
-                <ScalarProperty Name="DiaChi" ColumnName="DiaChi" />
-                <ScalarProperty Name="SoDT" ColumnName="SoDT" />
-                <ScalarProperty Name="TenKhachHang" ColumnName="TenKhachHang" />
                 <ScalarProperty Name="MaKhachHang" ColumnName="MaKhachHang" />
+                <ScalarProperty Name="TenKhachHang" ColumnName="TenKhachHang" />
+                <ScalarProperty Name="SoDT" ColumnName="SoDT" />
+                <ScalarProperty Name="DiaChi" ColumnName="DiaChi" />
+                <ScalarProperty Name="GhiChu1" ColumnName="GhiChu1" />
+                <ScalarProperty Name="GhiChu2" ColumnName="GhiChu2" />
+                <ScalarProperty Name="GhiChu3" ColumnName="GhiChu3" />
+                <ScalarProperty Name="GhiChu4" ColumnName="GhiChu4" />
+                <ScalarProperty Name="GiaTri" ColumnName="GiaTri" />
+                <ScalarProperty Name="TrangThai1" ColumnName="TrangThai1" />
+                <ScalarProperty Name="TrangThai2" ColumnName="TrangThai2" />
+                <ScalarProperty Name="TrangThai3" ColumnName="TrangThai3" />
+                <ScalarProperty Name="TrangThai4" ColumnName="TrangThai4" />
+                <ScalarProperty Name="NgayTao" ColumnName="NgayTao" />
+                <ScalarProperty Name="NgayUpdate" ColumnName="NgayUpdate" />
+                <ScalarProperty Name="UserTao" ColumnName="UserTao" />
+                <ScalarProperty Name="UserUpdate" ColumnName="UserUpdate" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="tblLichSus">
             <EntityTypeMapping TypeName="QLCongTacVienModel.tblLichSu">
               <MappingFragment StoreEntitySet="tblLichSu">
-                <ScalarProperty Name="UserUpdate" ColumnName="UserUpdate" />
-                <ScalarProperty Name="UserTao" ColumnName="UserTao" />
-                <ScalarProperty Name="NgayUpdate" ColumnName="NgayUpdate" />
-                <ScalarProperty Name="NgayTao" ColumnName="NgayTao" />
-                <ScalarProperty Name="GhiChu4" ColumnName="GhiChu4" />
-                <ScalarProperty Name="GhiChu3" ColumnName="GhiChu3" />
-                <ScalarProperty Name="GhiChu2" ColumnName="GhiChu2" />
-                <ScalarProperty Name="GhiChu1" ColumnName="GhiChu1" />
-                <ScalarProperty Name="GiaTri" ColumnName="GiaTri" />
-                <ScalarProperty Name="NoiDung" ColumnName="NoiDung" />
                 <ScalarProperty Name="MaLichSu" ColumnName="MaLichSu" />
+                <ScalarProperty Name="NoiDung" ColumnName="NoiDung" />
+                <ScalarProperty Name="GiaTri" ColumnName="GiaTri" />
+                <ScalarProperty Name="GhiChu1" ColumnName="GhiChu1" />
+                <ScalarProperty Name="GhiChu2" ColumnName="GhiChu2" />
+                <ScalarProperty Name="GhiChu3" ColumnName="GhiChu3" />
+                <ScalarProperty Name="GhiChu4" ColumnName="GhiChu4" />
+                <ScalarProperty Name="NgayTao" ColumnName="NgayTao" />
+                <ScalarProperty Name="NgayUpdate" ColumnName="NgayUpdate" />
+                <ScalarProperty Name="UserTao" ColumnName="UserTao" />
+                <ScalarProperty Name="UserUpdate" ColumnName="UserUpdate" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="tblNhoms">
             <EntityTypeMapping TypeName="QLCongTacVienModel.tblNhom">
               <MappingFragment StoreEntitySet="tblNhom">
-                <ScalarProperty Name="TrangThai" ColumnName="TrangThai" />
-                <ScalarProperty Name="UserUpdate" ColumnName="UserUpdate" />
-                <ScalarProperty Name="UserTao" ColumnName="UserTao" />
-                <ScalarProperty Name="NgayUpdate" ColumnName="NgayUpdate" />
-                <ScalarProperty Name="NgayTao" ColumnName="NgayTao" />
-                <ScalarProperty Name="GhiChu" ColumnName="GhiChu" />
-                <ScalarProperty Name="MoTaoNhom" ColumnName="MoTaoNhom" />
-                <ScalarProperty Name="TenNhom" ColumnName="TenNhom" />
                 <ScalarProperty Name="MaNhom" ColumnName="MaNhom" />
+                <ScalarProperty Name="TenNhom" ColumnName="TenNhom" />
+                <ScalarProperty Name="MoTaoNhom" ColumnName="MoTaoNhom" />
+                <ScalarProperty Name="GhiChu" ColumnName="GhiChu" />
+                <ScalarProperty Name="NgayTao" ColumnName="NgayTao" />
+                <ScalarProperty Name="NgayUpdate" ColumnName="NgayUpdate" />
+                <ScalarProperty Name="UserTao" ColumnName="UserTao" />
+                <ScalarProperty Name="UserUpdate" ColumnName="UserUpdate" />
+                <ScalarProperty Name="TrangThai" ColumnName="TrangThai" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblNhom_KhachHang">
+            <EntityTypeMapping TypeName="QLCongTacVienModel.tblNhom_KhachHang">
+              <MappingFragment StoreEntitySet="tblNhom_KhachHang">
+                <ScalarProperty Name="MaNhom" ColumnName="MaNhom" />
+                <ScalarProperty Name="MaKhachHang" ColumnName="MaKhachHang" />
+                <ScalarProperty Name="TrangThai" ColumnName="TrangThai" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="tblOrders">
             <EntityTypeMapping TypeName="QLCongTacVienModel.tblOrder">
               <MappingFragment StoreEntitySet="tblOrder">
-                <ScalarProperty Name="TrangThai" ColumnName="TrangThai" />
-                <ScalarProperty Name="NgayUpdate" ColumnName="NgayUpdate" />
-                <ScalarProperty Name="NgayTao" ColumnName="NgayTao" />
-                <ScalarProperty Name="NgayHen" ColumnName="NgayHen" />
-                <ScalarProperty Name="AccountID" ColumnName="AccountID" />
-                <ScalarProperty Name="TongTien" ColumnName="TongTien" />
-                <ScalarProperty Name="MaKhachHang" ColumnName="MaKhachHang" />
-                <ScalarProperty Name="SoLuong" ColumnName="SoLuong" />
-                <ScalarProperty Name="ProductID" ColumnName="ProductID" />
                 <ScalarProperty Name="OrderID" ColumnName="OrderID" />
+                <ScalarProperty Name="ProductID" ColumnName="ProductID" />
+                <ScalarProperty Name="SoLuong" ColumnName="SoLuong" />
+                <ScalarProperty Name="MaKhachHang" ColumnName="MaKhachHang" />
+                <ScalarProperty Name="TongTien" ColumnName="TongTien" />
+                <ScalarProperty Name="AccountID" ColumnName="AccountID" />
+                <ScalarProperty Name="NgayHen" ColumnName="NgayHen" />
+                <ScalarProperty Name="NgayTao" ColumnName="NgayTao" />
+                <ScalarProperty Name="NgayUpdate" ColumnName="NgayUpdate" />
+                <ScalarProperty Name="TrangThai" ColumnName="TrangThai" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="tblOrder_Account">
             <EntityTypeMapping TypeName="QLCongTacVienModel.tblOrder_Account">
               <MappingFragment StoreEntitySet="tblOrder_Account">
-                <ScalarProperty Name="TrangThai" ColumnName="TrangThai" />
-                <ScalarProperty Name="HueHong" ColumnName="HueHong" />
-                <ScalarProperty Name="OrderID" ColumnName="OrderID" />
                 <ScalarProperty Name="AccountID" ColumnName="AccountID" />
+                <ScalarProperty Name="OrderID" ColumnName="OrderID" />
+                <ScalarProperty Name="HueHong" ColumnName="HueHong" />
+                <ScalarProperty Name="TrangThai" ColumnName="TrangThai" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="tblPermissions">
             <EntityTypeMapping TypeName="QLCongTacVienModel.tblPermission">
               <MappingFragment StoreEntitySet="tblPermission">
-                <ScalarProperty Name="NgayUpdate" ColumnName="NgayUpdate" />
-                <ScalarProperty Name="NgayTao" ColumnName="NgayTao" />
-                <ScalarProperty Name="Status" ColumnName="Status" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="PermisionID" ColumnName="PermisionID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="NgayTao" ColumnName="NgayTao" />
+                <ScalarProperty Name="NgayUpdate" ColumnName="NgayUpdate" />
+                <ScalarProperty Name="PermissionKey" ColumnName="PermissionKey" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="tblPhongBans">
             <EntityTypeMapping TypeName="QLCongTacVienModel.tblPhongBan">
               <MappingFragment StoreEntitySet="tblPhongBan">
-                <ScalarProperty Name="TrangThai" ColumnName="TrangThai" />
-                <ScalarProperty Name="UserUpdate" ColumnName="UserUpdate" />
-                <ScalarProperty Name="UserTao" ColumnName="UserTao" />
-                <ScalarProperty Name="NgayUpdate" ColumnName="NgayUpdate" />
-                <ScalarProperty Name="NgayTao" ColumnName="NgayTao" />
-                <ScalarProperty Name="GhiChuPhongBan" ColumnName="GhiChuPhongBan" />
-                <ScalarProperty Name="MoTaPhongBan" ColumnName="MoTaPhongBan" />
-                <ScalarProperty Name="TenPhongBan" ColumnName="TenPhongBan" />
                 <ScalarProperty Name="MaPhongBan" ColumnName="MaPhongBan" />
+                <ScalarProperty Name="TenPhongBan" ColumnName="TenPhongBan" />
+                <ScalarProperty Name="MoTaPhongBan" ColumnName="MoTaPhongBan" />
+                <ScalarProperty Name="GhiChuPhongBan" ColumnName="GhiChuPhongBan" />
+                <ScalarProperty Name="NgayTao" ColumnName="NgayTao" />
+                <ScalarProperty Name="NgayUpdate" ColumnName="NgayUpdate" />
+                <ScalarProperty Name="UserTao" ColumnName="UserTao" />
+                <ScalarProperty Name="UserUpdate" ColumnName="UserUpdate" />
+                <ScalarProperty Name="TrangThai" ColumnName="TrangThai" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="tblProducts">
             <EntityTypeMapping TypeName="QLCongTacVienModel.tblProduct">
               <MappingFragment StoreEntitySet="tblProduct">
-                <ScalarProperty Name="NgayUpdate" ColumnName="NgayUpdate" />
-                <ScalarProperty Name="NgayTao" ColumnName="NgayTao" />
-                <ScalarProperty Name="TrangThai" ColumnName="TrangThai" />
-                <ScalarProperty Name="GiaBan" ColumnName="GiaBan" />
-                <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
-                <ScalarProperty Name="ProductName" ColumnName="ProductName" />
                 <ScalarProperty Name="ProductID" ColumnName="ProductID" />
+                <ScalarProperty Name="ProductName" ColumnName="ProductName" />
+                <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
+                <ScalarProperty Name="GiaBan" ColumnName="GiaBan" />
+                <ScalarProperty Name="TrangThai" ColumnName="TrangThai" />
+                <ScalarProperty Name="NgayTao" ColumnName="NgayTao" />
+                <ScalarProperty Name="NgayUpdate" ColumnName="NgayUpdate" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="tblSites">
             <EntityTypeMapping TypeName="QLCongTacVienModel.tblSite">
               <MappingFragment StoreEntitySet="tblSite">
-                <ScalarProperty Name="Domain" ColumnName="Domain" />
-                <ScalarProperty Name="AccountID" ColumnName="AccountID" />
-                <ScalarProperty Name="NgayUpdate" ColumnName="NgayUpdate" />
-                <ScalarProperty Name="NgayTao" ColumnName="NgayTao" />
-                <ScalarProperty Name="TrangThai" ColumnName="TrangThai" />
-                <ScalarProperty Name="Title" ColumnName="Title" />
-                <ScalarProperty Name="SiteName" ColumnName="SiteName" />
                 <ScalarProperty Name="SiteID" ColumnName="SiteID" />
+                <ScalarProperty Name="SiteName" ColumnName="SiteName" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="TrangThai" ColumnName="TrangThai" />
+                <ScalarProperty Name="NgayTao" ColumnName="NgayTao" />
+                <ScalarProperty Name="NgayUpdate" ColumnName="NgayUpdate" />
+                <ScalarProperty Name="AccountID" ColumnName="AccountID" />
+                <ScalarProperty Name="Domain" ColumnName="Domain" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="tblSite_Product">
             <EntityTypeMapping TypeName="QLCongTacVienModel.tblSite_Product">
               <MappingFragment StoreEntitySet="tblSite_Product">
-                <ScalarProperty Name="TrangThai" ColumnName="TrangThai" />
-                <ScalarProperty Name="ProductID" ColumnName="ProductID" />
                 <ScalarProperty Name="SiteID" ColumnName="SiteID" />
+                <ScalarProperty Name="ProductID" ColumnName="ProductID" />
+                <ScalarProperty Name="TrangThai" ColumnName="TrangThai" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="tblUsers">
             <EntityTypeMapping TypeName="QLCongTacVienModel.tblUser">
               <MappingFragment StoreEntitySet="tblUser">
-                <ScalarProperty Name="GroupID" ColumnName="GroupID" />
-                <ScalarProperty Name="TrangThai" ColumnName="TrangThai" />
-                <ScalarProperty Name="UserUpdate" ColumnName="UserUpdate" />
-                <ScalarProperty Name="UserTao" ColumnName="UserTao" />
-                <ScalarProperty Name="NgayUpdate" ColumnName="NgayUpdate" />
-                <ScalarProperty Name="NgayTao" ColumnName="NgayTao" />
-                <ScalarProperty Name="GhiChu" ColumnName="GhiChu" />
-                <ScalarProperty Name="Email" ColumnName="Email" />
-                <ScalarProperty Name="DiaChi" ColumnName="DiaChi" />
-                <ScalarProperty Name="DienThoai" ColumnName="DienThoai" />
-                <ScalarProperty Name="FullName" ColumnName="FullName" />
-                <ScalarProperty Name="Password" ColumnName="Password" />
-                <ScalarProperty Name="UserName" ColumnName="UserName" />
                 <ScalarProperty Name="MaUser" ColumnName="MaUser" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="FullName" ColumnName="FullName" />
+                <ScalarProperty Name="DienThoai" ColumnName="DienThoai" />
+                <ScalarProperty Name="DiaChi" ColumnName="DiaChi" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="GhiChu" ColumnName="GhiChu" />
+                <ScalarProperty Name="NgayTao" ColumnName="NgayTao" />
+                <ScalarProperty Name="NgayUpdate" ColumnName="NgayUpdate" />
+                <ScalarProperty Name="UserTao" ColumnName="UserTao" />
+                <ScalarProperty Name="UserUpdate" ColumnName="UserUpdate" />
+                <ScalarProperty Name="TrangThai" ColumnName="TrangThai" />
+                <ScalarProperty Name="GroupID" ColumnName="GroupID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <AssociationSetMapping Name="tblAccount_Nhom" TypeName="QLCongTacVienModel.tblAccount_Nhom" StoreEntitySet="tblAccount_Nhom">
-            <EndProperty Name="tblNhom">
-              <ScalarProperty Name="MaNhom" ColumnName="MaNhom" />
-            </EndProperty>
             <EndProperty Name="tblAccount">
               <ScalarProperty Name="MaAccount" ColumnName="MaAccount" />
+            </EndProperty>
+            <EndProperty Name="tblNhom">
+              <ScalarProperty Name="MaNhom" ColumnName="MaNhom" />
             </EndProperty>
           </AssociationSetMapping>
           <AssociationSetMapping Name="tblAccount_User" TypeName="QLCongTacVienModel.tblAccount_User" StoreEntitySet="tblAccount_User">
+            <EndProperty Name="tblAccount">
+              <ScalarProperty Name="MaAccount" ColumnName="MaAccount" />
+            </EndProperty>
             <EndProperty Name="tblUser">
               <ScalarProperty Name="MaUser" ColumnName="MaUser" />
             </EndProperty>
-            <EndProperty Name="tblAccount">
-              <ScalarProperty Name="MaAccount" ColumnName="MaAccount" />
-            </EndProperty>
-          </AssociationSetMapping>
-          <AssociationSetMapping Name="tblGroup_Perrmision" TypeName="QLCongTacVienModel.tblGroup_Perrmision" StoreEntitySet="tblGroup_Perrmision">
-            <EndProperty Name="tblPermission">
-              <ScalarProperty Name="PermisionID" ColumnName="PermissionID" />
-            </EndProperty>
-            <EndProperty Name="tblGroupPermission">
-              <ScalarProperty Name="GroupID" ColumnName="GroupID" />
-            </EndProperty>
           </AssociationSetMapping>
           <AssociationSetMapping Name="tblKhachHang_LichSu" TypeName="QLCongTacVienModel.tblKhachHang_LichSu" StoreEntitySet="tblKhachHang_LichSu">
+            <EndProperty Name="tblKhachHang">
+              <ScalarProperty Name="MaKhachHang" ColumnName="MaKhachHang" />
+            </EndProperty>
             <EndProperty Name="tblLichSu">
               <ScalarProperty Name="MaLichSu" ColumnName="MaLichSu" />
             </EndProperty>
-            <EndProperty Name="tblKhachHang">
-              <ScalarProperty Name="MaKhachHang" ColumnName="MaKhachHang" />
-            </EndProperty>
-          </AssociationSetMapping>
-          <AssociationSetMapping Name="tblNhom_KhachHang" TypeName="QLCongTacVienModel.tblNhom_KhachHang" StoreEntitySet="tblNhom_KhachHang">
-            <EndProperty Name="tblNhom">
-              <ScalarProperty Name="MaNhom" ColumnName="MaNhom" />
-            </EndProperty>
-            <EndProperty Name="tblKhachHang">
-              <ScalarProperty Name="MaKhachHang" ColumnName="MaKhachHang" />
-            </EndProperty>
           </AssociationSetMapping>
           <AssociationSetMapping Name="tblPhongBan_Account" TypeName="QLCongTacVienModel.tblPhongBan_Account" StoreEntitySet="tblPhongBan_Account">
-            <EndProperty Name="tblPhongBan">
-              <ScalarProperty Name="MaPhongBan" ColumnName="MaPhongBan" />
-            </EndProperty>
             <EndProperty Name="tblAccount">
               <ScalarProperty Name="MaAccount" ColumnName="MaAccount" />
+            </EndProperty>
+            <EndProperty Name="tblPhongBan">
+              <ScalarProperty Name="MaPhongBan" ColumnName="MaPhongBan" />
             </EndProperty>
           </AssociationSetMapping>
         </EntityContainerMapping>

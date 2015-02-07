@@ -155,30 +155,30 @@ namespace QLCongTacVienClient
                 return false;
             }
         }
-
+        
         //Group_Permission
-       /* public List<tblOrder_Account> loadOderAccount()
+        public List<tblGroup_Perrmision> loadGroup_Permission()
         {
             try
             {
-                return context.tblOrder_Account.ToList();
+                return context.tblGroup_Perrmision.ToList();
             }
             catch (Exception ex)
             {
-                return new List<tblOrder_Account>();
+                return new List<tblGroup_Perrmision>();
             }
         }
-        public bool ThemOrderAccount(tblOrder_Account obj)
+        public bool ThemGroup_Permission(tblGroup_Perrmision obj)
         {
             try
             {
 
-                var result = context.tblOrder_Account.Where(x => x.AccountID.Equals(obj.AccountID)).FirstOrDefault();
+                var result = context.tblGroup_Perrmision.Where(x => x.GroupID.Equals(obj.GroupID)).FirstOrDefault();
                 if (result != null)
                 {
                     return false;
                 }
-                context.tblOrder_Account.Add(obj);
+                context.tblGroup_Perrmision.Add(obj);
                 context.SaveChanges();
                 return true;
             }
@@ -188,17 +188,17 @@ namespace QLCongTacVienClient
             }
         }
 
-        public bool XoaOrderAccount(tblOrder_Account obj)
+        public bool XoaGroup_Permission(tblGroup_Perrmision obj)
         {
             try
             {
-                var result = context.tblOrder_Account.Where(x => x.AccountID.Equals(obj.AccountID)).FirstOrDefault();
+                var result = context.tblGroup_Perrmision.Where(x => x.GroupID.Equals(obj.GroupID)).FirstOrDefault();
                 if (result == null)
                 {
                     return false;
                 }
 
-                context.tblOrder_Account.Remove(result);
+                context.tblGroup_Perrmision.Remove(result);
 
                 context.SaveChanges();
                 return true;
@@ -208,6 +208,6 @@ namespace QLCongTacVienClient
                 return false;
             }
         }
-        */
+         
     }
 }
