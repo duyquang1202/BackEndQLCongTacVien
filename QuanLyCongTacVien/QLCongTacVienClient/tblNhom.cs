@@ -16,8 +16,8 @@ namespace QLCongTacVienClient
     {
         public tblNhom()
         {
+            this.tblNhom_KhachHang = new HashSet<tblNhom_KhachHang>();
             this.tblAccounts = new HashSet<tblAccount>();
-            this.tblKhachHangs = new HashSet<tblKhachHang>();
         }
     
         public long MaNhom { get; set; }
@@ -30,7 +30,7 @@ namespace QLCongTacVienClient
         public string UserUpdate { get; set; }
         public Nullable<int> TrangThai { get; set; }
     
+        public virtual ICollection<tblNhom_KhachHang> tblNhom_KhachHang { get; set; }
         public virtual ICollection<tblAccount> tblAccounts { get; set; }
-        public virtual ICollection<tblKhachHang> tblKhachHangs { get; set; }
     }
 }

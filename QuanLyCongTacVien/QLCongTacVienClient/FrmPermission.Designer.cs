@@ -31,11 +31,11 @@
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.dgvGroup_Per = new System.Windows.Forms.DataGridView();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.btnThemGroupPer_ = new System.Windows.Forms.Button();
+            this.cbNameGroup_per = new System.Windows.Forms.ComboBox();
             this.btnDongGroupPer_ = new System.Windows.Forms.Button();
             this.btnLuuGroupPer_ = new System.Windows.Forms.Button();
             this.btnXoaGroupPer_ = new System.Windows.Forms.Button();
-            this.btnThemGroupPer_ = new System.Windows.Forms.Button();
-            this.cbNameGroup_per = new System.Windows.Forms.ComboBox();
             this.cbTrangthaiGroup_Per = new System.Windows.Forms.ComboBox();
             this.label6 = new System.Windows.Forms.Label();
             this.label17 = new System.Windows.Forms.Label();
@@ -67,11 +67,11 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.btnThemGroupPer_);
+            this.groupBox2.Controls.Add(this.cbNameGroup_per);
             this.groupBox2.Controls.Add(this.btnDongGroupPer_);
             this.groupBox2.Controls.Add(this.btnLuuGroupPer_);
             this.groupBox2.Controls.Add(this.btnXoaGroupPer_);
-            this.groupBox2.Controls.Add(this.btnThemGroupPer_);
-            this.groupBox2.Controls.Add(this.cbNameGroup_per);
             this.groupBox2.Controls.Add(this.cbTrangthaiGroup_Per);
             this.groupBox2.Controls.Add(this.label6);
             this.groupBox2.Controls.Add(this.label17);
@@ -83,6 +83,24 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Thông Tin";
             // 
+            // btnThemGroupPer_
+            // 
+            this.btnThemGroupPer_.Location = new System.Drawing.Point(66, 178);
+            this.btnThemGroupPer_.Name = "btnThemGroupPer_";
+            this.btnThemGroupPer_.Size = new System.Drawing.Size(75, 36);
+            this.btnThemGroupPer_.TabIndex = 31;
+            this.btnThemGroupPer_.Text = "Thêm";
+            this.btnThemGroupPer_.UseVisualStyleBackColor = true;
+            this.btnThemGroupPer_.Click += new System.EventHandler(this.btnThemGroupPer__Click_1);
+            // 
+            // cbNameGroup_per
+            // 
+            this.cbNameGroup_per.FormattingEnabled = true;
+            this.cbNameGroup_per.Location = new System.Drawing.Point(237, 58);
+            this.cbNameGroup_per.Name = "cbNameGroup_per";
+            this.cbNameGroup_per.Size = new System.Drawing.Size(186, 21);
+            this.cbNameGroup_per.TabIndex = 30;
+            // 
             // btnDongGroupPer_
             // 
             this.btnDongGroupPer_.Location = new System.Drawing.Point(575, 178);
@@ -91,6 +109,7 @@
             this.btnDongGroupPer_.TabIndex = 29;
             this.btnDongGroupPer_.Text = "Đóng";
             this.btnDongGroupPer_.UseVisualStyleBackColor = true;
+            this.btnDongGroupPer_.Click += new System.EventHandler(this.btnDongGroupPer__Click);
             // 
             // btnLuuGroupPer_
             // 
@@ -112,29 +131,12 @@
             this.btnXoaGroupPer_.TabIndex = 28;
             this.btnXoaGroupPer_.Text = "Xóa";
             this.btnXoaGroupPer_.UseVisualStyleBackColor = true;
-            // 
-            // btnThemGroupPer_
-            // 
-            this.btnThemGroupPer_.Location = new System.Drawing.Point(46, 178);
-            this.btnThemGroupPer_.Name = "btnThemGroupPer_";
-            this.btnThemGroupPer_.Size = new System.Drawing.Size(75, 36);
-            this.btnThemGroupPer_.TabIndex = 26;
-            this.btnThemGroupPer_.Text = "Thêm";
-            this.btnThemGroupPer_.UseVisualStyleBackColor = true;
-            this.btnThemGroupPer_.Click += new System.EventHandler(this.btnThemGroupPer__Click);
-            // 
-            // cbNameGroup_per
-            // 
-            this.cbNameGroup_per.FormattingEnabled = true;
-            this.cbNameGroup_per.Location = new System.Drawing.Point(241, 58);
-            this.cbNameGroup_per.Name = "cbNameGroup_per";
-            this.cbNameGroup_per.Size = new System.Drawing.Size(186, 21);
-            this.cbNameGroup_per.TabIndex = 25;
+            this.btnXoaGroupPer_.Click += new System.EventHandler(this.btnXoaGroupPer__Click);
             // 
             // cbTrangthaiGroup_Per
             // 
             this.cbTrangthaiGroup_Per.FormattingEnabled = true;
-            this.cbTrangthaiGroup_Per.Location = new System.Drawing.Point(239, 102);
+            this.cbTrangthaiGroup_Per.Location = new System.Drawing.Point(237, 101);
             this.cbTrangthaiGroup_Per.Name = "cbTrangthaiGroup_Per";
             this.cbTrangthaiGroup_Per.Size = new System.Drawing.Size(186, 21);
             this.cbTrangthaiGroup_Per.TabIndex = 24;
@@ -183,10 +185,10 @@
         private System.Windows.Forms.Label label17;
         private System.Windows.Forms.ComboBox cbTrangthaiGroup_Per;
         private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.ComboBox cbNameGroup_per;
         private System.Windows.Forms.Button btnDongGroupPer_;
         private System.Windows.Forms.Button btnLuuGroupPer_;
         private System.Windows.Forms.Button btnXoaGroupPer_;
+        private System.Windows.Forms.ComboBox cbNameGroup_per;
         private System.Windows.Forms.Button btnThemGroupPer_;
     }
 }

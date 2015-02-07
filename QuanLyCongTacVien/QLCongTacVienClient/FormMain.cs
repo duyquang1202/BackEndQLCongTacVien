@@ -11,6 +11,7 @@ namespace QLCongTacVienClient
 {
     public partial class FormMain : Form
     {
+        NhomKhachHang nhomKH;
         GroupPermission gp;
         Account ac;
         PhongBan objPro;
@@ -33,6 +34,7 @@ namespace QLCongTacVienClient
             dh = new DonHang();
             si = new Site();
             gp = new GroupPermission();
+            nhomKH = new NhomKhachHang();
             this.objUser = objUser;
         }
 
@@ -67,7 +69,62 @@ namespace QLCongTacVienClient
 
                     LoadDSGroupPermission();
                     LoadTrangThaiPhanQuyen();
+
+                    LoadDSNhomKH();
+                    LoadTrangThaiNhomKH();
         }
+        public void LoadDSNhomKH()
+        {
+            var list = nhomKH.LoadDSNhomKH();
+            DataTable dt = new DataTable();
+            dt.Columns.Add("MaNhom");
+            dt.Columns.Add("Tên Nhóm");
+            dt.Columns.Add("Mô Tả Nhóm");
+            dt.Columns.Add("Ghi Chú");
+            dt.Columns.Add("TrangThai");
+            dt.Columns.Add("Trạng Thái");
+            dt.Columns.Add("Ngày Tạo");
+            dt.Columns.Add("Ngày Update");
+            dt.Columns.Add("User Tạo");
+            dt.Columns.Add("User Update");
+            foreach (var item in list)
+            {
+                dt.Rows.Add(item.MaNhom,
+                    item.TenNhom,
+                    item.MoTaoNhom,
+                    item.GhiChu,
+                    item.TrangThai,
+                    (item.TrangThai == 1 ? "Hoạt Động" : "Dừng Hoạt động"),
+                    item.NgayTao.ToString(),
+                    item.NgayUpdate.ToString(),
+                    item.UserTao,
+                    item.UserUpdate);
+            }
+            DataGridViewButtonColumn btnKhachHang = new DataGridViewButtonColumn();
+            btnKhachHang.HeaderText = "Button KhachHang";
+            btnKhachHang.Text = "Button KhachHang";
+            btnKhachHang.Name = "btnKhachHang";
+            btnKhachHang.UseColumnTextForButtonValue = true;
+            if (dgvNhomKH.Columns["btnKhachHang"] == null)
+            {
+                dgvNhomKH.Columns.Add(btnKhachHang);
+            }
+            dgvNhomKH.DataSource = dt;
+            dgvNhomKH.Columns["btnKhachHang"].DisplayIndex = dgvNhomKH.Columns.Count - 1;
+        }
+        public void LoadTrangThaiNhomKH()
+        {
+            DataTable dt = new DataTable();
+            dt.Columns.Add("TenTrangThai");
+            dt.Columns.Add("MaTrangThai");
+            dt.Rows.Add("Dừng Hoạt Động", 0);
+            dt.Rows.Add("Hoạt Động", 1);
+
+            cbTrangThaiNhomKH.DataSource = dt;
+            cbTrangThaiNhomKH.DisplayMember = "TenTrangThai";
+            cbTrangThaiNhomKH.ValueMember = "MaTrangThai";
+        }
+       
         public void LoadDSGroupPermission()
         {
             var list = gp.LoadDSGroupPermission();
@@ -254,6 +311,7 @@ namespace QLCongTacVienClient
         }
         public void LoadCbTenAccount()
         {
+            
             var list = dh.loadAccount();
             DataTable dt = new DataTable();
             dt.Columns.Add("AccountID");
@@ -590,21 +648,7 @@ namespace QLCongTacVienClient
 
         private void btnXoaPhongBan_Click(object sender, EventArgs e)
         {
-              var result = objPro.XoaPhongBan(new tblPhongBan()
-                {
-                    MaPhongBan = Convert.ToInt16(dgvPhongBan.CurrentRow.Cells[0].Value.ToString()),
-                   
-                });
-
-            if (result == false)
-            {
-                MessageBox.Show("Xóa Phòng Ban Không Thành Công", "Warning!");
-                return;
-            }
-
-            MessageBox.Show("Bạn Đã Xóa Phòng Ban Thành Công!");
-            LoadDSPhongBan();
-  
+             
         }
 
         private void groupBox4_Enter(object sender, EventArgs e)
@@ -1347,6 +1391,159 @@ namespace QLCongTacVienClient
             txtNameGroupPer.Text = string.Empty;
             cbTrangThaiGroupPer.SelectedIndex = 0;
 
+        }
+
+        private void button1_Click_2(object sender, EventArgs e)
+        {
+            FrmQLQuyen frm = new FrmQLQuyen();
+            frm.Show();
+        }
+
+        private void btnThemNhomKH_Click(object sender, EventArgs e)
+        {
+            btnLuuNhomKH.Enabled = true;
+            txtTenNhomKH.Enabled = true;
+            txtMotaNhomKH.Enabled = true;
+            txtGhiChuNhomKH.Enabled = true;
+            cbTrangThaiNhomKH.Enabled = true;
+
+            Them = true;
+        }
+        public void ThemNhomKH()
+        {
+            var result = nhomKH.ThemNhomKH(new tblNhom()
+            {
+                TenNhom =txtTenNhomKH.Text,
+                MoTaoNhom =txtMotaNhomKH.Text,
+                GhiChu=txtGhiChuNhomKH.Text,
+                TrangThai = int.Parse(cbTrangThaiNhomKH.SelectedValue.ToString()),
+                NgayTao = DateTime.Now,
+                NgayUpdate = DateTime.Now,
+                UserTao = FormDangNhap.objUser.UserName,
+                UserUpdate = FormDangNhap.objUser.UserName,
+
+            });
+
+            if (result == false)
+            {
+                MessageBox.Show("Thêm Nhóm KH Không Thành Công", "Warning!");
+                return;
+            }
+
+            MessageBox.Show("Bạn Đã Thêm Nhóm KH Thành Công!");
+            LoadDSNhomKH();
+        }
+        public void CapNhapNhomKH()
+        {
+            var result =nhomKH.CapNhatNhomKH(new tblNhom()
+            {
+                MaNhom = int.Parse(dgvNhomKH.CurrentRow.Cells[1].Value.ToString()),
+                TenNhom =txtTenNhomKH.Text,
+                MoTaoNhom =txtMotaNhomKH.Text,
+                GhiChu=txtGhiChuNhomKH.Text,
+                TrangThai = int.Parse(cbTrangThaiNhomKH.SelectedValue.ToString()),
+                NgayUpdate = DateTime.Now,
+                UserUpdate = FormDangNhap.objUser.UserName,
+          
+            });
+
+            if (result == false)
+            {
+                MessageBox.Show("Sửa Nhóm KH Không Thành Công", "Warning!");
+                return;
+            }
+
+            MessageBox.Show("Bạn Đã Sửa Nhóm KH Thành Công!");
+            LoadDSNhomKH();
+        }
+
+        private void btnLuuNhomKH_Click(object sender, EventArgs e)
+        {
+            if (Them == true)
+            {
+                ThemNhomKH();
+            }
+            else
+            {
+                CapNhapNhomKH();
+            }
+        }
+
+        private void dgvNhomKH_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            Them = false;
+            btnLuuNhomKH.Enabled = true;
+            btnXoaNhomKH.Enabled = true;
+            btnThemNhomKH.Enabled = false;
+
+            txtTenNhomKH.Enabled = true;
+            txtMotaNhomKH.Enabled = true;
+            txtGhiChuNhomKH.Enabled = true;
+            cbTrangThaiNhomKH.Enabled = true;
+
+            txtTenNhomKH.Text = dgvNhomKH.CurrentRow.Cells[2].Value.ToString();
+            txtGhiChuNhomKH.Text = dgvNhomKH.CurrentRow.Cells[4].Value.ToString();
+            txtMotaNhomKH.Text = dgvNhomKH.CurrentRow.Cells[3].Value.ToString();
+            cbTrangThaiNhomKH.SelectedIndex = int.Parse(dgvNhomKH.CurrentRow.Cells[5].Value.ToString());
+        }
+
+        private void btnXoaNhomKH_Click(object sender, EventArgs e)
+        {
+            var result =nhomKH.XoaNhomKH (new tblNhom()
+            {
+                MaNhom = int.Parse(dgvNhomKH.CurrentRow.Cells[1].Value.ToString()),
+
+            });
+
+            if (result == false)
+            {
+                MessageBox.Show("Xóa Nhóm KH Không Thành Công", "Warning!");
+                return;
+            }
+
+            MessageBox.Show("Bạn Đã Xóa Nhóm KH Thành Công!");
+            LoadDSNhomKH();
+  
+        }
+
+        private void btnDongNhomKH_Click(object sender, EventArgs e)
+        {
+            btnLuuNhomKH.Enabled = false;
+            btnXoaNhomKH.Enabled = false;
+            btnThemNhomKH.Enabled = true;
+
+            txtTenNhomKH.Enabled = false;
+            txtGhiChuNhomKH.Enabled = false;
+            txtMotaNhomKH.Enabled = false;
+            cbTrangThaiNhomKH.Enabled = false;
+
+            txtTenNhomKH.Text = "";
+            txtGhiChuNhomKH.Text = "";
+            txtMotaNhomKH.Text = "";
+            cbTrangThaiNhomKH.SelectedIndex = 0;
+        }
+
+        private void dgvNhomKH_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            var senderGrid = (DataGridView)sender;
+
+            if (senderGrid.Columns[e.ColumnIndex] is DataGridViewButtonColumn &&
+                e.RowIndex >= 0)
+            {
+
+
+
+                int MaNhom = int.Parse(dgvNhomKH.Rows[e.RowIndex].Cells[dgvNhomKH.Columns["MaNhom"].Index].Value.ToString());
+                FrmNhom_KhachHang myform = new FrmNhom_KhachHang(MaNhom);////////////////(GroupID)
+                myform.Show();
+
+            }
+        }
+
+        private void button2_Click_1(object sender, EventArgs e)
+        {
+            FrmQLKhachHang frm = new FrmQLKhachHang();
+            frm.Show();
         }
 
 

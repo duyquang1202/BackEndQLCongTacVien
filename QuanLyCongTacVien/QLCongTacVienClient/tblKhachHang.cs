@@ -16,9 +16,9 @@ namespace QLCongTacVienClient
     {
         public tblKhachHang()
         {
+            this.tblNhom_KhachHang = new HashSet<tblNhom_KhachHang>();
             this.tblOrders = new HashSet<tblOrder>();
             this.tblLichSus = new HashSet<tblLichSu>();
-            this.tblNhoms = new HashSet<tblNhom>();
         }
     
         public long MaKhachHang { get; set; }
@@ -39,8 +39,8 @@ namespace QLCongTacVienClient
         public string UserTao { get; set; }
         public string UserUpdate { get; set; }
     
+        public virtual ICollection<tblNhom_KhachHang> tblNhom_KhachHang { get; set; }
         public virtual ICollection<tblOrder> tblOrders { get; set; }
         public virtual ICollection<tblLichSu> tblLichSus { get; set; }
-        public virtual ICollection<tblNhom> tblNhoms { get; set; }
     }
 }
