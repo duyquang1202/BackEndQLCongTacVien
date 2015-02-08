@@ -29,19 +29,21 @@
         private void InitializeComponent()
         {
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.dgvDSQuyen = new System.Windows.Forms.DataGridView();
-            this.cbTrangThaiPermission = new System.Windows.Forms.ComboBox();
-            this.label26 = new System.Windows.Forms.Label();
-            this.txtNamePermission = new System.Windows.Forms.TextBox();
-            this.label25 = new System.Windows.Forms.Label();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.btnDongPermission = new System.Windows.Forms.Button();
             this.btnLuuPermission = new System.Windows.Forms.Button();
             this.btnXoaPermission = new System.Windows.Forms.Button();
             this.btnThemPermission = new System.Windows.Forms.Button();
+            this.cbTrangThaiPermission = new System.Windows.Forms.ComboBox();
+            this.txtNamePermission = new System.Windows.Forms.TextBox();
+            this.label26 = new System.Windows.Forms.Label();
+            this.label25 = new System.Windows.Forms.Label();
+            this.txtPermissionKey = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
-            this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDSQuyen)).BeginInit();
+            this.groupBox2.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox1
@@ -55,8 +57,20 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Danh Sách Quyền";
             // 
+            // dgvDSQuyen
+            // 
+            this.dgvDSQuyen.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvDSQuyen.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgvDSQuyen.Location = new System.Drawing.Point(3, 16);
+            this.dgvDSQuyen.Name = "dgvDSQuyen";
+            this.dgvDSQuyen.Size = new System.Drawing.Size(664, 185);
+            this.dgvDSQuyen.TabIndex = 0;
+            this.dgvDSQuyen.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvDSQuyen_CellDoubleClick);
+            // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.txtPermissionKey);
+            this.groupBox2.Controls.Add(this.label1);
             this.groupBox2.Controls.Add(this.btnDongPermission);
             this.groupBox2.Controls.Add(this.btnLuuPermission);
             this.groupBox2.Controls.Add(this.btnXoaPermission);
@@ -72,50 +86,6 @@
             this.groupBox2.TabIndex = 1;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Thông Tin";
-            // 
-            // dgvDSQuyen
-            // 
-            this.dgvDSQuyen.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvDSQuyen.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgvDSQuyen.Location = new System.Drawing.Point(3, 16);
-            this.dgvDSQuyen.Name = "dgvDSQuyen";
-            this.dgvDSQuyen.Size = new System.Drawing.Size(664, 185);
-            this.dgvDSQuyen.TabIndex = 0;
-            this.dgvDSQuyen.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvDSQuyen_CellDoubleClick);
-            // 
-            // cbTrangThaiPermission
-            // 
-            this.cbTrangThaiPermission.FormattingEnabled = true;
-            this.cbTrangThaiPermission.Location = new System.Drawing.Point(252, 91);
-            this.cbTrangThaiPermission.Name = "cbTrangThaiPermission";
-            this.cbTrangThaiPermission.Size = new System.Drawing.Size(223, 21);
-            this.cbTrangThaiPermission.TabIndex = 22;
-            // 
-            // label26
-            // 
-            this.label26.AutoSize = true;
-            this.label26.Location = new System.Drawing.Point(147, 91);
-            this.label26.Name = "label26";
-            this.label26.Size = new System.Drawing.Size(62, 13);
-            this.label26.TabIndex = 21;
-            this.label26.Text = "Trạng Thái:";
-            // 
-            // txtNamePermission
-            // 
-            this.txtNamePermission.Enabled = false;
-            this.txtNamePermission.Location = new System.Drawing.Point(252, 42);
-            this.txtNamePermission.Name = "txtNamePermission";
-            this.txtNamePermission.Size = new System.Drawing.Size(223, 20);
-            this.txtNamePermission.TabIndex = 19;
-            // 
-            // label25
-            // 
-            this.label25.AutoSize = true;
-            this.label25.Location = new System.Drawing.Point(147, 45);
-            this.label25.Name = "label25";
-            this.label25.Size = new System.Drawing.Size(38, 13);
-            this.label25.TabIndex = 20;
-            this.label25.Text = "Name:";
             // 
             // btnDongPermission
             // 
@@ -159,6 +129,57 @@
             this.btnThemPermission.UseVisualStyleBackColor = true;
             this.btnThemPermission.Click += new System.EventHandler(this.btnThemPermission_Click);
             // 
+            // cbTrangThaiPermission
+            // 
+            this.cbTrangThaiPermission.FormattingEnabled = true;
+            this.cbTrangThaiPermission.Location = new System.Drawing.Point(252, 102);
+            this.cbTrangThaiPermission.Name = "cbTrangThaiPermission";
+            this.cbTrangThaiPermission.Size = new System.Drawing.Size(223, 21);
+            this.cbTrangThaiPermission.TabIndex = 22;
+            // 
+            // txtNamePermission
+            // 
+            this.txtNamePermission.Enabled = false;
+            this.txtNamePermission.Location = new System.Drawing.Point(252, 31);
+            this.txtNamePermission.Name = "txtNamePermission";
+            this.txtNamePermission.Size = new System.Drawing.Size(223, 20);
+            this.txtNamePermission.TabIndex = 19;
+            // 
+            // label26
+            // 
+            this.label26.AutoSize = true;
+            this.label26.Location = new System.Drawing.Point(147, 102);
+            this.label26.Name = "label26";
+            this.label26.Size = new System.Drawing.Size(62, 13);
+            this.label26.TabIndex = 21;
+            this.label26.Text = "Trạng Thái:";
+            // 
+            // label25
+            // 
+            this.label25.AutoSize = true;
+            this.label25.Location = new System.Drawing.Point(147, 34);
+            this.label25.Name = "label25";
+            this.label25.Size = new System.Drawing.Size(88, 13);
+            this.label25.TabIndex = 20;
+            this.label25.Text = "NamePermission:";
+            // 
+            // txtPermissionKey
+            // 
+            this.txtPermissionKey.Enabled = false;
+            this.txtPermissionKey.Location = new System.Drawing.Point(252, 65);
+            this.txtPermissionKey.Name = "txtPermissionKey";
+            this.txtPermissionKey.Size = new System.Drawing.Size(223, 20);
+            this.txtPermissionKey.TabIndex = 35;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(147, 68);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(78, 13);
+            this.label1.TabIndex = 36;
+            this.label1.Text = "PermissionKey:";
+            // 
             // FrmQLQuyen
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -170,9 +191,9 @@
             this.Text = "FrmQLQuyen";
             this.Load += new System.EventHandler(this.FrmQLQuyen_Load);
             this.groupBox1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dgvDSQuyen)).EndInit();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvDSQuyen)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -190,5 +211,7 @@
         private System.Windows.Forms.Button btnLuuPermission;
         private System.Windows.Forms.Button btnXoaPermission;
         private System.Windows.Forms.Button btnThemPermission;
+        private System.Windows.Forms.TextBox txtPermissionKey;
+        private System.Windows.Forms.Label label1;
     }
 }

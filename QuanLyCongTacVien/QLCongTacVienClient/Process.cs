@@ -9,11 +9,21 @@ namespace QLCongTacVienClient
     {
        
         public  QLCongTacVienEntities context;
+        private static Process instance;
         public  Process()
         {
             context = new QLCongTacVienEntities();
         }
 
+        public static Process getInstance()
+        {
+            if (instance == null)
+            {
+                return new Process();
+            }
+
+            return instance;
+        }
      
         public tblUser checkDangNhap(string UserName,string Password)
         {
@@ -60,6 +70,17 @@ namespace QLCongTacVienClient
             catch (Exception ex)
             {
                 return new List<tblProduct>();
+            }
+        }
+        public List<Category> loadCategory()
+        {
+            try
+            {
+                return context.Categories.ToList();
+            }
+            catch (Exception ex)
+            {
+                return new List<Category>();
             }
         }
         public List<tblAccount> loadAccount()
@@ -202,6 +223,39 @@ namespace QLCongTacVienClient
 
                 context.SaveChanges();
                 return true;
+            }
+            catch (Exception objEX)
+            {
+                return false;
+            }
+        }
+        public  bool CheckPermission(long UserID,string PermissionKey)
+        {
+            try 
+            {  
+               
+               var result1= context.tblUsers.Where(x=>x.MaUser.Equals(UserID)).FirstOrDefault();
+               if (result1 == null)
+               {
+                   return false;
+               }
+               var group = context.tblGroupPermissions.Where(x => x.GroupID == result1.GroupID).FirstOrDefault();
+               if (group == null)
+
+               {
+                   return false;
+               }
+               if (group.Status == 0)
+               {
+                   return false;
+               }
+               var count = group.tblGroup_Perrmision.Where(x => x.tblPermission.PermissionKey == PermissionKey && x.tblPermission.Status==1).Count();
+               if (count <= 0)
+               {
+                   return false;
+               }
+                
+               return true;
             }
             catch (Exception objEX)
             {

@@ -16,6 +16,7 @@ namespace QLCongTacVienClient
     {
         public tblAccount()
         {
+            this.Categories = new HashSet<Category>();
             this.tblAccount1 = new HashSet<tblAccount>();
             this.tblOrder_Account = new HashSet<tblOrder_Account>();
             this.tblOrders = new HashSet<tblOrder>();
@@ -36,6 +37,7 @@ namespace QLCongTacVienClient
         public string UserUpdate { get; set; }
         public Nullable<int> TrangThai { get; set; }
     
+        public virtual ICollection<Category> Categories { get; set; }
         public virtual ICollection<tblAccount> tblAccount1 { get; set; }
         public virtual tblAccount tblAccount2 { get; set; }
         public virtual ICollection<tblOrder_Account> tblOrder_Account { get; set; }

@@ -30,6 +30,10 @@
           <EntitySet Name="tblSite" EntityType="QLCongTacVienModel.Store.tblSite" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="tblSite_Product" EntityType="QLCongTacVienModel.Store.tblSite_Product" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="tblUser" EntityType="QLCongTacVienModel.Store.tblUser" store:Type="Tables" Schema="dbo" />
+          <AssociationSet Name="FK_Category_tblAccount" Association="QLCongTacVienModel.Store.FK_Category_tblAccount">
+            <End Role="tblAccount" EntitySet="tblAccount" />
+            <End Role="Category" EntitySet="Category" />
+          </AssociationSet>
           <AssociationSet Name="FK_tblAboutSite_tblSite" Association="QLCongTacVienModel.Store.FK_tblAboutSite_tblSite">
             <End Role="tblSite" EntitySet="tblSite" />
             <End Role="tblAboutSite" EntitySet="tblAboutSite" />
@@ -141,7 +145,7 @@
           </Key>
           <Property Name="CategoryID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="CategoryName" Type="nvarchar" MaxLength="50" />
-          <Property Name="AccountID" Type="int" />
+          <Property Name="AccountID" Type="bigint" />
           <Property Name="NgayTao" Type="datetime" />
           <Property Name="NgayUpdate" Type="datetime" />
         </EntityType>
@@ -367,6 +371,8 @@
           <Property Name="TrangThai" Type="int" />
           <Property Name="NgayTao" Type="datetime" />
           <Property Name="NgayUpdate" Type="datetime" />
+          <Property Name="NoiDung" Type="nvarchar" MaxLength="1000" />
+          <Property Name="HinhAnh" Type="nvarchar" MaxLength="300" />
         </EntityType>
         <EntityType Name="tblSite">
           <Key>
@@ -409,6 +415,18 @@
           <Property Name="TrangThai" Type="int" />
           <Property Name="GroupID" Type="int" />
         </EntityType>
+        <Association Name="FK_Category_tblAccount">
+          <End Role="tblAccount" Type="QLCongTacVienModel.Store.tblAccount" Multiplicity="0..1" />
+          <End Role="Category" Type="QLCongTacVienModel.Store.Category" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblAccount">
+              <PropertyRef Name="MaAccount" />
+            </Principal>
+            <Dependent Role="Category">
+              <PropertyRef Name="AccountID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_tblAboutSite_tblSite">
           <End Role="tblSite" Type="QLCongTacVienModel.Store.tblSite" Multiplicity="0..1" />
           <End Role="tblAboutSite" Type="QLCongTacVienModel.Store.tblAboutSite" Multiplicity="*" />
@@ -747,6 +765,10 @@
           <EntitySet Name="tblSites" EntityType="QLCongTacVienModel.tblSite" />
           <EntitySet Name="tblSite_Product" EntityType="QLCongTacVienModel.tblSite_Product" />
           <EntitySet Name="tblUsers" EntityType="QLCongTacVienModel.tblUser" />
+          <AssociationSet Name="FK_Category_tblAccount" Association="QLCongTacVienModel.FK_Category_tblAccount">
+            <End Role="tblAccount" EntitySet="tblAccounts" />
+            <End Role="Category" EntitySet="Categories" />
+          </AssociationSet>
           <AssociationSet Name="FK_tblProduct_Category" Association="QLCongTacVienModel.FK_tblProduct_Category">
             <End Role="Category" EntitySet="Categories" />
             <End Role="tblProduct" EntitySet="tblProducts" />
@@ -842,9 +864,10 @@
           </Key>
           <Property Name="CategoryID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="CategoryName" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
-          <Property Name="AccountID" Type="Int32" />
+          <Property Name="AccountID" Type="Int64" />
           <Property Name="NgayTao" Type="DateTime" Precision="3" />
           <Property Name="NgayUpdate" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="tblAccount" Relationship="QLCongTacVienModel.FK_Category_tblAccount" FromRole="Category" ToRole="tblAccount" />
           <NavigationProperty Name="tblProducts" Relationship="QLCongTacVienModel.FK_tblProduct_Category" FromRole="Category" ToRole="tblProduct" />
         </EntityType>
         <EntityType Name="sysdiagram">
@@ -880,6 +903,7 @@
           <Property Name="UserTao" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
           <Property Name="UserUpdate" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
           <Property Name="TrangThai" Type="Int32" />
+          <NavigationProperty Name="Categories" Relationship="QLCongTacVienModel.FK_Category_tblAccount" FromRole="tblAccount" ToRole="Category" />
           <NavigationProperty Name="tblAccount1" Relationship="QLCongTacVienModel.FK_tblAccount_tblAccount" FromRole="tblAccount" ToRole="tblAccount1" />
           <NavigationProperty Name="tblAccount2" Relationship="QLCongTacVienModel.FK_tblAccount_tblAccount" FromRole="tblAccount1" ToRole="tblAccount" />
           <NavigationProperty Name="tblOrder_Account" Relationship="QLCongTacVienModel.FK_tblOrder_Account_tblAccount" FromRole="tblAccount" ToRole="tblOrder_Account" />
@@ -1068,6 +1092,8 @@
           <Property Name="TrangThai" Type="Int32" />
           <Property Name="NgayTao" Type="DateTime" Precision="3" />
           <Property Name="NgayUpdate" Type="DateTime" Precision="3" />
+          <Property Name="NoiDung" Type="String" MaxLength="1000" Unicode="true" FixedLength="false" />
+          <Property Name="HinhAnh" Type="String" MaxLength="300" Unicode="true" FixedLength="false" />
           <NavigationProperty Name="Category" Relationship="QLCongTacVienModel.FK_tblProduct_Category" FromRole="tblProduct" ToRole="Category" />
           <NavigationProperty Name="tblOrders" Relationship="QLCongTacVienModel.FK_tblOrder_tblProduct" FromRole="tblProduct" ToRole="tblOrder" />
           <NavigationProperty Name="tblSite_Product" Relationship="QLCongTacVienModel.FK_tblSite_Product_tblProduct" FromRole="tblProduct" ToRole="tblSite_Product" />
@@ -1122,6 +1148,18 @@
           <NavigationProperty Name="tblGroupPermission" Relationship="QLCongTacVienModel.FK_tblUser_tblGroupPermission" FromRole="tblUser" ToRole="tblGroupPermission" />
           <NavigationProperty Name="tblAccounts" Relationship="QLCongTacVienModel.tblAccount_User" FromRole="tblUser" ToRole="tblAccount" />
         </EntityType>
+        <Association Name="FK_Category_tblAccount">
+          <End Role="tblAccount" Type="QLCongTacVienModel.tblAccount" Multiplicity="0..1" />
+          <End Role="Category" Type="QLCongTacVienModel.Category" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblAccount">
+              <PropertyRef Name="MaAccount" />
+            </Principal>
+            <Dependent Role="Category">
+              <PropertyRef Name="AccountID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_tblProduct_Category">
           <End Role="Category" Type="QLCongTacVienModel.Category" Multiplicity="0..1" />
           <End Role="tblProduct" Type="QLCongTacVienModel.tblProduct" Multiplicity="*" />
@@ -1572,6 +1610,8 @@
                 <ScalarProperty Name="TrangThai" ColumnName="TrangThai" />
                 <ScalarProperty Name="NgayTao" ColumnName="NgayTao" />
                 <ScalarProperty Name="NgayUpdate" ColumnName="NgayUpdate" />
+                <ScalarProperty Name="NoiDung" ColumnName="NoiDung" />
+                <ScalarProperty Name="HinhAnh" ColumnName="HinhAnh" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

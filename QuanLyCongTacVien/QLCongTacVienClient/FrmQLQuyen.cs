@@ -28,6 +28,7 @@ namespace QLCongTacVienClient
             dt.Columns.Add("Trạng Thái");
             dt.Columns.Add("Ngày Tạo");
             dt.Columns.Add("Ngày Update");
+            dt.Columns.Add("Permissionkey");
 
             foreach (var item in list)
             {
@@ -36,7 +37,8 @@ namespace QLCongTacVienClient
                     item.Status,
                     (item.Status == 1 ? "Hoạt Động" : "Không Hoạt Động"),
                     item.NgayTao.ToString(),
-                    item.NgayUpdate.ToString()
+                    item.NgayUpdate.ToString(),
+                    item.PermissionKey
                     );
             }
             dgvDSQuyen.DataSource = dt;
@@ -62,7 +64,7 @@ namespace QLCongTacVienClient
         private void btnThemPermission_Click(object sender, EventArgs e)
         {
             btnLuuPermission.Enabled = true;
-
+            txtPermissionKey.Enabled = true;
             txtNamePermission.Enabled = true;
             cbTrangThaiPermission.Enabled = true;
 
@@ -76,6 +78,7 @@ namespace QLCongTacVienClient
                 Status=int.Parse(cbTrangThaiPermission.SelectedValue.ToString()),
                 NgayTao = DateTime.Now,
                 NgayUpdate = DateTime.Now,
+                PermissionKey=txtPermissionKey.Text,
             });
 
             if (result == false)
@@ -83,6 +86,7 @@ namespace QLCongTacVienClient
                 MessageBox.Show("Thêm Permission Không Thành Công", "Warning!");
                 return;
             }
+            
 
             MessageBox.Show("Bạn Đã Thêm Permission Thành Công!");
             LoadDSPermission();
@@ -93,7 +97,8 @@ namespace QLCongTacVienClient
             {
                 PermisionID=int.Parse(dgvDSQuyen.CurrentRow.Cells[0].Value.ToString()),
                 Name=txtNamePermission.Text,
-                Status = int.Parse(cbTrangThaiPermission.SelectedValue.ToString())
+                Status = int.Parse(cbTrangThaiPermission.SelectedValue.ToString()),
+                PermissionKey=txtPermissionKey.Text,
             });
              if (result == false)
             {
@@ -110,6 +115,7 @@ namespace QLCongTacVienClient
         {
             if (Them == true)
             {
+                
                 ThemPermission();
             }
             else
@@ -126,10 +132,12 @@ namespace QLCongTacVienClient
             btnDongPermission.Enabled = true;
 
             txtNamePermission.Enabled = true;
+            txtPermissionKey.Enabled = true;
             cbTrangThaiPermission.Enabled = true;
 
             txtNamePermission.Text = dgvDSQuyen.CurrentRow.Cells[1].Value.ToString();
             cbTrangThaiPermission.SelectedIndex = int.Parse(dgvDSQuyen.CurrentRow.Cells[2].Value.ToString());
+            txtPermissionKey.Text = dgvDSQuyen.CurrentRow.Cells[6].Value.ToString();
         }
 
         private void btnXoaPermission_Click(object sender, EventArgs e)
@@ -155,11 +163,12 @@ namespace QLCongTacVienClient
             btnThemPermission.Enabled = true;
             btnLuuPermission.Enabled = false;
             btnXoaPermission.Enabled = false;
-
+            txtPermissionKey.Enabled = false;
             txtNamePermission.Enabled = false;
             cbTrangThaiPermission.Enabled = false;
 
             txtNamePermission.Text = "";
+            txtPermissionKey.Text = "";
             cbTrangThaiPermission.SelectedIndex = 0;
         }
 

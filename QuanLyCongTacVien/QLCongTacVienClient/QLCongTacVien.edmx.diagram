@@ -4,27 +4,28 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2008/10/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="0acb790879e54337b4cee82e600d104e" Name="Diagram1">
-        <EntityTypeShape EntityType="QLCongTacVienModel.Category" Width="1.5" PointX="1.5" PointY="0.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="QLCongTacVienModel.sysdiagram" Width="1.5" PointX="3.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="QLCongTacVienModel.tblAboutSite" Width="1.5" PointX="5.25" PointY="24.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="QLCongTacVienModel.tblAccount" Width="1.5" PointX="0.75" PointY="14.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="QLCongTacVienModel.tblContactSite" Width="1.5" PointX="5.25" PointY="27.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="QLCongTacVienModel.tblGroup_Perrmision" Width="1.5" PointX="6" PointY="33" IsExpanded="true" />
-        <EntityTypeShape EntityType="QLCongTacVienModel.tblGroupPermission" Width="1.5" PointX="3.75" PointY="32.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="QLCongTacVienModel.tblInfoSite" Width="1.5" PointX="5.25" PointY="29.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="QLCongTacVienModel.tblKhachHang" Width="1.5" PointX="3" PointY="3.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="QLCongTacVienModel.tblLichSu" Width="1.5" PointX="5.25" PointY="4.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="QLCongTacVienModel.tblNhom" Width="1.5" PointX="3" PointY="9.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="QLCongTacVienModel.tblNhom_KhachHang" Width="1.5" PointX="5.25" PointY="10.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="QLCongTacVienModel.tblOrder" Width="1.5" PointX="3" PointY="15.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="QLCongTacVienModel.tblOrder_Account" Width="1.5" PointX="5.25" PointY="15.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="QLCongTacVienModel.tblPermission" Width="1.5" PointX="3.75" PointY="36.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="QLCongTacVienModel.tblPhongBan" Width="1.5" PointX="3" PointY="21" IsExpanded="true" />
-        <EntityTypeShape EntityType="QLCongTacVienModel.tblProduct" Width="1.5" PointX="0.75" PointY="10.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="QLCongTacVienModel.tblSite" Width="1.5" PointX="3" PointY="26.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="QLCongTacVienModel.tblSite_Product" Width="1.5" PointX="8.25" PointY="27.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="QLCongTacVienModel.tblUser" Width="1.5" PointX="6" PointY="19" IsExpanded="true" />
+      <Diagram DiagramId="5e7b31e0cbc149d98b66ea90a8f75e90" Name="Diagram1">
+        <EntityTypeShape EntityType="QLCongTacVienModel.Category" Width="1.5" PointX="3" PointY="6.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="QLCongTacVienModel.sysdiagram" Width="1.5" PointX="0.75" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="QLCongTacVienModel.tblAboutSite" Width="1.5" PointX="5.25" PointY="18" IsExpanded="true" />
+        <EntityTypeShape EntityType="QLCongTacVienModel.tblAccount" Width="1.5" PointX="0.75" PointY="13.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="QLCongTacVienModel.tblContactSite" Width="1.5" PointX="5.25" PointY="20.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="QLCongTacVienModel.tblGroup_Perrmision" Width="1.5" PointX="8" PointY="26.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="QLCongTacVienModel.tblGroupPermission" Width="1.5" PointX="5.75" PointY="26.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="QLCongTacVienModel.tblInfoSite" Width="1.5" PointX="5.25" PointY="23.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="QLCongTacVienModel.tblKhachHang" Width="1.5" PointX="5.25" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="QLCongTacVienModel.tblLichSu" Width="1.5" PointX="7.5" PointY="1.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="QLCongTacVienModel.tblNhom" Width="1.5" PointX="3" PointY="10.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="QLCongTacVienModel.tblNhom_KhachHang" Width="1.5" PointX="5.25" PointY="11" IsExpanded="true" />
+        <EntityTypeShape EntityType="QLCongTacVienModel.tblOrder" Width="1.5" PointX="7.5" PointY="10.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="QLCongTacVienModel.tblOrder_Account" Width="1.5" PointX="9.75" PointY="13.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="QLCongTacVienModel.tblPermission" Width="1.5" PointX="5.75" PointY="30.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="QLCongTacVienModel.tblPhongBan" Width="1.5" PointX="3" PointY="14.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="QLCongTacVienModel.tblProduct" Width="1.5" PointX="5.25" PointY="6.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="QLCongTacVienModel.tblSite" Width="1.5" PointX="3" PointY="19.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="QLCongTacVienModel.tblSite_Product" Width="1.5" PointX="7.5" PointY="14.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="QLCongTacVienModel.tblUser" Width="1.5" PointX="8" PointY="17.625" IsExpanded="true" />
+        <AssociationConnector Association="QLCongTacVienModel.FK_Category_tblAccount" ManuallyRouted="false" />
         <AssociationConnector Association="QLCongTacVienModel.FK_tblProduct_Category" ManuallyRouted="false" />
         <AssociationConnector Association="QLCongTacVienModel.FK_tblAboutSite_tblSite" ManuallyRouted="false" />
         <AssociationConnector Association="QLCongTacVienModel.FK_tblAccount_tblAccount" ManuallyRouted="false" />

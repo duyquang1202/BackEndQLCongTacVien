@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Configuration;
 using System.Data;
 using System.Drawing;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
@@ -11,12 +13,14 @@ namespace QLCongTacVienClient
 {
     public partial class FormMain : Form
     {
+        LoaiSanPham lsp;
         NhomKhachHang nhomKH;
         GroupPermission gp;
         Account ac;
         PhongBan objPro;
         DonHang dh;
         Site si;
+        SanPham sp;
         public bool Them;
         public tblUser objUser;
         
@@ -35,6 +39,8 @@ namespace QLCongTacVienClient
             si = new Site();
             gp = new GroupPermission();
             nhomKH = new NhomKhachHang();
+            sp = new SanPham();
+            lsp = new LoaiSanPham();
             this.objUser = objUser;
         }
 
@@ -72,6 +78,113 @@ namespace QLCongTacVienClient
 
                     LoadDSNhomKH();
                     LoadTrangThaiNhomKH();
+
+                    LoadDSSanPham();
+                    LoadTrangThaiSanPham();
+                    LoadCbCategoryName();
+
+                    LoadDSLoaiSanPham();
+                    LoadCbAccountNamecategory();
+        }
+        public void LoadDSLoaiSanPham()
+        {
+            var list = lsp.LoadDSLoaiSanPham();
+            DataTable dt = new DataTable();
+            dt.Columns.Add("CategoryID");
+            dt.Columns.Add("CategoryName");
+            dt.Columns.Add("AccountID");
+            dt.Columns.Add("AccountName");
+            dt.Columns.Add("Ngày Tạo");
+            dt.Columns.Add("Ngày Update");
+
+            foreach (var item in list)
+            {
+                dt.Rows.Add(item.CategoryID,
+                    item.CategoryName,
+                    item.AccountID,
+                    item.tblAccount.TenAccount,
+                    item.NgayTao.ToString(),
+                    item.NgayUpdate.ToString());
+            }
+            
+            dgvLoaiSanPham.DataSource = dt;
+        }
+        public void LoadCbAccountNamecategory()
+        {
+            var list =lsp.loadAccount();
+            DataTable dt = new DataTable();
+            dt.Columns.Add("AccountID");
+            dt.Columns.Add("AccountName");
+            foreach (var item in list)
+            {
+                dt.Rows.Add(item.MaAccount, item.TenAccount);
+            }
+            
+            cbTenAccountLSP.DataSource = dt;
+            cbTenAccountLSP.DisplayMember = "AccountName";
+            cbTenAccountLSP.ValueMember = "AccountID";
+        }
+       
+       
+        public void LoadDSSanPham()
+        {
+            var list =sp.LoadDSProduct();
+            DataTable dt = new DataTable();
+            dt.Columns.Add("ProductID");
+            dt.Columns.Add("Product Name");
+            dt.Columns.Add("CategoryID");
+            dt.Columns.Add("Category Name");
+            dt.Columns.Add("Giá Bán");
+            dt.Columns.Add("TrangThai");
+            dt.Columns.Add("Trạng Thái");
+            dt.Columns.Add("Ngày Tạo");
+            dt.Columns.Add("Ngày Update");
+            dt.Columns.Add("Nội Dung");
+            dt.Columns.Add("Hình Ảnh");
+            
+            foreach (var item in list)
+            {
+                dt.Rows.Add(item.ProductID,
+                    item.ProductName,
+                    item.CategoryID,
+                    item.Category.CategoryName,
+                    item.GiaBan,
+                    item.TrangThai,
+                    (item.TrangThai == 1 ? "Hoạt Động" : "Dừng Hoạt động"),
+                    item.NgayTao.ToString(),
+                    item.NgayUpdate.ToString(),
+                    item.NoiDung,
+                    item.HinhAnh);
+            }
+           
+            dgvSanPham.DataSource = dt;
+        }
+        public void LoadTrangThaiSanPham()
+        {
+            DataTable dt = new DataTable();
+            dt.Columns.Add("TenTrangThai");
+            dt.Columns.Add("MaTrangThai");
+            dt.Rows.Add("Dừng Hoạt Động", 0);
+            dt.Rows.Add("Hoạt Động", 1);
+           
+            cbTrangThaiSanPham.DataSource = dt;
+            cbTrangThaiSanPham.DisplayMember = "TenTrangThai";
+            cbTrangThaiSanPham.ValueMember = "MaTrangThai";
+        }
+        public void LoadCbCategoryName()
+        {
+            var list =sp.loadCategory();
+            DataTable dt = new DataTable();
+            dt.Columns.Add("CategoryID");
+            dt.Columns.Add("CategoryName");
+            foreach (var item in list)
+            {
+                dt.Rows.Add(item.CategoryID, item.CategoryName);
+            }
+            
+            cbCategoryName.DataSource = dt;
+            cbCategoryName.DisplayMember = "CategoryName";
+            cbCategoryName.ValueMember = "CategoryID";
         }
         public void LoadDSNhomKH()
         {
@@ -909,6 +1022,12 @@ namespace QLCongTacVienClient
 
         private void btnThemDH_Click(object sender, EventArgs e)
         {
+
+            if (Process.getInstance().CheckPermission(this.objUser.MaUser, "ThemDH") == false)
+            {
+                MessageBox.Show("Ban khong co quyen su dung chuc nang  nay");
+                return;
+            }
             cbProduct.Enabled = true;
             txtSoluong.Enabled= true;
             txtTongTien.Enabled = true;
@@ -1546,6 +1665,325 @@ namespace QLCongTacVienClient
             frm.Show();
         }
 
+        private void btnThemSanPham_Click(object sender, EventArgs e)
+        {
+            btnLuuSanPham.Enabled = true;
+            txtGiaBan.Enabled = true;
+            txtTenSanPham.Enabled = true;
+            txtNoiDung.Enabled = true;
+            
+            cbTrangThaiSanPham.Enabled = true;
+            cbCategoryName.Enabled = true;
+            Them = true;
+        }
+
+        public void ThemSanPham()
+        {
+            //copy
+            string filename = getImageName(txtPath.Text);
+            string timestamp = DateTime.UtcNow.ToString("yyyyMMddHHmmssfff",
+                                  CultureInfo.InvariantCulture);
+            string DesPath = ConfigurationManager.AppSettings["UploadPath"];
+            string picture = SaveImageToDrive(txtPath.Text, DesPath, filename, timestamp + filename);
+            string path = "/Upload" + timestamp + filename;
+            var result =sp.ThemProduct(new tblProduct()
+            {
+                ProductName=txtTenSanPham.Text,
+                CategoryID=int.Parse(cbCategoryName.SelectedValue.ToString()),
+                GiaBan =float.Parse(txtGiaBan.Text),
+                TrangThai = int.Parse(cbTrangThaiSanPham.SelectedValue.ToString()),
+                NoiDung=txtNoiDung.Text,
+                HinhAnh=path,
+                NgayTao = DateTime.Now,
+                NgayUpdate = DateTime.Now,               
+            });
+
+            if (result == false)
+            {
+                MessageBox.Show("Thêm Sản Phẩm Không Thành Công", "Warning!");
+                return;
+            }
+
+            MessageBox.Show("Bạn Đã Thêm Sản Phẩm Thành Công!");
+            LoadDSSanPham();
+        }
+        public void CapNhapSanPham()
+        {
+            //hinhah database
+            if (txtPath.Text != dgvSanPham.CurrentRow.Cells[10].Value.ToString())
+            {
+                string filename = getImageName(txtPath.Text);
+                string timestamp = DateTime.UtcNow.ToString("yyyyMMddHHmmssfff",
+                                      CultureInfo.InvariantCulture);
+                string DesPath = ConfigurationManager.AppSettings["UploadPath"];
+                string picture = SaveImageToDrive(txtPath.Text, DesPath, filename, timestamp + filename);
+                string path = "/Upload" + timestamp + filename;
+                var result = sp.CapNhatProduct(new tblProduct()
+                {
+                    ProductID = int.Parse(dgvSanPham.CurrentRow.Cells[0].Value.ToString()),
+                    ProductName = txtTenSanPham.Text,
+                    CategoryID = int.Parse(cbCategoryName.SelectedValue.ToString()),
+                    GiaBan = float.Parse(txtGiaBan.Text),
+                    TrangThai = int.Parse(cbTrangThaiSanPham.SelectedValue.ToString()),
+                    NgayUpdate = DateTime.Now,
+                    NoiDung=txtNoiDung.Text,
+                    HinhAnh=path,
+                    //HinhAnh
+                });
+                if (result == false)
+                {
+                    MessageBox.Show("Sửa Sản Phẩm Không Thành Công", "Warning!");
+                    return;
+                }
+
+                MessageBox.Show("Bạn Đã Sửa Sản Phẩm Thành Công!");
+                LoadDSSanPham();
+
+            }
+            else
+            {
+                var result = sp.CapNhatProduct(new tblProduct()
+                {
+                    ProductID = int.Parse(dgvSanPham.CurrentRow.Cells[0].Value.ToString()),
+                    ProductName = txtTenSanPham.Text,
+                    CategoryID = int.Parse(cbCategoryName.SelectedValue.ToString()),
+                    GiaBan = float.Parse(txtGiaBan.Text),
+                    TrangThai = int.Parse(cbTrangThaiSanPham.SelectedValue.ToString()),
+                    NgayUpdate = DateTime.Now,
+                    NoiDung=txtNoiDung.Text,
+                    HinhAnh=dgvSanPham.CurrentRow.Cells[10].Value.ToString(),
+                    //HinhAnh
+                });
+                if (result == false)
+                {
+                    MessageBox.Show("Sửa Sản Phẩm Không Thành Công", "Warning!");
+                    return;
+                }
+
+                MessageBox.Show("Bạn Đã Sửa Sản Phẩm Thành Công!");
+                LoadDSSanPham();
+            }
+          
+            /*if (result == false)
+            {
+                MessageBox.Show("Sửa Sản Phẩm Không Thành Công", "Warning!");
+                return;
+            }
+
+            MessageBox.Show("Bạn Đã Sửa Sản Phẩm Thành Công!");
+            LoadDSSanPham();*/
+        }
+
+        private void btnLuuSanPham_Click(object sender, EventArgs e)
+        {
+            if (Them == true)
+            {
+                ThemSanPham();
+            }
+            else 
+            {
+                CapNhapSanPham();
+            }
+        }
+
+        private void dgvSanPham_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            Them = false;
+            btnLuuSanPham.Enabled = true;
+            btnXoaSanPham.Enabled = true;
+            btnThemSanPham.Enabled = false;
+            
+
+            txtTenSanPham.Enabled = true;
+            txtGiaBan.Enabled = true;
+            cbTrangThaiSanPham.Enabled = true;
+            cbCategoryName.Enabled = true;
+            txtNoiDung.Enabled = true;
+
+            txtTenSanPham.Text = dgvSanPham.CurrentRow.Cells[1].Value.ToString();
+            cbCategoryName.SelectedValue = int.Parse(dgvSanPham.CurrentRow.Cells[2].Value.ToString());
+            txtGiaBan.Text = dgvSanPham.CurrentRow.Cells[4].Value.ToString();
+            cbTrangThaiSanPham.SelectedIndex = int.Parse(dgvSanPham.CurrentRow.Cells[5].Value.ToString());
+            txtNoiDung.Text = dgvSanPham.CurrentRow.Cells[9].Value.ToString();
+            txtPath.Text = dgvSanPham.CurrentRow.Cells[10].Value.ToString();
+        }
+
+        private void btnXoaSanPham_Click(object sender, EventArgs e)
+        {
+            var result =sp.XoaProduct(new tblProduct()
+            {
+                ProductID = int.Parse(dgvSanPham.CurrentRow.Cells[0].Value.ToString()),
+
+            });
+
+            if (result == false)
+            {
+                MessageBox.Show("Xóa Sản Phẩm Không Thành Công", "Warning!");
+                return;
+            }
+
+            MessageBox.Show("Bạn Đã Xóa Sản Phẩm Thành Công!");
+            LoadDSSanPham();
+        }
+
+        private void btnDongSanPham_Click(object sender, EventArgs e)
+        {
+            btnLuuSanPham.Enabled =false;
+            btnXoaSanPham.Enabled = false;
+            btnThemSanPham.Enabled = true;
+
+            txtTenSanPham.Enabled = false;
+            txtGiaBan.Enabled = false;
+            cbTrangThaiSanPham.Enabled = false;
+            cbCategoryName.Enabled = false;
+            txtNoiDung.Enabled = false;
+            txtTenSanPham.Text = "";
+            txtGiaBan.Text = "";
+            cbCategoryName.SelectedIndex = 0;
+            cbTrangThaiSanPham.SelectedIndex = 0;
+            txtNoiDung.Text = "";
+        }
+
+        private void button6_Click(object sender, EventArgs e)//btnThemloaisanpham
+        {
+            btnLuuLoaiSP.Enabled = true;
+            txtcategoryname.Enabled = true;
+            cbTenAccountLSP.Enabled = true;
+
+            
+
+            Them = true;
+        }
+
+        private void dgvLoaiSanPham_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            Them = false;
+            btnLuuLoaiSP.Enabled = true;
+            btnXoaLoaiSP.Enabled = true;
+            btnThemLoaiSanPham.Enabled = false;
+            txtcategoryname.Enabled = true;
+            cbTenAccountLSP.Enabled = true;
+
+            txtcategoryname.Text = dgvLoaiSanPham.CurrentRow.Cells[1].Value.ToString();
+            cbTenAccountLSP.SelectedValue = int.Parse(dgvLoaiSanPham.CurrentRow.Cells[2].Value.ToString());
+        }
+
+        private void btnDongLoaiSP_Click(object sender, EventArgs e)
+        {
+            btnLuuLoaiSP.Enabled = false;
+            btnXoaLoaiSP.Enabled = false; btnThemLoaiSanPham.Enabled = true;
+
+            txtcategoryname.Enabled = false;
+            cbTenAccountLSP.Enabled = false;
+          
+
+            txtcategoryname.Text = "";
+            cbTenAccountLSP.SelectedIndex = 0;
+           
+        }
+
+        public void ThemLoaiSanPham()
+        {
+            var result =lsp.ThemLoaiSanPham(new Category()
+            {
+                CategoryName=txtcategoryname.Text,
+                AccountID=int.Parse(cbTenAccountLSP.SelectedValue.ToString()),             
+                NgayTao = DateTime.Now,
+                NgayUpdate = DateTime.Now,
+            });
+
+            if (result == false)
+            {
+                MessageBox.Show("Thêm Loại Sản Phẩm Không Thành Công", "Warning!");
+                return;
+            }
+
+            MessageBox.Show("Bạn Đã Thêm Loại Sản Phẩm Thành Công!");
+            LoadDSLoaiSanPham();
+        }
+        public void CapNhapLoaiSanPham()
+        {
+            var result =lsp.CapNhatLoaiSanPham (new Category()
+            {
+                CategoryID=int.Parse(dgvLoaiSanPham.CurrentRow.Cells[0].Value.ToString()),
+                CategoryName = txtcategoryname.Text,
+                AccountID = int.Parse(cbTenAccountLSP.SelectedValue.ToString()),              
+                NgayUpdate = DateTime.Now,
+
+
+            });
+
+            if (result == false)
+            {
+                MessageBox.Show("Sửa Loại Sản Phẩm Không Thành Công", "Warning!");
+                return;
+            }
+
+            MessageBox.Show("Bạn Đã Sửa Loại Sản Phẩm Thành Công!");
+            LoadDSLoaiSanPham();
+        }
+
+        private void btnLuuLoaiSP_Click(object sender, EventArgs e)
+        {
+            if (Them == true)
+            {
+                ThemLoaiSanPham();
+            }
+            else
+            {
+                CapNhapLoaiSanPham();
+            }
+        }
+
+        private void btnXoaLoaiSP_Click(object sender, EventArgs e)
+        {
+            var result =lsp.XoaLoaiSanPham(new Category()
+            {
+                 CategoryID=int.Parse(dgvLoaiSanPham.CurrentRow.Cells[0].Value.ToString()),
+
+            });
+
+            if (result == false)
+            {
+                MessageBox.Show("Xóa Loại Sản Phẩm Không Thành Công", "Warning!");
+                return;
+            }
+
+            MessageBox.Show("Bạn Đã Xóa Loại Sản Phẩm Thành Công!");
+            LoadDSLoaiSanPham();
+        }
+
+        public  string SaveImageToDrive(string src, string desc, string filename, string fileNew)
+        {
+            //const string localFilename = @"c:\file.jpg";
+         
+            string localFileNew = @desc + "\\" + fileNew;
+            System.IO.File.Copy(@src, @localFileNew);
+            return fileNew;
+        }
+        public  string getImageName(string values)
+        {
+            string[] rs = values.Split('\\');
+            return rs[rs.Length - 1];
+        }
+        private void btnHinhAnh_Click(object sender, EventArgs e)
+        {
+            //Create a new instance of openFileDialog
+            OpenFileDialog res = new OpenFileDialog();
+
+            //Filter
+            res.Filter = "Image Files|*.jpg;*.jpeg;*.png;";
+
+            //When the user select the file
+            if (res.ShowDialog() == DialogResult.OK)
+            {
+               //Get the file's path
+               var filePath = res.FileName;
+               txtPath.Text = filePath;
+            
+              
+            }
+        }
 
     }
 }
