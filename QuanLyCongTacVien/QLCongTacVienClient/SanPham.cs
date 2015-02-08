@@ -5,25 +5,25 @@ using System.Text;
 
 namespace QLCongTacVienClient
 {
-    class QLQuyen:Process
+    class SanPham:Process
     {
-         public List<tblPermission> LoadDSPermission()
+         public List<tblProduct> LoadDSProduct()
         {
             try
             {
-                return context.tblPermissions.ToList();
+                return context.tblProducts.ToList();
             }
             catch (Exception objEX)
             {
-                return new List<tblPermission>();
+                return new List<tblProduct>();
             }
         }
 
-        public bool ThemPermission(tblPermission obj)
+        public bool ThemProduct(tblProduct obj)
         {
             try
             {
-                context.tblPermissions.Add(obj);
+                context.tblProducts.Add(obj);
                 context.SaveChanges();
                 return true;
             }
@@ -33,19 +33,23 @@ namespace QLCongTacVienClient
             }
         }
 
-        public bool CapNhatPermission(tblPermission obj)
+        public bool CapNhatProduct(tblProduct obj)
         {
             try
             {
-                var result = context.tblPermissions.Where(x => x.PermisionID.Equals(obj.PermisionID)).FirstOrDefault();
+                var result = context.tblProducts.Where(x => x.ProductID.Equals(obj.ProductID)).FirstOrDefault();
                 if (result == null)
                 {
                     return false;
                 }
-                result.Name=obj.Name;
-                result.Status = obj.Status;
-                result.PermissionKey = obj.PermissionKey;
-                
+              
+                result.ProductName = obj.ProductName;
+                result.CategoryID=obj.CategoryID;
+                result.GiaBan=obj.GiaBan;
+                result.TrangThai = obj.TrangThai;
+                result.NgayUpdate = obj.NgayUpdate;
+                result.NoiDung = obj.NoiDung;
+                result.HinhAnh = obj.HinhAnh;
                 context.SaveChanges();
                 return true;
             }
@@ -55,17 +59,17 @@ namespace QLCongTacVienClient
             }
         }
 
-        public bool XoaPermission(tblPermission obj)
+        public bool XoaProduct(tblProduct obj)
         {
             try
             {
-                var result = context.tblPermissions.Where(x => x.PermisionID.Equals(obj.PermisionID)).FirstOrDefault();
+                var result = context.tblProducts.Where(x => x.ProductID.Equals(obj.ProductID)).FirstOrDefault();
                 if (result == null)
                 {
                     return false;
                 }
 
-                context.tblPermissions.Remove(result);
+                context.tblProducts.Remove(result);
 
                 context.SaveChanges();
                 return true;

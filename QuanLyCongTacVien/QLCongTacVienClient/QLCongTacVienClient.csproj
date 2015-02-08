@@ -40,6 +40,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.Entity" />
     <Reference Include="System.Runtime.Serialization" />
@@ -124,6 +125,7 @@
     <Compile Include="GroupPermission.cs" />
     <Compile Include="Group_Permission.cs" />
     <Compile Include="HoaHong.cs" />
+    <Compile Include="LoaiSanPham.cs" />
     <Compile Include="NhomKhachHang.cs" />
     <Compile Include="Nhom_KH.cs" />
     <Compile Include="PhongBan.cs" />
@@ -153,6 +155,7 @@
     <Compile Include="QLUser.Designer.cs">
       <DependentUpon>QLUser.cs</DependentUpon>
     </Compile>
+    <Compile Include="SanPham.cs" />
     <Compile Include="Site.cs" />
     <Compile Include="sysdiagram.cs">
       <DependentUpon>QLCongTacVien.tt</DependentUpon>

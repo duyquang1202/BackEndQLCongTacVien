@@ -5,25 +5,26 @@ using System.Text;
 
 namespace QLCongTacVienClient
 {
-    class QLQuyen:Process
+    class LoaiSanPham:Process
     {
-         public List<tblPermission> LoadDSPermission()
+         public List<Category> LoadDSLoaiSanPham()
         {
             try
             {
-                return context.tblPermissions.ToList();
+                return context.Categories.ToList();
             }
             catch (Exception objEX)
             {
-                return new List<tblPermission>();
+                return new List<Category>();
             }
         }
+         
 
-        public bool ThemPermission(tblPermission obj)
+        public bool ThemLoaiSanPham(Category obj)
         {
             try
             {
-                context.tblPermissions.Add(obj);
+                context.Categories.Add(obj);
                 context.SaveChanges();
                 return true;
             }
@@ -33,19 +34,19 @@ namespace QLCongTacVienClient
             }
         }
 
-        public bool CapNhatPermission(tblPermission obj)
+        public bool CapNhatLoaiSanPham(Category obj)
         {
             try
             {
-                var result = context.tblPermissions.Where(x => x.PermisionID.Equals(obj.PermisionID)).FirstOrDefault();
+                var result = context.Categories.Where(x => x.CategoryID.Equals(obj.CategoryID)).FirstOrDefault();
                 if (result == null)
                 {
                     return false;
                 }
-                result.Name=obj.Name;
-                result.Status = obj.Status;
-                result.PermissionKey = obj.PermissionKey;
-                
+              
+                result.CategoryName = obj.CategoryName;
+                result.AccountID=obj.AccountID;
+                result.NgayUpdate=obj.NgayUpdate;
                 context.SaveChanges();
                 return true;
             }
@@ -55,17 +56,17 @@ namespace QLCongTacVienClient
             }
         }
 
-        public bool XoaPermission(tblPermission obj)
+        public bool XoaLoaiSanPham(Category obj)
         {
             try
             {
-                var result = context.tblPermissions.Where(x => x.PermisionID.Equals(obj.PermisionID)).FirstOrDefault();
+                var result = context.Categories.Where(x => x.CategoryID.Equals(obj.CategoryID)).FirstOrDefault();
                 if (result == null)
                 {
                     return false;
                 }
 
-                context.tblPermissions.Remove(result);
+                context.Categories.Remove(result);
 
                 context.SaveChanges();
                 return true;

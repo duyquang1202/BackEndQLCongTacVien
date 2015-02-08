@@ -21,10 +21,11 @@ namespace QLCongTacVienClient
     
         public int CategoryID { get; set; }
         public string CategoryName { get; set; }
-        public Nullable<int> AccountID { get; set; }
+        public Nullable<long> AccountID { get; set; }
         public Nullable<System.DateTime> NgayTao { get; set; }
         public Nullable<System.DateTime> NgayUpdate { get; set; }
     
+        public virtual tblAccount tblAccount { get; set; }
         public virtual ICollection<tblProduct> tblProducts { get; set; }
     }
 }
