@@ -5,6 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Windows.Forms;
 
 namespace QLCongTacVienClient
@@ -59,7 +60,7 @@ namespace QLCongTacVienClient
             var result =about.CapNhapAbout(new tblAboutSite()
             {
                 AboutID = int.Parse(dgvAboutSite.CurrentRow.Cells[0].Value.ToString()),
-                Note =txtNoteAboutSite.Text,
+                Note = Regex.Replace(txtNoteAboutSite.Text, @"([\r\n]\s*)+", "<br>"),
 
             });
             if (result == false)

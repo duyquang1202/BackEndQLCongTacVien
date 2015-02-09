@@ -91,44 +91,46 @@ namespace QLCongTacVienClient
 
         }
 
-        private void FormMain_Load(object sender, EventArgs e)
+        public void loadform()
         {
 
+            LoadTrangThai();
+            LoadDSPhongBan();
 
-        
-                    
-                    LoadTrangThai();
-                    LoadDSPhongBan();
-            
-                    loadDSAcount();
-                    LoadTrangThaiAcount();
-                   // loadAccountManager();
-                    loadcboChonPhongBan();
-                    loadLoaiAccount();
-                    LoadDSDonHang();
-                    LoadTrangThaiDonHang();
-                    LoadCbTenAccount();
-                    LoadNhanVienGiaoDich();
-                    LoadCbTenKhachHang();
-                    loadProduct();
+            loadDSAcount();
+            LoadTrangThaiAcount();
+            // loadAccountManager();
+            loadcboChonPhongBan();
+            loadLoaiAccount();
+            LoadDSDonHang();
+            LoadTrangThaiDonHang();
+            LoadCbTenAccount();
+            LoadNhanVienGiaoDich();
+            LoadCbTenKhachHang();
+            loadProduct();
 
-                    LoadDSSite();
-                    LoadTrangThaiSite();
-                    LoadCbTenAccountSite();
+            LoadDSSite();
+            LoadTrangThaiSite();
+            LoadCbTenAccountSite();
 
-                    LoadDSGroupPermission();
-                    LoadTrangThaiPhanQuyen();
+            LoadDSGroupPermission();
+            LoadTrangThaiPhanQuyen();
 
-                    LoadDSNhomKH();
-                    LoadTrangThaiNhomKH();
+            LoadDSNhomKH();
+            LoadTrangThaiNhomKH();
 
-                    LoadDSSanPham();
-                    LoadTrangThaiSanPham();
-                    LoadCbCategoryName();
+            LoadDSSanPham();
+            LoadTrangThaiSanPham();
+            LoadCbCategoryName();
 
-                    LoadDSLoaiSanPham();
-                    LoadCbAccountNamecategory();
-                    DisplayTabControl();
+            LoadDSLoaiSanPham();
+            LoadCbAccountNamecategory();
+            DisplayTabControl();
+        }
+
+        private void FormMain_Load(object sender, EventArgs e)
+        {
+            loadform();
         }
         public void LoadDSLoaiSanPham()
         {
@@ -2173,6 +2175,11 @@ namespace QLCongTacVienClient
             
             
             
+        }
+
+        private void button3_Click_1(object sender, EventArgs e)
+        {
+            loadform();
         }
 
     }

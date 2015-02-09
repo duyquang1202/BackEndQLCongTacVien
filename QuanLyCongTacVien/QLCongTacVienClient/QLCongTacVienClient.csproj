@@ -157,9 +157,6 @@
     </Compile>
     <Compile Include="SanPham.cs" />
     <Compile Include="Site.cs" />
-    <Compile Include="sysdiagram.cs">
-      <DependentUpon>QLCongTacVien.tt</DependentUpon>
-    </Compile>
     <Compile Include="tblAboutSite.cs">
       <DependentUpon>QLCongTacVien.tt</DependentUpon>
     </Compile>

@@ -11,6 +11,7 @@ namespace QLCongTacVienClient
         {
             try
             {
+                context = new QLCongTacVienEntities();
                 var objNhom = context.tblNhoms.Find(MaNhom);
                 if (objNhom == null)
                 {
@@ -27,6 +28,7 @@ namespace QLCongTacVienClient
         {
             try
             {
+                context = new QLCongTacVienEntities();
                 return context.tblKhachHangs.ToList();
             }
             catch (Exception objEX)

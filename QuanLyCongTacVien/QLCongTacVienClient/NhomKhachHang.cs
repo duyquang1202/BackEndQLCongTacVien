@@ -11,6 +11,7 @@ namespace QLCongTacVienClient
         {
             try
             {
+                context = new QLCongTacVienEntities();
                 return context.tblNhoms.ToList();
             }
             catch (Exception objEX)

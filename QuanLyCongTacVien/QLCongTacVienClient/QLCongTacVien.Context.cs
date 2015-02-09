@@ -26,7 +26,6 @@ namespace QLCongTacVienClient
         }
     
         public DbSet<Category> Categories { get; set; }
-        public DbSet<sysdiagram> sysdiagrams { get; set; }
         public DbSet<tblAboutSite> tblAboutSites { get; set; }
         public DbSet<tblAccount> tblAccounts { get; set; }
         public DbSet<tblContactSite> tblContactSites { get; set; }

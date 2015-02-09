@@ -7,8 +7,10 @@ namespace QLCongTacVienClient
 {
     public class DonHang : Process
     {
+       
         public List<tblOrder> getDSDonHang(long MaAccount)
         {
+            context = new QLCongTacVienEntities();
             List<tblAccount> lsAccount = new List<tblAccount>();
             var result = context.tblAccounts.Where(x => x.MaAccount == MaAccount).ToList();
             foreach (var item in result)
@@ -33,8 +35,13 @@ namespace QLCongTacVienClient
                 }
                
             }
-
-            return lsOrder;
+            var result2 =lsOrder.OrderByDescending(y=>y.OrderID).GroupBy(x=>x.OrderID);
+            var result3 = new List<tblOrder>();
+            foreach (var item in result2)
+	        {
+		        result3.Add(item.FirstOrDefault());
+	        }
+            return result3;
         }
 
         public int ThemDonHang(tblOrder obj)

@@ -33,6 +33,7 @@
             this.groupBox6 = new System.Windows.Forms.GroupBox();
             this.dtgvDonHang = new System.Windows.Forms.DataGridView();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
+            this.button3 = new System.Windows.Forms.Button();
             this.cbNhanVienGiaoDich = new System.Windows.Forms.ComboBox();
             this.label19 = new System.Windows.Forms.Label();
             this.cbTenKhachHang = new System.Windows.Forms.ComboBox();
@@ -265,6 +266,7 @@
             // 
             // groupBox5
             // 
+            this.groupBox5.Controls.Add(this.button3);
             this.groupBox5.Controls.Add(this.cbNhanVienGiaoDich);
             this.groupBox5.Controls.Add(this.label19);
             this.groupBox5.Controls.Add(this.cbTenKhachHang);
@@ -292,6 +294,16 @@
             this.groupBox5.TabIndex = 15;
             this.groupBox5.TabStop = false;
             this.groupBox5.Text = "Thông Tin:";
+            // 
+            // button3
+            // 
+            this.button3.Location = new System.Drawing.Point(741, 236);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(75, 36);
+            this.button3.TabIndex = 22;
+            this.button3.Text = "Refresh";
+            this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.button3_Click_1);
             // 
             // cbNhanVienGiaoDich
             // 
@@ -475,7 +487,7 @@
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(868, 596);
+            this.tabPage2.Size = new System.Drawing.Size(868, 572);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Quản Lý Phòng Ban";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -497,7 +509,7 @@
             this.groupBox2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox2.Location = new System.Drawing.Point(3, 3);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(862, 324);
+            this.groupBox2.Size = new System.Drawing.Size(862, 300);
             this.groupBox2.TabIndex = 7;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Thông Tin";
@@ -618,7 +630,7 @@
             // 
             this.groupBox1.Controls.Add(this.dgvPhongBan);
             this.groupBox1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.groupBox1.Location = new System.Drawing.Point(3, 327);
+            this.groupBox1.Location = new System.Drawing.Point(3, 303);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(862, 266);
             this.groupBox1.TabIndex = 0;
@@ -643,7 +655,7 @@
             this.tabPage3.Location = new System.Drawing.Point(4, 22);
             this.tabPage3.Name = "tabPage3";
             this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage3.Size = new System.Drawing.Size(868, 596);
+            this.tabPage3.Size = new System.Drawing.Size(868, 572);
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "Quản Lý Account";
             this.tabPage3.UseVisualStyleBackColor = true;
@@ -670,7 +682,7 @@
             this.groupBox4.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox4.Location = new System.Drawing.Point(3, 3);
             this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(862, 377);
+            this.groupBox4.Size = new System.Drawing.Size(862, 353);
             this.groupBox4.TabIndex = 1;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Thông Tin";
@@ -839,7 +851,7 @@
             // 
             this.groupBox3.Controls.Add(this.dgvAccount);
             this.groupBox3.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.groupBox3.Location = new System.Drawing.Point(3, 380);
+            this.groupBox3.Location = new System.Drawing.Point(3, 356);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Size = new System.Drawing.Size(862, 213);
             this.groupBox3.TabIndex = 0;
@@ -864,7 +876,7 @@
             this.tabPage4.Location = new System.Drawing.Point(4, 22);
             this.tabPage4.Name = "tabPage4";
             this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage4.Size = new System.Drawing.Size(868, 596);
+            this.tabPage4.Size = new System.Drawing.Size(868, 572);
             this.tabPage4.TabIndex = 3;
             this.tabPage4.Text = "Quản Lý Site";
             this.tabPage4.UseVisualStyleBackColor = true;
@@ -888,7 +900,7 @@
             this.groupBox8.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox8.Location = new System.Drawing.Point(3, 3);
             this.groupBox8.Name = "groupBox8";
-            this.groupBox8.Size = new System.Drawing.Size(862, 363);
+            this.groupBox8.Size = new System.Drawing.Size(862, 339);
             this.groupBox8.TabIndex = 1;
             this.groupBox8.TabStop = false;
             this.groupBox8.Text = "ThôngTin";
@@ -1024,7 +1036,7 @@
             // 
             this.groupBox7.Controls.Add(this.dgvSite);
             this.groupBox7.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.groupBox7.Location = new System.Drawing.Point(3, 366);
+            this.groupBox7.Location = new System.Drawing.Point(3, 342);
             this.groupBox7.Name = "groupBox7";
             this.groupBox7.Size = new System.Drawing.Size(862, 227);
             this.groupBox7.TabIndex = 0;
@@ -1049,7 +1061,7 @@
             this.tabPage5.Location = new System.Drawing.Point(4, 22);
             this.tabPage5.Name = "tabPage5";
             this.tabPage5.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage5.Size = new System.Drawing.Size(868, 596);
+            this.tabPage5.Size = new System.Drawing.Size(868, 572);
             this.tabPage5.TabIndex = 4;
             this.tabPage5.Text = "Quản Lý Phân Quyền";
             this.tabPage5.UseVisualStyleBackColor = true;
@@ -1068,7 +1080,7 @@
             this.groupBox10.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox10.Location = new System.Drawing.Point(3, 3);
             this.groupBox10.Name = "groupBox10";
-            this.groupBox10.Size = new System.Drawing.Size(862, 359);
+            this.groupBox10.Size = new System.Drawing.Size(862, 335);
             this.groupBox10.TabIndex = 1;
             this.groupBox10.TabStop = false;
             this.groupBox10.Text = "Thông Tin";
@@ -1163,7 +1175,7 @@
             // 
             this.groupBox9.Controls.Add(this.dgvPhanQuyen);
             this.groupBox9.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.groupBox9.Location = new System.Drawing.Point(3, 362);
+            this.groupBox9.Location = new System.Drawing.Point(3, 338);
             this.groupBox9.Name = "groupBox9";
             this.groupBox9.Size = new System.Drawing.Size(862, 231);
             this.groupBox9.TabIndex = 0;
@@ -1189,7 +1201,7 @@
             this.tabPage6.Location = new System.Drawing.Point(4, 22);
             this.tabPage6.Name = "tabPage6";
             this.tabPage6.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage6.Size = new System.Drawing.Size(868, 596);
+            this.tabPage6.Size = new System.Drawing.Size(868, 572);
             this.tabPage6.TabIndex = 5;
             this.tabPage6.Text = "Quản Lý Nhóm Khách Hàng";
             this.tabPage6.UseVisualStyleBackColor = true;
@@ -1212,7 +1224,7 @@
             this.groupBox12.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox12.Location = new System.Drawing.Point(3, 3);
             this.groupBox12.Name = "groupBox12";
-            this.groupBox12.Size = new System.Drawing.Size(862, 373);
+            this.groupBox12.Size = new System.Drawing.Size(862, 349);
             this.groupBox12.TabIndex = 1;
             this.groupBox12.TabStop = false;
             this.groupBox12.Text = "Thông Tin";
@@ -1344,7 +1356,7 @@
             // 
             this.groupBox11.Controls.Add(this.dgvNhomKH);
             this.groupBox11.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.groupBox11.Location = new System.Drawing.Point(3, 376);
+            this.groupBox11.Location = new System.Drawing.Point(3, 352);
             this.groupBox11.Name = "groupBox11";
             this.groupBox11.Size = new System.Drawing.Size(862, 217);
             this.groupBox11.TabIndex = 0;
@@ -1369,7 +1381,7 @@
             this.tabPage7.Location = new System.Drawing.Point(4, 22);
             this.tabPage7.Name = "tabPage7";
             this.tabPage7.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage7.Size = new System.Drawing.Size(868, 596);
+            this.tabPage7.Size = new System.Drawing.Size(868, 572);
             this.tabPage7.TabIndex = 6;
             this.tabPage7.Text = "Quản Lý Sản Phẩm";
             this.tabPage7.UseVisualStyleBackColor = true;
@@ -1395,7 +1407,7 @@
             this.groupBox14.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox14.Location = new System.Drawing.Point(3, 3);
             this.groupBox14.Name = "groupBox14";
-            this.groupBox14.Size = new System.Drawing.Size(862, 318);
+            this.groupBox14.Size = new System.Drawing.Size(862, 294);
             this.groupBox14.TabIndex = 1;
             this.groupBox14.TabStop = false;
             this.groupBox14.Text = "Thông Tin";
@@ -1552,7 +1564,7 @@
             // 
             this.groupBox13.Controls.Add(this.dgvSanPham);
             this.groupBox13.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.groupBox13.Location = new System.Drawing.Point(3, 321);
+            this.groupBox13.Location = new System.Drawing.Point(3, 297);
             this.groupBox13.Name = "groupBox13";
             this.groupBox13.Size = new System.Drawing.Size(862, 272);
             this.groupBox13.TabIndex = 0;
@@ -1576,7 +1588,7 @@
             this.tabPage8.Location = new System.Drawing.Point(4, 22);
             this.tabPage8.Name = "tabPage8";
             this.tabPage8.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage8.Size = new System.Drawing.Size(868, 596);
+            this.tabPage8.Size = new System.Drawing.Size(868, 572);
             this.tabPage8.TabIndex = 7;
             this.tabPage8.Text = "Quản Lý Loại Sản Phẩm";
             this.tabPage8.UseVisualStyleBackColor = true;
@@ -1594,7 +1606,7 @@
             this.groupBox16.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox16.Location = new System.Drawing.Point(3, 3);
             this.groupBox16.Name = "groupBox16";
-            this.groupBox16.Size = new System.Drawing.Size(862, 269);
+            this.groupBox16.Size = new System.Drawing.Size(862, 245);
             this.groupBox16.TabIndex = 1;
             this.groupBox16.TabStop = false;
             this.groupBox16.Text = "Thông Tin";
@@ -1681,7 +1693,7 @@
             // 
             this.groupBox15.Controls.Add(this.dgvLoaiSanPham);
             this.groupBox15.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.groupBox15.Location = new System.Drawing.Point(3, 272);
+            this.groupBox15.Location = new System.Drawing.Point(3, 248);
             this.groupBox15.Name = "groupBox15";
             this.groupBox15.Size = new System.Drawing.Size(862, 321);
             this.groupBox15.TabIndex = 0;
@@ -1726,7 +1738,7 @@
             // dangXuatToolStripMenuItem
             // 
             this.dangXuatToolStripMenuItem.Name = "dangXuatToolStripMenuItem";
-            this.dangXuatToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.dangXuatToolStripMenuItem.Size = new System.Drawing.Size(129, 22);
             this.dangXuatToolStripMenuItem.Text = "Đăng Xuất";
             this.dangXuatToolStripMenuItem.Click += new System.EventHandler(this.dangXuatToolStripMenuItem_Click);
             // 
@@ -1934,6 +1946,7 @@
         private System.Windows.Forms.TextBox txtNoiDung;
         private System.Windows.Forms.Label label35;
         private System.Windows.Forms.MenuStrip menuStrip1;
+        private System.Windows.Forms.Button button3;
         private System.Windows.Forms.ToolStripMenuItem dĐaăngToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem menuToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem dangXuatToolStripMenuItem;

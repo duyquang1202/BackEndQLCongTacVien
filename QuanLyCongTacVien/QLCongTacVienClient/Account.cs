@@ -11,6 +11,7 @@ namespace QLCongTacVienClient
         {
             try
             {
+                context = new QLCongTacVienEntities();
                 return context.tblAccounts.ToList();
                 
             }
@@ -83,6 +84,7 @@ namespace QLCongTacVienClient
         {
             try
             {
+                context = new QLCongTacVienEntities();
                 var result = context.tblAccounts.Where(x => x.tblPhongBans.Where(m => m.MaPhongBan == MaPhongBan).Count() > 0 && x.LoaiAccount==LoaiAccount).ToList();
                 return result;
             }
