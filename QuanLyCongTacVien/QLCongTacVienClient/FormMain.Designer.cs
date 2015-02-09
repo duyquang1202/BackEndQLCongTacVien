@@ -140,6 +140,7 @@
             this.dgvNhomKH = new System.Windows.Forms.DataGridView();
             this.tabPage7 = new System.Windows.Forms.TabPage();
             this.groupBox14 = new System.Windows.Forms.GroupBox();
+            this.label35 = new System.Windows.Forms.Label();
             this.btnHinhAnh = new System.Windows.Forms.Button();
             this.txtPath = new System.Windows.Forms.TextBox();
             this.txtNoiDung = new System.Windows.Forms.TextBox();
@@ -169,7 +170,10 @@
             this.label38 = new System.Windows.Forms.Label();
             this.groupBox15 = new System.Windows.Forms.GroupBox();
             this.dgvLoaiSanPham = new System.Windows.Forms.DataGridView();
-            this.label35 = new System.Windows.Forms.Label();
+            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.dĐaăngToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.dangXuatToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tabMainControl.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.groupBox6.SuspendLayout();
@@ -203,6 +207,7 @@
             this.groupBox16.SuspendLayout();
             this.groupBox15.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvLoaiSanPham)).BeginInit();
+            this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabMainControl
@@ -216,10 +221,10 @@
             this.tabMainControl.Controls.Add(this.tabPage7);
             this.tabMainControl.Controls.Add(this.tabPage8);
             this.tabMainControl.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tabMainControl.Location = new System.Drawing.Point(0, 0);
+            this.tabMainControl.Location = new System.Drawing.Point(0, 24);
             this.tabMainControl.Name = "tabMainControl";
             this.tabMainControl.SelectedIndex = 0;
-            this.tabMainControl.Size = new System.Drawing.Size(876, 622);
+            this.tabMainControl.Size = new System.Drawing.Size(876, 598);
             this.tabMainControl.TabIndex = 0;
             this.tabMainControl.Tag = "";
             // 
@@ -230,7 +235,7 @@
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(868, 596);
+            this.tabPage1.Size = new System.Drawing.Size(868, 572);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Quản Lý Đơn Hàng";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -240,7 +245,7 @@
             // 
             this.groupBox6.Controls.Add(this.dtgvDonHang);
             this.groupBox6.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.groupBox6.Location = new System.Drawing.Point(3, 347);
+            this.groupBox6.Location = new System.Drawing.Point(3, 323);
             this.groupBox6.Name = "groupBox6";
             this.groupBox6.Size = new System.Drawing.Size(862, 246);
             this.groupBox6.TabIndex = 16;
@@ -283,7 +288,7 @@
             this.groupBox5.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox5.Location = new System.Drawing.Point(3, 3);
             this.groupBox5.Name = "groupBox5";
-            this.groupBox5.Size = new System.Drawing.Size(862, 590);
+            this.groupBox5.Size = new System.Drawing.Size(862, 566);
             this.groupBox5.TabIndex = 15;
             this.groupBox5.TabStop = false;
             this.groupBox5.Text = "Thông Tin:";
@@ -1395,6 +1400,15 @@
             this.groupBox14.TabStop = false;
             this.groupBox14.Text = "Thông Tin";
             // 
+            // label35
+            // 
+            this.label35.AutoSize = true;
+            this.label35.Location = new System.Drawing.Point(37, 150);
+            this.label35.Name = "label35";
+            this.label35.Size = new System.Drawing.Size(55, 13);
+            this.label35.TabIndex = 54;
+            this.label35.Text = "Nội Dung:";
+            // 
             // btnHinhAnh
             // 
             this.btnHinhAnh.Location = new System.Drawing.Point(623, 166);
@@ -1684,14 +1698,37 @@
             this.dgvLoaiSanPham.TabIndex = 0;
             this.dgvLoaiSanPham.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvLoaiSanPham_CellDoubleClick);
             // 
-            // label35
+            // menuStrip1
             // 
-            this.label35.AutoSize = true;
-            this.label35.Location = new System.Drawing.Point(37, 150);
-            this.label35.Name = "label35";
-            this.label35.Size = new System.Drawing.Size(55, 13);
-            this.label35.TabIndex = 54;
-            this.label35.Text = "Nội Dung:";
+            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.dĐaăngToolStripMenuItem,
+            this.menuToolStripMenuItem});
+            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
+            this.menuStrip1.Name = "menuStrip1";
+            this.menuStrip1.Size = new System.Drawing.Size(876, 24);
+            this.menuStrip1.TabIndex = 1;
+            this.menuStrip1.Text = "menuStrip1";
+            // 
+            // dĐaăngToolStripMenuItem
+            // 
+            this.dĐaăngToolStripMenuItem.Name = "dĐaăngToolStripMenuItem";
+            this.dĐaăngToolStripMenuItem.Size = new System.Drawing.Size(12, 20);
+            this.dĐaăngToolStripMenuItem.Click += new System.EventHandler(this.dĐaăngToolStripMenuItem_Click);
+            // 
+            // menuToolStripMenuItem
+            // 
+            this.menuToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.dangXuatToolStripMenuItem});
+            this.menuToolStripMenuItem.Name = "menuToolStripMenuItem";
+            this.menuToolStripMenuItem.Size = new System.Drawing.Size(50, 20);
+            this.menuToolStripMenuItem.Text = "Menu";
+            // 
+            // dangXuatToolStripMenuItem
+            // 
+            this.dangXuatToolStripMenuItem.Name = "dangXuatToolStripMenuItem";
+            this.dangXuatToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.dangXuatToolStripMenuItem.Text = "Đăng Xuất";
+            this.dangXuatToolStripMenuItem.Click += new System.EventHandler(this.dangXuatToolStripMenuItem_Click);
             // 
             // FormMain
             // 
@@ -1699,6 +1736,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(876, 622);
             this.Controls.Add(this.tabMainControl);
+            this.Controls.Add(this.menuStrip1);
             this.Name = "FormMain";
             this.Text = "FormMain";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FormMain_FormClosing);
@@ -1744,7 +1782,10 @@
             this.groupBox16.PerformLayout();
             this.groupBox15.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvLoaiSanPham)).EndInit();
+            this.menuStrip1.ResumeLayout(false);
+            this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -1892,5 +1933,9 @@
         private System.Windows.Forms.TextBox txtPath;
         private System.Windows.Forms.TextBox txtNoiDung;
         private System.Windows.Forms.Label label35;
+        private System.Windows.Forms.MenuStrip menuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem dĐaăngToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem menuToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem dangXuatToolStripMenuItem;
     }
 }

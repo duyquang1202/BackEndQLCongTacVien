@@ -11,12 +11,14 @@ namespace QLCongTacVienClient
 {
     public partial class FrmQLKhachHang : Form
     {
+        public tblUser objUser;
         QLKhachHang kh;
         public bool Them;
-        public FrmQLKhachHang()
+        public FrmQLKhachHang(tblUser objUser)
         {
             InitializeComponent();
             kh = new QLKhachHang();
+            this.objUser = objUser;
         }
         public void LoadDSKhachHang()
         {
@@ -121,6 +123,11 @@ namespace QLCongTacVienClient
 
         private void btnThemKhachHang_Click(object sender, EventArgs e)
         {
+            if (Process.getInstance().CheckPermission(this.objUser.MaUser, "ThemKhachHang") == false)
+            {
+                MessageBox.Show("Ban khong co quyen su dung chuc nang  nay");
+                return;
+            }
             btnLuuKhachHang.Enabled = true;
 
             txtTenKhachHang.Enabled = true;
@@ -161,6 +168,7 @@ namespace QLCongTacVienClient
         }
         public void ThemKhachHang()
         {
+            
             var result =kh.ThemKhachHang(new tblKhachHang()
             {
                 TenKhachHang =txtTenKhachHang.Text,
@@ -230,12 +238,22 @@ namespace QLCongTacVienClient
             }
             else
             {
+                if (Process.getInstance().CheckPermission(this.objUser.MaUser, "CapNhatKhachHang") == false)
+                {
+                    MessageBox.Show("Ban khong co quyen su dung chuc nang  nay");
+                    return;
+                } 
                 CapNhapKhachHang();
             }
         }
 
         private void btnXoaKhachHang_Click(object sender, EventArgs e)
         {
+            if (Process.getInstance().CheckPermission(this.objUser.MaUser, "XoaKhachHang") == false)
+            {
+                MessageBox.Show("Ban khong co quyen su dung chuc nang  nay");
+                return;
+            }
             var result =kh.XoaKhachHang (new tblKhachHang()
             {
                 MaKhachHang = int.Parse(dgvKhachHang.CurrentRow.Cells[0].Value.ToString()),

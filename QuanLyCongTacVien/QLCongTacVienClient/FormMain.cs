@@ -49,10 +49,53 @@ namespace QLCongTacVienClient
             Application.Exit();
         }
 
+        public void DisplayTabControl()
+        {
+            //            // Hide the tab page
+            //tabControl.TabPages.Remove(tabPage1);
+            //// Show the tab page (insert it to the correct position)
+            //tabControl.TabPages.Insert(0, tabPage1);
+            if (Process.getInstance().CheckPermission(this.objUser.MaUser, "HienThiQLDH") == false)
+            {
+                tabMainControl.TabPages.Remove(tabPage1);
+            }
+            if (Process.getInstance().CheckPermission(this.objUser.MaUser, "HienThiQLPB") == false)
+            {
+                tabMainControl.TabPages.Remove(tabPage2);
+            }
+            if (Process.getInstance().CheckPermission(this.objUser.MaUser, "HienThiQLAccount") == false)
+            {
+                tabMainControl.TabPages.Remove(tabPage3);
+            }
+            if (Process.getInstance().CheckPermission(this.objUser.MaUser, "HienThiQLSite") == false)
+            {
+                tabMainControl.TabPages.Remove(tabPage4);
+            }
+            if (Process.getInstance().CheckPermission(this.objUser.MaUser, "HienThiQLPhanQuyen") == false)
+            {
+                tabMainControl.TabPages.Remove(tabPage5);
+            }
+            if (Process.getInstance().CheckPermission(this.objUser.MaUser, "HienThiQLNhomKH") == false)
+            {
+                tabMainControl.TabPages.Remove(tabPage6);
+            }
+            if (Process.getInstance().CheckPermission(this.objUser.MaUser, "HienThiQLSanPham") == false)
+            {
+                tabMainControl.TabPages.Remove(tabPage7);
+            }
+            if (Process.getInstance().CheckPermission(this.objUser.MaUser, "HienThiQLLoaiSanPham") == false)
+            {
+                tabMainControl.TabPages.Remove(tabPage8);
+            }
+
+
+        }
+
         private void FormMain_Load(object sender, EventArgs e)
         {
 
-                    
+
+        
                     
                     LoadTrangThai();
                     LoadDSPhongBan();
@@ -85,6 +128,7 @@ namespace QLCongTacVienClient
 
                     LoadDSLoaiSanPham();
                     LoadCbAccountNamecategory();
+                    DisplayTabControl();
         }
         public void LoadDSLoaiSanPham()
         {
@@ -653,6 +697,11 @@ namespace QLCongTacVienClient
 
         private void btnThemPhongBan_Click(object sender, EventArgs e)
         {
+            if (Process.getInstance().CheckPermission(this.objUser.MaUser, "ThemPhongBan") == false)
+            {
+                MessageBox.Show("Ban khong co quyen su dung chuc nang  nay");
+                return;
+            }
             txtphongban.Enabled = true;
             cbTrangThaiPhongBan.Enabled = true;
             txtLuuYPhongBan.Enabled = true;
@@ -689,13 +738,18 @@ namespace QLCongTacVienClient
 
         public void CapNhatPhongBan()
         {
+            if (Process.getInstance().CheckPermission(this.objUser.MaUser, "CapNhatPhongBan") == false)
+            {
+                MessageBox.Show("Ban khong co quyen su dung chuc nang  nay");
+                return;
+            }
             var result = objPro.CapNhatPhongBan(new tblPhongBan()
             {
                 MaPhongBan = Convert.ToInt32(dgvPhongBan.CurrentRow.Cells[0].Value.ToString()),
                 TenPhongBan = txtphongban.Text,
                 GhiChuPhongBan = txtLuuYPhongBan.Text,
                 TrangThai = int.Parse(cbTrangThaiPhongBan.SelectedValue.ToString()),
-                NgayUpdate = DateTime.Now,
+                //NgayUpdate = DateTime.Now,
                 UserUpdate = FormDangNhap.objUser.UserName,
                 MoTaPhongBan = txtMoTaPhongBan.Text
             });
@@ -761,7 +815,25 @@ namespace QLCongTacVienClient
 
         private void btnXoaPhongBan_Click(object sender, EventArgs e)
         {
-             
+            if (Process.getInstance().CheckPermission(this.objUser.MaUser, "XoaPhongBan") == false)
+            {
+                MessageBox.Show("Ban khong co quyen su dung chuc nang  nay");
+                return;
+            }
+            var result = objPro.XoaPhongBan(new tblPhongBan()
+            {
+                MaPhongBan = Convert.ToInt32(dgvPhongBan.CurrentRow.Cells[0].Value.ToString()),
+                
+            });
+
+            if (result == false)
+            {
+                MessageBox.Show("Xóa Phòng Ban Không Thành Công", "Warning!");
+                return;
+            }
+
+            MessageBox.Show("Bạn Đã Xóa Phòng Ban Thành Công!");
+            LoadDSPhongBan();
         }
 
         private void groupBox4_Enter(object sender, EventArgs e)
@@ -843,7 +915,7 @@ namespace QLCongTacVienClient
                 LoaiAccount=cbLoaiAccount.SelectedValue.ToString(),
                 AccountManager=Convert.ToInt16(cboAccountManager.SelectedValue.ToString()),
                 GhiChu= txtLuuyAcount.Text,
-                NgayUpdate=DateTime.Now,
+               // NgayUpdate=DateTime.Now,
                 UserUpdate=FormDangNhap.objUser.UserName    
             });
             if (result == false)
@@ -868,6 +940,11 @@ namespace QLCongTacVienClient
             }
             else
             {
+                if (Process.getInstance().CheckPermission(this.objUser.MaUser, "CapNhatAccount") == false)
+                {
+                    MessageBox.Show("Ban khong co quyen su dung chuc nang  nay");
+                    return;
+                }
                 CapNhatAccount();
             }
 
@@ -875,6 +952,11 @@ namespace QLCongTacVienClient
         //btnXoaAccount
         private void button3_Click(object sender, EventArgs e) //btnXoaAccount
         {
+            if (Process.getInstance().CheckPermission(this.objUser.MaUser, "XoaAccount") == false)
+            {
+                MessageBox.Show("Ban khong co quyen su dung chuc nang  nay");
+                return;
+            }
             var result = ac.XoaAccount(new tblAccount()
                 {
                     MaAccount=Convert.ToInt16(dgvAccount.CurrentRow.Cells[1].Value.ToString()),
@@ -985,6 +1067,11 @@ namespace QLCongTacVienClient
 
         private void btnThemAcount_Click(object sender, EventArgs e)
         {
+            if (Process.getInstance().CheckPermission(this.objUser.MaUser, "ThemAccount") == false)
+            {
+                MessageBox.Show("Ban khong co quyen su dung chuc nang  nay");
+                return;
+            }
             txtTenAcount.Enabled = true;
 
             cboTrangthaiAcount.Enabled = true;
@@ -1078,7 +1165,7 @@ namespace QLCongTacVienClient
                 AccountID = int.Parse(cbTenAccountDH.SelectedValue.ToString()),
                 NgayHen=DateTime.Parse(txtNgayHen.Text),
                 TrangThai = int.Parse(cbTrangThaiDHang.SelectedValue.ToString()),
-                NgayUpdate = DateTime.Now
+                //NgayUpdate = DateTime.Now
                 
             });
 
@@ -1121,6 +1208,7 @@ namespace QLCongTacVienClient
         
         private void btnLuuDH_Click(object sender, EventArgs e)
         {
+            
             if (Them == true)
             {
                 int orderID = ThemDonHang();
@@ -1130,6 +1218,11 @@ namespace QLCongTacVienClient
             }
             else
             {
+                if (Process.getInstance().CheckPermission(this.objUser.MaUser, "CapNhapDH") == false)
+                {
+                    MessageBox.Show("Ban khong co quyen su dung chuc nang  nay");
+                    return;
+                }
                 CapNhapOrderAccount();
                 CapNhapDonHang();
                 
@@ -1197,6 +1290,11 @@ namespace QLCongTacVienClient
         }
         private void btnXoaDH_Click(object sender, EventArgs e)
         {
+            if (Process.getInstance().CheckPermission(this.objUser.MaUser, "XoaDH") == false)
+            {
+                MessageBox.Show("Ban khong co quyen su dung chuc nang  nay");
+                return;
+            }
             var result =dh.XoaDonHang(new tblOrder()
             {
                 OrderID = Convert.ToInt16(dtgvDonHang.CurrentRow.Cells[1].Value.ToString()),///////////////////////////ko doi----------
@@ -1229,7 +1327,11 @@ namespace QLCongTacVienClient
 
         private void btnThemSite_Click(object sender, EventArgs e)
         {
-            
+            if (Process.getInstance().CheckPermission(this.objUser.MaUser, "ThemSite") == false)
+            {
+                MessageBox.Show("Ban khong co quyen su dung chuc nang  nay");
+                return;
+            }
             btnLuuSite.Enabled = true;
 
             txtSiteName.Enabled = true;
@@ -1270,7 +1372,7 @@ namespace QLCongTacVienClient
                 SiteName =txtSiteName.Text,
                 Title =txtTitle.Text,
                 TrangThai = int.Parse(cbTrangThaiPhongBan.SelectedValue.ToString()),
-                NgayUpdate = DateTime.Now,
+                //NgayUpdate = DateTime.Now,
                 AccountID= int.Parse(cbTenAccountSite.SelectedValue.ToString()),
                 Domain=txtDomain.Text,
             });
@@ -1292,6 +1394,11 @@ namespace QLCongTacVienClient
             }
             else
             {
+                if (Process.getInstance().CheckPermission(this.objUser.MaUser, "CapNhatSite") == false)
+                {
+                    MessageBox.Show("Ban khong co quyen su dung chuc nang  nay");
+                    return;
+                }
                 CapNhapSite();
             }
         }
@@ -1337,6 +1444,11 @@ namespace QLCongTacVienClient
 
         private void btnXoaSite_Click(object sender, EventArgs e)
         {
+            if (Process.getInstance().CheckPermission(this.objUser.MaUser, "XoaSite") == false)
+            {
+                MessageBox.Show("Ban khong co quyen su dung chuc nang  nay");
+                return;
+            }
             var result =si.XoaSite(new tblSite()
             {
                 SiteID = Convert.ToInt16(dgvSite.CurrentRow.Cells[3].Value.ToString()),
@@ -1413,6 +1525,11 @@ namespace QLCongTacVienClient
 
         private void btnThemGroupPer_Click(object sender, EventArgs e)
         {
+            if (Process.getInstance().CheckPermission(this.objUser.MaUser, "ThemGroupPermission") == false)
+            {
+                MessageBox.Show("Ban khong co quyen su dung chuc nang  nay");
+                return;
+            }
             txtNameGroupPer.Enabled = true;
             cbTrangThaiGroupPer.Enabled = true;
 
@@ -1444,7 +1561,7 @@ namespace QLCongTacVienClient
                 GroupID = int.Parse(dgvPhanQuyen.CurrentRow.Cells[1].Value.ToString()),
                 Name = txtNameGroupPer.Text,
                 Status=int.Parse(cbTrangThaiGroupPer.SelectedValue.ToString()),
-                NgayUpdate = DateTime.Now
+                //NgayUpdate = DateTime.Now
                 
 
             });
@@ -1467,6 +1584,11 @@ namespace QLCongTacVienClient
             }
             else
             {
+                if (Process.getInstance().CheckPermission(this.objUser.MaUser, "CapNhatGroupPermission") == false)
+                {
+                    MessageBox.Show("Ban khong co quyen su dung chuc nang  nay");
+                    return;
+                }
                 CapNhapGroupPer();
             }
         }
@@ -1487,6 +1609,11 @@ namespace QLCongTacVienClient
 
         private void btnXoaGroupPer_Click(object sender, EventArgs e)
         {
+            if (Process.getInstance().CheckPermission(this.objUser.MaUser, "XoaGroupPermission") == false)
+            {
+                MessageBox.Show("Ban khong co quyen su dung chuc nang  nay");
+                return;
+            }
             var result = gp.XoaGroupPermission(new tblGroupPermission() 
             {
                 GroupID=int.Parse(dgvPhanQuyen.CurrentRow.Cells[1].Value.ToString())
@@ -1520,6 +1647,11 @@ namespace QLCongTacVienClient
 
         private void btnThemNhomKH_Click(object sender, EventArgs e)
         {
+            if (Process.getInstance().CheckPermission(this.objUser.MaUser, "ThemNhomKhachHang") == false)
+            {
+                MessageBox.Show("Ban khong co quyen su dung chuc nang  nay");
+                return;
+            }
             btnLuuNhomKH.Enabled = true;
             txtTenNhomKH.Enabled = true;
             txtMotaNhomKH.Enabled = true;
@@ -1561,7 +1693,7 @@ namespace QLCongTacVienClient
                 MoTaoNhom =txtMotaNhomKH.Text,
                 GhiChu=txtGhiChuNhomKH.Text,
                 TrangThai = int.Parse(cbTrangThaiNhomKH.SelectedValue.ToString()),
-                NgayUpdate = DateTime.Now,
+               // NgayUpdate = DateTime.Now,
                 UserUpdate = FormDangNhap.objUser.UserName,
           
             });
@@ -1584,6 +1716,11 @@ namespace QLCongTacVienClient
             }
             else
             {
+                if (Process.getInstance().CheckPermission(this.objUser.MaUser, "CapNhatNhomKhachHang") == false)
+                {
+                    MessageBox.Show("Ban khong co quyen su dung chuc nang  nay");
+                    return;
+                }
                 CapNhapNhomKH();
             }
         }
@@ -1608,6 +1745,11 @@ namespace QLCongTacVienClient
 
         private void btnXoaNhomKH_Click(object sender, EventArgs e)
         {
+            if (Process.getInstance().CheckPermission(this.objUser.MaUser, "XoaNhomKhachHang") == false)
+            {
+                MessageBox.Show("Ban khong co quyen su dung chuc nang  nay");
+                return;
+            }
             var result =nhomKH.XoaNhomKH (new tblNhom()
             {
                 MaNhom = int.Parse(dgvNhomKH.CurrentRow.Cells[1].Value.ToString()),
@@ -1661,12 +1803,17 @@ namespace QLCongTacVienClient
 
         private void button2_Click_1(object sender, EventArgs e)
         {
-            FrmQLKhachHang frm = new FrmQLKhachHang();
+            FrmQLKhachHang frm = new FrmQLKhachHang(objUser);
             frm.Show();
         }
 
         private void btnThemSanPham_Click(object sender, EventArgs e)
         {
+            if (Process.getInstance().CheckPermission(this.objUser.MaUser, "ThemSanPham") == false)
+            {
+                MessageBox.Show("Ban khong co quyen su dung chuc nang  nay");
+                return;
+            }
             btnLuuSanPham.Enabled = true;
             txtGiaBan.Enabled = true;
             txtTenSanPham.Enabled = true;
@@ -1727,7 +1874,7 @@ namespace QLCongTacVienClient
                     CategoryID = int.Parse(cbCategoryName.SelectedValue.ToString()),
                     GiaBan = float.Parse(txtGiaBan.Text),
                     TrangThai = int.Parse(cbTrangThaiSanPham.SelectedValue.ToString()),
-                    NgayUpdate = DateTime.Now,
+                   // NgayUpdate = DateTime.Now,
                     NoiDung=txtNoiDung.Text,
                     HinhAnh=path,
                     //HinhAnh
@@ -1751,7 +1898,7 @@ namespace QLCongTacVienClient
                     CategoryID = int.Parse(cbCategoryName.SelectedValue.ToString()),
                     GiaBan = float.Parse(txtGiaBan.Text),
                     TrangThai = int.Parse(cbTrangThaiSanPham.SelectedValue.ToString()),
-                    NgayUpdate = DateTime.Now,
+                    //NgayUpdate = DateTime.Now,
                     NoiDung=txtNoiDung.Text,
                     HinhAnh=dgvSanPham.CurrentRow.Cells[10].Value.ToString(),
                     //HinhAnh
@@ -1784,6 +1931,11 @@ namespace QLCongTacVienClient
             }
             else 
             {
+                if (Process.getInstance().CheckPermission(this.objUser.MaUser, "CapNhatSanPham") == false)
+                {
+                    MessageBox.Show("Ban khong co quyen su dung chuc nang  nay");
+                    return;
+                }
                 CapNhapSanPham();
             }
         }
@@ -1812,6 +1964,11 @@ namespace QLCongTacVienClient
 
         private void btnXoaSanPham_Click(object sender, EventArgs e)
         {
+            if (Process.getInstance().CheckPermission(this.objUser.MaUser, "XoaSanPham") == false)
+            {
+                MessageBox.Show("Ban khong co quyen su dung chuc nang  nay");
+                return;
+            }
             var result =sp.XoaProduct(new tblProduct()
             {
                 ProductID = int.Parse(dgvSanPham.CurrentRow.Cells[0].Value.ToString()),
@@ -1848,6 +2005,11 @@ namespace QLCongTacVienClient
 
         private void button6_Click(object sender, EventArgs e)//btnThemloaisanpham
         {
+            if (Process.getInstance().CheckPermission(this.objUser.MaUser, "ThemLoaiSanPham") == false)
+            {
+                MessageBox.Show("Ban khong co quyen su dung chuc nang  nay");
+                return;
+            }
             btnLuuLoaiSP.Enabled = true;
             txtcategoryname.Enabled = true;
             cbTenAccountLSP.Enabled = true;
@@ -1910,7 +2072,7 @@ namespace QLCongTacVienClient
                 CategoryID=int.Parse(dgvLoaiSanPham.CurrentRow.Cells[0].Value.ToString()),
                 CategoryName = txtcategoryname.Text,
                 AccountID = int.Parse(cbTenAccountLSP.SelectedValue.ToString()),              
-                NgayUpdate = DateTime.Now,
+                //NgayUpdate = DateTime.Now,
 
 
             });
@@ -1933,12 +2095,22 @@ namespace QLCongTacVienClient
             }
             else
             {
+                if (Process.getInstance().CheckPermission(this.objUser.MaUser, "CapNhatLoaiSanPham") == false)
+                {
+                    MessageBox.Show("Ban khong co quyen su dung chuc nang  nay");
+                    return;
+                }
                 CapNhapLoaiSanPham();
             }
         }
 
         private void btnXoaLoaiSP_Click(object sender, EventArgs e)
         {
+            if (Process.getInstance().CheckPermission(this.objUser.MaUser, "XoaLoaiSanPham") == false)
+            {
+                MessageBox.Show("Ban khong co quyen su dung chuc nang  nay");
+                return;
+            }
             var result =lsp.XoaLoaiSanPham(new Category()
             {
                  CategoryID=int.Parse(dgvLoaiSanPham.CurrentRow.Cells[0].Value.ToString()),
@@ -1985,6 +2157,22 @@ namespace QLCongTacVienClient
             
               
             }
+        }
+
+        private void dĐaăngToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void dangXuatToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+          
+            FormDangNhap dangnhap = new FormDangNhap();
+            dangnhap.Show();
+            this.Hide();
+            
+            
+            
         }
 
     }
