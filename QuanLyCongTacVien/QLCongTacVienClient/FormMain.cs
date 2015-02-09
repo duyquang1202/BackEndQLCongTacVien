@@ -1684,8 +1684,9 @@ namespace QLCongTacVienClient
             string timestamp = DateTime.UtcNow.ToString("yyyyMMddHHmmssfff",
                                   CultureInfo.InvariantCulture);
             string DesPath = ConfigurationManager.AppSettings["UploadPath"];
+            string strPath = ConfigurationManager.AppSettings["Path"]; 
             string picture = SaveImageToDrive(txtPath.Text, DesPath, filename, timestamp + filename);
-            string path = "/Upload" + timestamp + filename;
+            string path = strPath + timestamp + filename;
             var result =sp.ThemProduct(new tblProduct()
             {
                 ProductName=txtTenSanPham.Text,
@@ -1716,8 +1717,9 @@ namespace QLCongTacVienClient
                 string timestamp = DateTime.UtcNow.ToString("yyyyMMddHHmmssfff",
                                       CultureInfo.InvariantCulture);
                 string DesPath = ConfigurationManager.AppSettings["UploadPath"];
+                string strPath = ConfigurationManager.AppSettings["Path"]; 
                 string picture = SaveImageToDrive(txtPath.Text, DesPath, filename, timestamp + filename);
-                string path = "/Upload" + timestamp + filename;
+                string path = strPath + timestamp + filename;
                 var result = sp.CapNhatProduct(new tblProduct()
                 {
                     ProductID = int.Parse(dgvSanPham.CurrentRow.Cells[0].Value.ToString()),

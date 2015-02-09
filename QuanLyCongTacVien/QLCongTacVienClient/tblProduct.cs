@@ -29,6 +29,8 @@ namespace QLCongTacVienClient
         public Nullable<System.DateTime> NgayUpdate { get; set; }
         public string NoiDung { get; set; }
         public string HinhAnh { get; set; }
+        public Nullable<int> View { get; set; }
+        public Nullable<int> OrderNum { get; set; }
     
         public virtual Category Category { get; set; }
         public virtual ICollection<tblOrder> tblOrders { get; set; }
