@@ -24,11 +24,21 @@ namespace QLCongTacVienClient
                 return new List<tblUser>();
             }
         }
-        public bool ThemUser(tblUser obj)
+        public bool ThemUser(tblUser obj,long MaAccount)
         {
             try
             {
-                context.tblUsers.Add(obj);
+                var account = context.tblAccounts.Find(MaAccount);
+                if (account == null)
+                {
+                    return false;
+                }
+                var user = context.tblUsers.Add(obj);
+                if (user == null)
+                {
+                    return false;
+                }
+                account.tblUsers.Add(user);
                 context.SaveChanges();
                 return true;
             }

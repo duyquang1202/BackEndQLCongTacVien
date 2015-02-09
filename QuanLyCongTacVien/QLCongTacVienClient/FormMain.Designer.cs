@@ -228,6 +228,7 @@
             this.tabMainControl.Size = new System.Drawing.Size(876, 598);
             this.tabMainControl.TabIndex = 0;
             this.tabMainControl.Tag = "";
+            this.tabMainControl.TabIndexChanged += new System.EventHandler(this.tabMainControl_TabIndexChanged);
             // 
             // tabPage1
             // 

@@ -144,7 +144,7 @@ namespace QLCongTacVienClient
                 
                 
 
-            });
+            },this.MaAccount);
             if (result == false )
             {
                 MessageBox.Show("Thêm User Không Thành Công", "Warning!");

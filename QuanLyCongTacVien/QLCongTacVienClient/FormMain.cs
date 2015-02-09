@@ -693,6 +693,7 @@ namespace QLCongTacVienClient
             cboChonPhongBan.DataSource = dt;
             cboChonPhongBan.DisplayMember = "TenPhongBan";
             cboChonPhongBan.ValueMember = "MaPhongBan";
+            cboChonPhongBan.SelectedIndex = 0;
         }
        
      
@@ -1021,6 +1022,7 @@ namespace QLCongTacVienClient
             //LoadAccountManager(int.Parse(dgvAccount.CurrentRow.Cells[14].Value.ToString()),LoaiAcc.Value);
             //cboAccountManager.SelectedItem = new KeyValuePair<string, string>(dgvAccount.CurrentRow.Cells[7].Value.ToString(), dgvAccount.CurrentRow.Cells[8].Value.ToString());
             cboAccountManager.SelectedItem = dgvAccount.CurrentRow.Cells[7].Value.ToString();
+        
             cboTrangthaiAcount.SelectedIndex =int.Parse(dgvAccount.CurrentRow.Cells[14].Value.ToString());
 
             
@@ -1045,6 +1047,17 @@ namespace QLCongTacVienClient
             {
                 //to do something
                 listResult = ac.getAccountFromLoaiAccount(MaPhongBan, "QL");
+
+                cboAccountManager.DataSource = listResult;
+                cboAccountManager.DisplayMember = "TenAccount";
+                cboAccountManager.ValueMember = "MaAccount";
+
+                return;
+            }
+
+            if(strLoaiAccount=="AD")
+            {
+                listResult = ac.getAccountFromLoaiAccount(MaPhongBan, "AD1");
 
                 cboAccountManager.DataSource = listResult;
                 cboAccountManager.DisplayMember = "TenAccount";
@@ -2178,6 +2191,20 @@ namespace QLCongTacVienClient
         }
 
         private void button3_Click_1(object sender, EventArgs e)
+        {
+            try
+            {
+                loadform();
+            }
+            catch (Exception objex)
+            {
+                
+                throw;
+            }
+            
+        }
+
+        private void tabMainControl_TabIndexChanged(object sender, EventArgs e)
         {
             loadform();
         }

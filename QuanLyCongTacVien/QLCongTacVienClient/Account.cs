@@ -85,7 +85,21 @@ namespace QLCongTacVienClient
             try
             {
                 context = new QLCongTacVienEntities();
-                var result = context.tblAccounts.Where(x => x.tblPhongBans.Where(m => m.MaPhongBan == MaPhongBan).Count() > 0 && x.LoaiAccount==LoaiAccount).ToList();
+                var result = new List<tblAccount>();
+                if (LoaiAccount =="AD1")
+                {
+                     result = context.tblAccounts.Where(x => x.tblPhongBans.Count() > 0 && x.LoaiAccount == LoaiAccount).ToList();
+                }                   
+                else
+                {
+                     result = context.tblAccounts.Where(x => x.tblPhongBans.Where(m => m.MaPhongBan == MaPhongBan).Count() > 0 && x.LoaiAccount == LoaiAccount).ToList();
+                    if(LoaiAccount=="AD" && result.Count()==0)
+                    {
+                        result = context.tblAccounts.Where(x => x.tblPhongBans.Count() > 0 && x.LoaiAccount == LoaiAccount).ToList();
+                    }
+                   
+                }
+               
                 return result;
             }
             catch (Exception)

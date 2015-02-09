@@ -229,8 +229,6 @@
           <Property Name="NgayUpdate" Type="datetime" />
           <Property Name="NoiDung" Type="nvarchar" MaxLength="1000" />
           <Property Name="HinhAnh" Type="nvarchar" MaxLength="300" />
-          <Property Name="View" Type="int" />
-          <Property Name="OrderNum" Type="int" />
         </EntityType>
         <EntityType Name="tblSite">
           <Key>
@@ -1073,8 +1071,6 @@
           <Property Name="NgayUpdate" Type="DateTime" Precision="3" />
           <Property Name="NoiDung" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
           <Property Name="HinhAnh" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
-          <Property Name="View" Type="Int32" />
-          <Property Name="OrderNum" Type="Int32" />
           <NavigationProperty Name="Category" Relationship="QLCongTacVienModel.FK_tblProduct_Category" FromRole="tblProduct" ToRole="Category" />
           <NavigationProperty Name="tblOrders" Relationship="QLCongTacVienModel.FK_tblOrder_tblProduct" FromRole="tblProduct" ToRole="tblOrder" />
           <NavigationProperty Name="tblSite_Product" Relationship="QLCongTacVienModel.FK_tblSite_Product_tblProduct" FromRole="tblProduct" ToRole="tblSite_Product" />
@@ -1573,8 +1569,6 @@
           <EntitySetMapping Name="tblProducts">
             <EntityTypeMapping TypeName="QLCongTacVienModel.tblProduct">
               <MappingFragment StoreEntitySet="tblProduct">
-                <ScalarProperty Name="OrderNum" ColumnName="OrderNum" />
-                <ScalarProperty Name="View" ColumnName="View" />
                 <ScalarProperty Name="HinhAnh" ColumnName="HinhAnh" />
                 <ScalarProperty Name="NoiDung" ColumnName="NoiDung" />
                 <ScalarProperty Name="NgayUpdate" ColumnName="NgayUpdate" />
